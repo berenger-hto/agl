@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GadgetAn - Employee Hierarchy</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3b19e6",
+                        "background-light": "#f8fafc",
+                        "background-canvas": "#f1f5f9",
+                        "neon-cyan": "#00b8d4",
+                        "neon-purple": "#8e24aa",
+                        "neon-green": "#2e7d32",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #3b19e608 1px, transparent 1px), linear-gradient(to bottom, #3b19e608 1px, transparent 1px)",
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+        .glow-primary {
+            box-shadow: 0 10px 15px -3px rgba(59, 25, 230, 0.1), 0 4px 6px -4px rgba(59, 25, 230, 0.1);
+        }
+        .connector-line {
+            background: #3b19e6;
+            opacity: 0.3;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(59, 25, 230, 0.1);
+        }
+        .node-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(59, 25, 230, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background-light text-slate-800 font-display overflow-hidden h-screen w-screen flex flex-col">
+<nav class="h-16 border-b border-slate-200 bg-white/90 backdrop-blur-md flex items-center justify-between px-6 z-50 shrink-0">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="material-icons text-primary text-3xl">hub</span>
+<span class="text-xl font-bold tracking-wider text-slate-900 uppercase">Gadget<span class="text-primary">An</span></span>
+</div>
+<div class="h-6 w-px bg-slate-200 mx-2"></div>
+<div class="hidden md:flex items-center text-sm font-medium text-slate-500">
+<span class="material-icons text-base mr-1">badge</span>
+            HR Command Center
+        </div>
+</div>
+<div class="flex-1 max-w-xl mx-8 relative">
+<span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full bg-slate-100 border-transparent focus:bg-white focus:border-primary/50 focus:ring-0 text-sm rounded-lg py-2 pl-10 pr-4 placeholder-slate-500 text-slate-900 transition-all" placeholder="Search employee ID, name, or role..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-green-50 border border-green-200">
+<div class="w-2 h-2 rounded-full bg-green-500"></div>
+<span class="text-xs font-semibold text-green-700">SYSTEM ONLINE</span>
+</div>
+<button class="relative p-2 rounded-lg hover:bg-slate-100 transition-colors">
+<span class="material-icons text-slate-500">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-primary rounded-full"></span>
+</button>
+<div class="w-8 h-8 rounded-full bg-gradient-to-tr from-primary to-purple-600 p-[2px] cursor-pointer">
+<img alt="User Profile" class="rounded-full w-full h-full object-cover border-2 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhXzfXHqO3bSObAWRZ764DmWiDs-b9eX2-5oyE-pwbV5iD7jzCkCf3xj4grFLQbICnx8ooTqqlIcHxwNzzah5mOKqwwqJvyneTkhK4exyFoyPJSQm-0rgQLKlHvxjknKABn4Rd0seVdaYcoVJgHxDqxKoC61R84ebEmZudGZRaiE3oLoKaB50M4RuEmqW8jOYUBlGF6mqho4SsH9eyExjKV2QuGYhZ3o-J_GEjkQNP9RGtp4rikHPp9AF55jC0Moiy5ZotRpfzEtU"/>
+</div>
+</div>
+</nav>
+<div class="flex-1 flex overflow-hidden relative bg-background-canvas">
+<div class="absolute inset-0 bg-grid-pattern bg-[length:40px_40px] pointer-events-none"></div>
+<div class="absolute top-6 left-6 z-40 flex flex-col gap-3">
+<div class="glass-panel p-2 rounded-xl flex flex-col gap-2 shadow-xl shadow-slate-200/50">
+<button class="p-2 hover:bg-slate-100 text-slate-600 rounded-lg transition-colors" title="Zoom In">
+<span class="material-icons text-xl">add</span>
+</button>
+<button class="p-2 hover:bg-slate-100 text-slate-600 rounded-lg transition-colors" title="Zoom Out">
+<span class="material-icons text-xl">remove</span>
+</button>
+<button class="p-2 hover:bg-slate-100 text-slate-600 rounded-lg transition-colors" title="Fit to Screen">
+<span class="material-icons text-xl">center_focus_strong</span>
+</button>
+<div class="h-px w-full bg-slate-200 my-1"></div>
+<button class="p-2 hover:bg-slate-100 text-slate-600 rounded-lg transition-colors" title="Reset Layout">
+<span class="material-icons text-xl">refresh</span>
+</button>
+</div>
+<div class="glass-panel p-4 rounded-xl shadow-xl shadow-slate-200/50 w-48">
+<h3 class="text-[10px] font-bold text-slate-400 uppercase mb-3 tracking-widest">Filters</h3>
+<div class="space-y-2">
+<label class="flex items-center gap-2 text-sm text-slate-600 cursor-pointer group">
+<input checked="" class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+<span class="group-hover:text-primary transition-colors">Engineering</span>
+</label>
+<label class="flex items-center gap-2 text-sm text-slate-600 cursor-pointer group">
+<input checked="" class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+<span class="group-hover:text-primary transition-colors">Sales</span>
+</label>
+<label class="flex items-center gap-2 text-sm text-slate-600 cursor-pointer group">
+<input checked="" class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"/>
+<span class="group-hover:text-primary transition-colors">Support</span>
+</label>
+</div>
+</div>
+</div>
+<main class="flex-1 overflow-auto relative cursor-grab active:cursor-grabbing p-20 flex justify-center items-start min-w-[1000px]">
+<div class="flex flex-col items-center gap-16 scale-100 origin-top transform" id="tree-container">
+<div class="relative group z-10">
+<div class="relative w-64 node-card hover:border-primary/40 rounded-2xl p-4 shadow-xl shadow-slate-200 transition-all duration-300 hover:-translate-y-1 cursor-pointer">
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest shadow-lg">
+                        Chief Executive
+                    </div>
+<div class="flex flex-col items-center gap-3 mt-2">
+<div class="relative">
+<div class="w-16 h-16 rounded-xl bg-slate-100 p-0.5 overflow-hidden ring-2 ring-primary ring-offset-2 ring-offset-white">
+<img alt="CEO Portrait" class="w-full h-full object-cover rounded-lg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXI2_AO4obTYXE2RmvXcOsMXTk2K2v7mWlNagm-WzcUkDE69qdunE_7SjeM2MyhTT4YGYnwcJpHX37u40X9iCtUXFX79zVO-xQeND6kL4lvNbyNrkF6Jgro7chmCalvEzPDrpsrPPciOunvzpoZmAU8MnmuYqzFgYR5ydZCwZ__6Rj5bjSr9A4fmXi27ZJZHatLaHbT3AP8HzjwO_ZberaLVrnU49c26T2YkntUUBYpjLsvAv0v_veLiFsBUFsgGyQpnTkL96Cs2g"/>
+</div>
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></span>
+</div>
+<div class="text-center">
+<h3 class="text-slate-900 font-bold text-lg">Alexandra Vane</h3>
+<p class="text-slate-500 text-sm">Director of Operations</p>
+</div>
+<div class="w-full flex justify-center gap-2 mt-1">
+<span class="px-2 py-0.5 rounded text-[10px] bg-primary/10 text-primary font-semibold border border-primary/20">Lvl 10 Clearance</span>
+</div>
+</div>
+</div>
+<div class="absolute top-full left-1/2 -translate-x-1/2 h-16 w-0.5 connector-line"></div>
+</div>
+<div class="relative w-[600px] h-0.5 connector-line -mt-8 mb-8">
+<div class="absolute left-0 top-0 h-8 w-0.5 connector-line"></div>
+<div class="absolute left-1/2 -translate-x-1/2 top-0 h-8 w-0.5 connector-line"></div>
+<div class="absolute right-0 top-0 h-8 w-0.5 connector-line"></div>
+</div>
+<div class="flex gap-16 items-start">
+<div class="flex flex-col items-center gap-8 group">
+<div class="relative w-56 node-card rounded-xl p-3 hover:bg-slate-50 transition-all cursor-pointer border border-slate-100 hover:border-primary/30">
+<div class="flex items-center gap-3">
+<div class="relative">
+<img alt="Engineering Lead" class="w-12 h-12 rounded-lg object-cover ring-1 ring-slate-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9X17jkzaj3JHxiTGhCbwaE76TvGZGA1-6jLIgKA5Cxf-eBC7VyjAUkYQAYBBuFjSgsWFY_yWnvqpaRwg5BtJO7OkUTXORRFrdRD3BO6D8ZVjhO3NMFz3GxwxyIJuYfAT464rvfLdl7xl-phfxOvzfazbDrN0cKRK-uqp2QziQihFQ__rJ12nCMGPpHm6r-xYdA8s1nTPkv7V61LNNzUe04yLCZnI53Tm4ysm6taGdROQFFoP8Sshid0CeYlT690koF8GCYt53dG8"/>
+<span class="absolute -bottom-1 -right-1 material-icons text-[10px] bg-white text-neon-purple p-0.5 rounded-full border border-neon-purple/20 shadow-sm">code</span>
+</div>
+<div>
+<h4 class="text-slate-900 font-semibold text-sm">Marcus Chen</h4>
+<p class="text-slate-500 text-xs">Head of R&amp;D</p>
+<span class="inline-block mt-1 px-1.5 py-0.5 rounded text-[10px] bg-neon-purple/10 text-neon-purple border border-neon-purple/20 font-bold">ADMIN</span>
+</div>
+</div>
+<div class="absolute top-full left-1/2 -translate-x-1/2 h-8 w-0.5 bg-slate-200"></div>
+</div>
+<div class="flex gap-4 mt-2">
+<div class="w-40 node-card p-2 rounded-xl border border-slate-100 hover:border-neon-cyan/50 transition-colors cursor-pointer relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-neon-cyan"></div>
+<div class="flex flex-col items-center text-center">
+<img alt="Employee" class="w-10 h-10 rounded-full mb-2 border border-slate-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpLv7hzMhtghsJErhQkLRCqZDV7a7sZ47uAMvAgUtQUDiUgqmyEtf-CPkhwKznTr46JblpCktIkcwe76FRNCC5RuVPSBGZd0Bou7pDS1uNVIOPD8gMeFqjZc6NDpREdBxecEB-0hHB-4IoCAPAm3PqzIFbbkumCaYbtc6icxZXzISy2TuANocLNPYWzcBoDjHj1pZfCW5OJ1nnPl92ya3TtY-HUdOZRohyPdcrSGnw6UIC_sltk4oUNsCt8ummNzGATZ2bV0RzwY4"/>
+<h5 class="text-xs font-bold text-slate-800">Sarah J.</h5>
+<p class="text-[10px] text-slate-500">Gadgeteer</p>
+<span class="mt-1 text-[9px] text-neon-cyan font-bold px-1.5 py-0.5 bg-neon-cyan/5 border border-neon-cyan/20 rounded">AGENT</span>
+</div>
+</div>
+<div class="w-40 node-card p-2 rounded-xl border border-slate-100 hover:border-neon-cyan/50 transition-colors cursor-pointer relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-neon-cyan"></div>
+<div class="flex flex-col items-center text-center">
+<img alt="Employee" class="w-10 h-10 rounded-full mb-2 border border-slate-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRKTFopJn1N4O3eWi92yCLzI49gBfBMhEQXSDVcOhYxUyRFtLkoENk75Cq6xIO2MFSg29budMu5p1cQh_tkS6WvS1fxCJtR4hBogGtCPO1xccOvwR_qxlAAV6X_xR2_t9Po1MQZD4QNl8CJHPa6EUHLDWsvJv6LfRWmf7PPioRKu_zkSZMybDJXYbNLUz3sAsqgeGeuJsrmFfM6-UMxlQl80CdjK62ukUTCRcF_hFmXJWq--6EV5Adt522Bm9gRKYRrK4dG0JwCs8"/>
+<h5 class="text-xs font-bold text-slate-800">David K.</h5>
+<p class="text-[10px] text-slate-500">Proto-Type</p>
+<span class="mt-1 text-[9px] text-neon-cyan font-bold px-1.5 py-0.5 bg-neon-cyan/5 border border-neon-cyan/20 rounded">AGENT</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-center gap-8 group">
+<div class="relative w-56 node-card rounded-xl p-3 hover:bg-slate-50 transition-all cursor-pointer border border-primary/20 ring-2 ring-primary ring-opacity-10 shadow-lg">
+<div class="absolute -top-2 -right-2 flex h-4 w-4">
+<span class="absolute inline-flex h-full w-full rounded-full bg-primary/20"></span>
+<span class="relative inline-flex rounded-full h-4 w-4 bg-primary"></span>
+</div>
+<div class="flex items-center gap-3">
+<div class="relative">
+<img alt="Sales Lead" class="w-12 h-12 rounded-lg object-cover ring-1 ring-slate-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuYH7kMnSOutvIfXkmANAM0mB6jtUlDc4EjXm6Wd8uNZ-QKOKNhPVOYRvEwVqY8vqJJiklHz0BGIpBVOf86N8gQnOKuhv09tYOvgOqvg6cOO713e5BVXtJCQ-a1RV4hrPMsdKbrrRxi55Ape5Ms-gqZ7zY5pqY6W2EFPNDXABSIbUSdXRHHzWcViKzz_TUpngbUQ-rGJY9PqF-qziu57H_MrMa0pib3cZCjj21AVtvUcWIhHLH32t-xsv80felfWXmfSeGe-79jQ8"/>
+<span class="absolute -bottom-1 -right-1 material-icons text-[10px] bg-white text-neon-green p-0.5 rounded-full border border-neon-green/20 shadow-sm">attach_money</span>
+</div>
+<div>
+<h4 class="text-slate-900 font-semibold text-sm">Elena Ross</h4>
+<p class="text-slate-500 text-xs">Global Sales</p>
+<span class="inline-block mt-1 px-1.5 py-0.5 rounded text-[10px] bg-neon-green/10 text-neon-green border border-neon-green/20 font-bold">CASHIER</span>
+</div>
+</div>
+<div class="absolute top-full left-1/2 -translate-x-1/2 h-8 w-0.5 bg-primary/30"></div>
+</div>
+<div class="flex gap-4 mt-2">
+<div class="w-40 bg-primary/5 p-2 rounded-xl border-2 border-primary shadow-lg cursor-pointer relative overflow-hidden transform scale-105">
+<div class="absolute top-0 right-0 p-1">
+<span class="material-icons text-xs text-primary">check_circle</span>
+</div>
+<div class="flex flex-col items-center text-center">
+<img alt="Employee" class="w-10 h-10 rounded-full mb-2 border-2 border-primary" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKPcnno0IKyxfrGxX5psgjGjcBpwE3EOMT8gkcYbhHblwiqDr84qetq5243_rXq67FQE1G6Sw4ha9p-x8YCcckl8PaRA-6he6vQIKTXn2Km58VcAzKCLqLetr9WWiexrv7rhZX59chgCR8geJ9wgIZ7QpfbZILpQ7Cg4JyGYHKP-yi8CGFQkW5DdLWLgEi-3oxIyOHA-MMESl26jEQN6eqbR69DJL4z8B19LG8xh6fpalPCOJp_sAGqovqfJkJr4BFVEImPhnxXjw"/>
+<h5 class="text-xs font-bold text-slate-900">Jinx V.</h5>
+<p class="text-[10px] text-slate-600">Sales Lead</p>
+<span class="mt-1 text-[9px] text-neon-green font-bold px-1.5 py-0.5 bg-neon-green/10 border border-neon-green/20 rounded">CASHIER</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-center gap-8 group">
+<div class="relative w-56 node-card rounded-xl p-3 opacity-60 hover:opacity-100 transition-all cursor-pointer border border-dashed border-slate-300">
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="w-12 h-12 rounded-lg bg-slate-100 flex items-center justify-center text-slate-400">
+<span class="material-icons">person_off</span>
+</div>
+</div>
+<div>
+<h4 class="text-slate-500 font-semibold text-sm">Vacant</h4>
+<p class="text-slate-400 text-xs">HR Director</p>
+<span class="inline-block mt-1 px-1.5 py-0.5 rounded text-[10px] bg-slate-100 text-slate-500 border border-slate-200">PENDING</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<aside class="w-96 bg-white border-l border-slate-200 flex flex-col z-30 shadow-2xl absolute right-0 top-0 bottom-0 overflow-y-auto transform transition-transform duration-300">
+<div class="h-32 bg-slate-100 relative">
+<div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80')] bg-cover bg-center opacity-10 grayscale" data-alt="Abstract futuristic neon grid pattern"></div>
+<div class="absolute top-4 right-4 flex gap-2">
+<button class="p-2 rounded-full bg-white/80 hover:bg-white text-slate-600 shadow-sm transition">
+<span class="material-icons text-sm">edit</span>
+</button>
+<button class="p-2 rounded-full bg-white/80 hover:bg-white text-slate-600 shadow-sm transition">
+<span class="material-icons text-sm">close</span>
+</button>
+</div>
+</div>
+<div class="px-6 -mt-10 relative">
+<div class="w-20 h-20 rounded-2xl border-4 border-white bg-white overflow-hidden shadow-xl mb-3">
+<img alt="Jinx V Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5h6ZKn6qSh0K8IFKkyXQQwnbXRa3sRfSkqm3fmpBRmWdNgPQOBzyN-ywtXtO8j-4RxMoM352VE7c87A8zW60cqwjhOi8oFBY4NYAN-ugRwrzDkrbjqrJjP_3AyI6ggiWAjKAZpuUEdtRezEtgVTFkPLeeZtII6uxGUERqd5OYhe-A6hj3hp29e2YUm2-hem2PYC7kjxzggLOJPhHNZsromQvOJ2bBt2AO0MqOuEId8O0lILswdgNsYnxglvwNhHHJh1q9-mlYjCE"/>
+</div>
+<div class="mb-6">
+<h2 class="text-2xl font-bold text-slate-900 tracking-tight">Jinx V.</h2>
+<p class="text-primary font-semibold">Regional Sales Lead</p>
+<div class="flex items-center gap-2 mt-2 text-xs text-slate-500">
+<span class="flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-green-500"></span> Online
+                    </span>
+<span>•</span>
+<span>ID: #8842-GS</span>
+<span>•</span>
+<span>Sector 7</span>
+</div>
+</div>
+<div class="flex gap-3 mb-8">
+<button class="flex-1 bg-primary hover:bg-blue-700 text-white py-2.5 px-4 rounded-xl text-sm font-semibold transition-all shadow-lg shadow-primary/20">
+                    Message
+                </button>
+<button class="px-4 py-2.5 border border-slate-200 rounded-xl text-slate-500 hover:bg-slate-50 transition-colors">
+<span class="material-icons text-base">more_horiz</span>
+</button>
+</div>
+<div class="grid grid-cols-2 gap-3 mb-8">
+<div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+<span class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Clearance</span>
+<div class="text-neon-purple font-bold mt-1">Level 4</div>
+</div>
+<div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+<span class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Reports</span>
+<div class="text-slate-900 font-bold mt-1">12 Agents</div>
+</div>
+<div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+<span class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Performance</span>
+<div class="text-green-600 font-bold mt-1">+24%</div>
+</div>
+<div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+<span class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Tenure</span>
+<div class="text-slate-900 font-bold mt-1">3 Years</div>
+</div>
+</div>
+<div class="mb-8">
+<h3 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+                    Recent Logs
+                    <span class="h-px flex-1 bg-slate-100"></span>
+</h3>
+<div class="space-y-4">
+<div class="flex gap-3 relative">
+<div class="flex flex-col items-center">
+<div class="w-2.5 h-2.5 rounded-full bg-primary ring-4 ring-white z-10"></div>
+<div class="w-0.5 h-full bg-slate-100 absolute top-2"></div>
+</div>
+<div class="pb-2">
+<p class="text-sm text-slate-700">Authorized transfer of <span class="text-slate-900 font-semibold">Neuro-Link V4</span>.</p>
+<span class="text-[10px] text-slate-400 font-medium">2 hours ago</span>
+</div>
+</div>
+<div class="flex gap-3 relative">
+<div class="flex flex-col items-center">
+<div class="w-2.5 h-2.5 rounded-full bg-neon-green ring-4 ring-white z-10"></div>
+<div class="w-0.5 h-full bg-slate-100 absolute top-2"></div>
+</div>
+<div class="pb-2">
+<p class="text-sm text-slate-700">Clocked in at <span class="text-slate-900 font-semibold">Central Hub</span>.</p>
+<span class="text-[10px] text-slate-400 font-medium">08:45 AM</span>
+</div>
+</div>
+</div>
+</div>
+<div>
+<h3 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+                    Gadget Access
+                    <span class="h-px flex-1 bg-slate-100"></span>
+</h3>
+<div class="flex flex-wrap gap-2 pb-8">
+<span class="px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-600 hover:border-primary/30 transition-colors cursor-default">Quantum Communicator</span>
+<span class="px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-600 hover:border-primary/30 transition-colors cursor-default">Hover-Board X1</span>
+<span class="px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-600 hover:border-primary/30 transition-colors cursor-default">Neural Interface</span>
+</div>
+</div>
+</div>
+<div class="mt-auto p-6 bg-white/80 backdrop-blur border-t border-slate-100">
+<button class="w-full py-3 rounded-xl border border-red-200 text-red-600 hover:bg-red-50 transition-colors text-sm font-semibold flex justify-center items-center gap-2">
+<span class="material-icons text-base">warning</span>
+                Revoke Access
+            </button>
+</div>
+</aside>
+</div>
+
+</body></html>

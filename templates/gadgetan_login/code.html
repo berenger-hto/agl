@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GadgetAn Login - Light Mode</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Orbitron:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3b19e6", 
+                        "neon-blue": "#00f2ff", 
+                        "neon-purple": "#7000ff",
+                        "background-light": "#f8fafc",
+                        "slate-custom": "#1e293b",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "orbitron": ["Orbitron", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                    backgroundImage: {
+                        'grid-pattern-light': "linear-gradient(to right, #e2e8f0 1px, transparent 1px), linear-gradient(to bottom, #e2e8f0 1px, transparent 1px)",
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(59, 25, 230, 0.15);
+        }
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.07), 
+                        inset 0 0 40px rgba(255, 255, 255, 0.4);
+        }
+        .neon-text-glow {
+            text-shadow: 0 0 8px rgba(0, 242, 255, 0.3);
+        }
+        .neon-border-glow:focus-within {
+            box-shadow: 0 0 15px rgba(59, 25, 230, 0.15);
+            border-color: #7000ff;
+        }
+        @keyframes shimmer {
+            100% { transform: translateX(100%); }
+        }
+        .animate-shimmer {
+            animation: shimmer 2s infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: spin-slow 12s linear infinite;
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light text-slate-custom min-h-screen relative overflow-hidden flex items-center justify-center selection:bg-neon-blue selection:text-slate-custom">
+<div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+<div class="absolute inset-0 bg-grid-pattern-light bg-[size:40px_40px] opacity-60"></div>
+<div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px] animate-pulse-slow"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-neon-purple/10 rounded-full blur-[120px] animate-pulse-slow" style="animation-delay: 2s;"></div>
+<div class="absolute top-[40%] left-[20%] w-[300px] h-[300px] bg-neon-blue/10 rounded-full blur-[80px] animate-float"></div>
+<div class="absolute right-[15%] top-[15%] opacity-10 transform rotate-12">
+<svg class="text-slate-400" fill="currentColor" height="400" viewBox="0 0 24 24" width="400">
+<path d="M12 2L2 22L12 18L22 22L12 2Z" fill="transparent" stroke="currentColor" stroke-width="0.3"></path>
+<circle class="animate-spin-slow" cx="12" cy="12" fill="none" r="8" stroke="currentColor" stroke-width="0.1" style="transform-origin: center;"></circle>
+<circle class="animate-spin-slow" cx="12" cy="12" fill="none" r="6" stroke="currentColor" stroke-width="0.1" style="animation-direction: reverse; transform-origin: center;"></circle>
+</svg>
+</div>
+</div>
+<main class="relative z-10 w-full max-w-md p-6">
+<div class="glass-panel rounded-xl p-8 sm:p-10 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-neon-purple via-primary to-neon-blue"></div>
+<div class="text-center mb-10">
+<div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white border border-slate-200 mb-4 shadow-sm">
+<span class="material-icons text-3xl text-primary">fingerprint</span>
+</div>
+<h1 class="font-orbitron text-3xl font-bold tracking-wider text-slate-custom mb-2">
+                GADGET<span class="text-primary">AN</span>
+</h1>
+<p class="text-slate-500 text-xs font-semibold tracking-widest uppercase">System Access Portal</p>
+</div>
+<form class="space-y-6">
+<div class="space-y-2">
+<label class="block text-xs font-bold text-slate-600 uppercase tracking-wider ml-1" for="email">Identity Code</label>
+<div class="relative group neon-border-glow rounded-lg transition-all duration-300">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-icons text-slate-400 group-focus-within:text-primary transition-colors text-lg">alternate_email</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-3.5 bg-white/80 border border-slate-200 rounded-lg text-slate-custom placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-display sm:text-sm" id="email" placeholder="agent@gadgetan.io" type="email"/>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-center ml-1">
+<label class="block text-xs font-bold text-slate-600 uppercase tracking-wider" for="password">Security Key</label>
+</div>
+<div class="relative group neon-border-glow rounded-lg transition-all duration-300">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-icons text-slate-400 group-focus-within:text-primary transition-colors text-lg">lock</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-3.5 bg-white/80 border border-slate-200 rounded-lg text-slate-custom placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-display sm:text-sm tracking-widest" id="password" placeholder="••••••••••••" type="password"/>
+</div>
+</div>
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center">
+<input class="h-4 w-4 rounded border-slate-300 bg-white text-primary focus:ring-primary focus:ring-offset-0" id="remember-me" name="remember-me" type="checkbox"/>
+<label class="ml-2 block text-slate-600 font-medium" for="remember-me">Persist Link</label>
+</div>
+<div class="text-sm">
+<a class="font-bold text-primary hover:text-neon-purple transition-colors" href="#">Lost Key?</a>
+</div>
+</div>
+<button class="group relative w-full flex justify-center py-4 px-4 border border-transparent rounded-lg text-sm font-orbitron font-bold text-white bg-slate-custom overflow-hidden hover:bg-black transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary shadow-lg" type="button">
+<div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-shimmer"></div>
+<span class="relative flex items-center gap-2">
+                    INITIALIZE SESSION
+                    <span class="material-icons text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</span>
+</button>
+<div class="mt-6 text-center">
+<p class="text-xs font-medium text-slate-500">
+                    Need clearance? 
+                    <a class="font-bold text-primary hover:underline transition-all ml-1" href="#">Request Access</a>
+</p>
+</div>
+</form>
+<div class="absolute bottom-4 left-4 right-4 flex justify-between items-end opacity-20 pointer-events-none">
+<div class="h-px w-8 bg-primary"></div>
+<div class="h-1.5 w-1.5 rounded-full bg-neon-purple mx-1"></div>
+<div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-400 to-transparent"></div>
+<div class="h-1.5 w-1.5 rounded-full bg-neon-blue mx-1"></div>
+<div class="h-px w-8 bg-primary"></div>
+</div>
+</div>
+<div class="mt-8 text-center opacity-60 hover:opacity-100 transition-opacity duration-300">
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-slate-200 bg-white shadow-sm">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="text-[10px] text-slate-600 font-mono font-bold uppercase tracking-tighter">System Online v4.2.0-LT</span>
+</div>
+</div>
+</main>
+
+</body></html>

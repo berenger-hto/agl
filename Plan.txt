@@ -1,0 +1,90 @@
+🚀 Plan de Développement : GadgetAn (Stack React + Hono)
+1. Architecture Globale
+L'application est séparée en deux entités distinctes pour maximiser la performance :
+
+Backend (API) : Hono (Node.js ou Bun) pour traiter les requêtes JSON.
+
+Frontend (UI) : React avec Vite pour le build et react-router pour le routage côté client.
+
+2. Structure du Projet
+Plaintext
+
+/gadgetan-project
+├── /backend (Hono)
+│   ├── src/
+│   │   ├── index.ts        # Entry point & Routes API
+│   │   ├── db.ts           # Connexion MySQL (Drizzle ou Knex)
+│   │   └── controllers/    # Logique (Ventes, Stocks, Prod)
+├── /frontend (React)
+│   ├── src/
+│   │   ├── components/     # Composants UI (Glassmorphism)
+│   │   ├── pages/          # Vues principales (Dashboard, Caisse...)
+│   │   ├── App.tsx         # Configuration de react-router
+│   │   └── hooks/          # Appels API avec TanStack Query
+3. Configuration du Routage (react-router)
+Le routage doit être déclaré dans App.tsx pour permettre une navigation sans reload.
+
+Routes Publiques :
+
+/login : Authentification (Validation via POST /api/auth).
+
+Routes Privées (Protected Routes) :
+
+/ : Dashboard (Stats Chart.js).
+
+/gadgets : Catalogue & Gestion des prix.
+
+/stocks : État des stocks et alertes (D3.js).
+
+
+/productions : Gestion des sessions de production.
+
+/caisse : Interface de vente en temps réel.
+
+
+/employes : Organigramme RH (D3.js).
+
+4. Spécifications du Backend (Hono API)
+Gestion des Stocks et Productions
+
+POST /api/productions : Crée une production et met à jour automatiquement la table STOCKS (incrémentation de quantite_disponible).
+
+GET /api/stocks/stats : Retourne les données JSON pour les jauges D3.js.
+
+Cycle de Vente et Facturation
+POST /api/ventes :
+
+Vérifie que quantite_vendue <= quantite_disponible.
+
+Insère la vente et capture le prix actuel dans CONCERNER.prix_unitaire_appliquer.
+
+Décrémente le stock.
+
+Génère la facture liée.
+
+5. Guide de Style UI (Stitch)
+Pour l'aspect Futuriste / Antigravity :
+
+Navigation : Utiliser <NavLink> de react-router avec des transitions CSS (fades) pour passer d'une vue à l'autre sans flash blanc.
+
+Visualisation :
+
+
+Dashboard : Intégrer des graphiques néon (Bleu/Violet) via Chart.js pour le suivi financier.
+
+
+RH : Utiliser l'auto-jointure matricule_employe_Superviseur pour générer un arbre D3.js interactif.
+
+
+État Global : Utiliser Context API pour stocker les informations de l'employé connecté (matricule, rôle) après le login.
+
+6. Sécurité et Intégrité
+
+Héritage : Le backend doit vérifier que seul un matricule présent dans la table CAISSIERS peut poster sur /api/ventes.
+
+Transactions SQL : Les ventes et productions doivent être encapsulées dans des transactions SQL pour garantir que le stock et la ligne de mouvement sont toujours synchronisés.
+
+Types : Utilisation de TypeScript sur toute la stack pour éviter les erreurs de manipulation sur les IDs de gadgets ou d'employés.
+
+ON doit utiliser une base de données MySQL.
+Pour la connexion à la bd, utiliser le fichier Connect_to_db.txt

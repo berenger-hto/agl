@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GadgetAn - Digital Invoice (Light Mode)</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3b19e6",
+                        "primary-light": "#6344ff",
+                        "charcoal": "#1e1e24",
+                        "background-light": "#ffffff",
+                        "border-charcoal": "#e2e8f0",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "mono": ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace"],
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                    boxShadow: {
+                        'neon-accent': '0 0 15px rgba(59, 25, 230, 0.3)',
+                    }
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply bg-[#fcfcfc] text-charcoal font-display;
+            }
+        }
+        .invoice-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+        }
+        .print-only {
+            display: none;
+        }
+        @media print {
+            .no-print { display: none; }
+            .print-only { display: block; }
+            body { background: white; }
+            .invoice-card { border: none; box-shadow: none; }
+        }
+    </style>
+</head>
+<body class="min-h-screen selection:bg-primary selection:text-white flex flex-col">
+<header class="w-full h-16 border-b border-slate-200 flex items-center justify-between px-6 lg:px-12 bg-white sticky top-0 z-50 no-print">
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-white font-bold">G</div>
+<nav class="hidden md:flex items-center text-sm font-medium text-slate-500">
+<a class="hover:text-primary transition-colors" href="#">Invoices</a>
+<span class="mx-2 text-slate-300">/</span>
+<span class="text-charcoal">#INV-9920-X</span>
+</nav>
+</div>
+<div class="flex items-center gap-3">
+<button class="p-2 text-slate-500 hover:text-primary hover:bg-slate-100 rounded-lg transition-colors" onclick="window.print()" title="Print">
+<span class="material-icons text-xl">print</span>
+</button>
+<button class="p-2 text-slate-500 hover:text-primary hover:bg-slate-100 rounded-lg transition-colors" title="Download">
+<span class="material-icons text-xl">download</span>
+</button>
+<button class="hidden sm:flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-light transition-all shadow-lg shadow-primary/20">
+<span class="material-icons text-sm">share</span>
+            Share Invoice
+        </button>
+</div>
+</header>
+<main class="flex-grow p-4 md:p-8 lg:p-12 relative">
+<div class="max-w-4xl mx-auto invoice-card rounded-xl overflow-hidden shadow-sm relative">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
+<div class="p-8 md:p-12 border-b border-slate-100">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="text-primary font-bold text-2xl tracking-tighter">GadgetAn</span>
+<div class="h-2 w-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.4)]"></div>
+</div>
+<p class="text-sm text-slate-500 uppercase tracking-widest text-[10px] font-semibold">Futuristic Management Systems</p>
+</div>
+<div class="text-right">
+<h1 class="text-4xl font-light text-charcoal mb-1 tracking-tight">INVOICE</h1>
+<p class="font-mono text-primary font-semibold">#INV-9920-X</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+<div>
+<h3 class="text-xs uppercase tracking-widest text-slate-400 mb-4 font-bold">Billed To</h3>
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center shrink-0">
+<span class="material-icons text-slate-400">business</span>
+</div>
+<div>
+<h4 class="text-charcoal font-bold text-lg">Cyberdyne Systems</h4>
+<p class="text-slate-500 text-sm mt-1">ID: C-800-101</p>
+<p class="text-slate-500 text-sm">101 Tech Blvd, Sector 7</p>
+<p class="text-slate-500 text-sm">Neo California, 90210</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col md:items-end">
+<h3 class="text-xs uppercase tracking-widest text-slate-400 mb-4 font-bold text-left md:text-right">Details</h3>
+<div class="grid grid-cols-2 gap-x-8 gap-y-3 text-sm w-full md:w-auto">
+<div class="text-slate-500 text-left md:text-right">Issued Date</div>
+<div class="text-charcoal font-mono font-medium text-right">Oct 24, 2049</div>
+<div class="text-slate-500 text-left md:text-right">Due Date</div>
+<div class="text-charcoal font-mono font-medium text-right">Nov 01, 2049</div>
+<div class="text-slate-500 text-left md:text-right mt-1">Status</div>
+<div class="text-right mt-1">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold bg-slate-100 text-charcoal border border-slate-200">
+                                PENDING
+                            </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="p-0 overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50/50 border-b border-slate-200">
+<th class="px-8 py-5 text-[11px] font-bold text-slate-400 uppercase tracking-widest">Item Description</th>
+<th class="px-8 py-5 text-[11px] font-bold text-slate-400 uppercase tracking-widest text-right">Qty</th>
+<th class="px-8 py-5 text-[11px] font-bold text-slate-400 uppercase tracking-widest text-right">Unit Price</th>
+<th class="px-8 py-5 text-[11px] font-bold text-slate-400 uppercase tracking-widest text-right">Total</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100">
+<tr class="group hover:bg-slate-50 transition-colors">
+<td class="px-8 py-6">
+<div class="flex items-center gap-4">
+<div class="h-10 w-10 rounded bg-slate-50 border border-slate-200 overflow-hidden shrink-0">
+<img alt="Chip" class="w-full h-full object-cover grayscale opacity-80" data-alt="Abstract blue computer chip detail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQtbhtL3aW-B0KVcRil5eXIRkVluMG20iNNvkeTlJDkN1yR4maxgDk9qrSKb5ExlGlxNebr4W2iK0YUu7LLT9_VClGr0ih8aN3FmWIfHycKPsWF0Hp6wa4b39ycnvzaC4R86j28QnLqrvpmqEH-UQibNf0iex29M2ZxxJK3u9fAZPNs6YT_Tv4ngMHq8hxXrj6CbR9QFFc9xq_xRCRlpp-eXXDNq-pHmOfNVQpmYktXD87UW5hXGBCVgaVor1dJrwvD7Icur2cWNw"/>
+</div>
+<div>
+<p class="text-charcoal font-semibold">Quantum Processor Unit</p>
+<p class="text-[10px] text-slate-400 font-mono mt-0.5">SKU: QPU-9000-X</p>
+</div>
+</div>
+</td>
+<td class="px-8 py-6 text-right font-mono text-slate-600">02</td>
+<td class="px-8 py-6 text-right font-mono text-slate-600">$1,200.00</td>
+<td class="px-8 py-6 text-right font-mono text-charcoal font-bold">$2,400.00</td>
+</tr>
+<tr class="group hover:bg-slate-50 transition-colors">
+<td class="px-8 py-6">
+<div class="flex items-center gap-4">
+<div class="h-10 w-10 rounded bg-slate-50 border border-slate-200 overflow-hidden shrink-0">
+<img alt="Hologram" class="w-full h-full object-cover grayscale opacity-80" data-alt="Glowing holographic light pattern abstract" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMc1IYSRNurk85giFQ5lZYp5RZawZrccfRu8-mrux_ur6SgyRuEeHho7xTqm-3XeLJ-JDU2j67sTjUNYuki_vGs7J_plJiLh4RONdNFjM2P0ehVgZoXjbzyU0df9lf8bvdL6wxlAmO_ghahJtNic6KC0y0uw2kVKBUu2nglB7wvsCzxX2y9NDDBUwwV7jQjChvUhhXZ-Emiy97KivyvqEbji2HWtvoBo5Jv4gbLFGt9Hha6iy93O-ccg0JkH6fNuW_6s_XHBUhb8w"/>
+</div>
+<div>
+<p class="text-charcoal font-semibold">Holographic Emitter</p>
+<p class="text-[10px] text-slate-400 font-mono mt-0.5">SKU: HLO-EM-V2</p>
+</div>
+</div>
+</td>
+<td class="px-8 py-6 text-right font-mono text-slate-600">05</td>
+<td class="px-8 py-6 text-right font-mono text-slate-600">$450.00</td>
+<td class="px-8 py-6 text-right font-mono text-charcoal font-bold">$2,250.00</td>
+</tr>
+<tr class="group hover:bg-slate-50 transition-colors">
+<td class="px-8 py-6">
+<div class="flex items-center gap-4">
+<div class="h-10 w-10 rounded bg-slate-50 border border-slate-200 overflow-hidden shrink-0">
+<img alt="Cables" class="w-full h-full object-cover grayscale opacity-80" data-alt="Close up of fiber optic cables blue light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG2KImMLETb-lLt59Vwc0T5zSSTg6aKUfw9X3q56mO2kTPvY_4GduQXoCLwbwbZekZj26h7BnimMPpoTh9gAnTPJr6Ao8vTJ12RQi8w7eKHdEVQFK4EZ8n86vSikVDD5JLy06cGoBhndqVjLNG6FuCjgin7gEx0W8iLI0EvapU2mAF2Iqw_JAg3TW0dXsotV-NkQYaPFZFU2LwdOVerb5-PaoZ5DraYUWfIAf6FUy0Ha2kLj4pN8HACeWPPqGORLUz23hQBq31Foo"/>
+</div>
+<div>
+<p class="text-charcoal font-semibold">Neural Link Cable</p>
+<p class="text-[10px] text-slate-400 font-mono mt-0.5">SKU: NRL-LNK-5M</p>
+</div>
+</div>
+</td>
+<td class="px-8 py-6 text-right font-mono text-slate-600">10</td>
+<td class="px-8 py-6 text-right font-mono text-slate-600">$50.00</td>
+<td class="px-8 py-6 text-right font-mono text-charcoal font-bold">$500.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-8 md:px-12 py-10 border-t border-slate-200 bg-white">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
+<div class="w-full md:w-1/2 text-sm">
+<h4 class="text-slate-400 font-bold uppercase text-[10px] tracking-widest mb-3">Payment Details</h4>
+<div class="bg-slate-50 rounded-lg p-5 border border-slate-200">
+<div class="flex justify-between mb-2">
+<span class="text-slate-500">Bank</span>
+<span class="text-charcoal font-medium">Galactic Credit Union</span>
+</div>
+<div class="flex justify-between mb-2">
+<span class="text-slate-500">Account</span>
+<span class="text-charcoal font-mono font-medium">**** 4921</span>
+</div>
+<div class="flex justify-between">
+<span class="text-slate-500">Swift Code</span>
+<span class="text-charcoal font-mono font-medium">GCU-SPACE-01</span>
+</div>
+</div>
+</div>
+<div class="w-full md:w-1/3 space-y-3">
+<div class="flex justify-between text-sm">
+<span class="text-slate-500">Subtotal</span>
+<span class="text-charcoal font-mono font-medium">$5,150.00</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-slate-500">VAT (20%)</span>
+<span class="text-charcoal font-mono font-medium">$1,030.00</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-slate-500">Discount (Bulk)</span>
+<span class="text-emerald-600 font-mono font-medium">-$600.00</span>
+</div>
+<div class="h-px bg-slate-200 my-4"></div>
+<div class="flex justify-between items-center">
+<span class="text-slate-400 font-bold uppercase tracking-wider text-[11px]">Total Amount</span>
+<span class="text-4xl font-bold text-primary font-mono drop-shadow-[0_2px_4px_rgba(59,25,230,0.1)]">
+                            $5,580.00
+                        </span>
+</div>
+</div>
+</div>
+</div>
+<div class="p-6 md:p-8 border-t border-slate-200 bg-slate-50/50 flex flex-col sm:flex-row justify-between items-center gap-4 no-print">
+<p class="text-[10px] text-slate-400 text-center sm:text-left font-medium">
+                PLEASE PAY WITHIN 15 DAYS OF RECEIVING THIS INVOICE.<br/>
+                GENERATED BY GADGETAN SYSTEM V4.2 LIGHT-CORE.
+            </p>
+<button class="w-full sm:w-auto bg-charcoal text-white font-semibold py-3 px-10 rounded-lg hover:bg-black transition-all shadow-xl shadow-charcoal/10 transform hover:-translate-y-0.5">
+                Process Payment
+            </button>
+</div>
+</div>
+<div class="mt-12 text-center">
+<p class="text-xs text-slate-400 font-medium">© 2049 GadgetAn Inc. All rights reserved.</p>
+</div>
+</main>
+<div class="print-only text-center py-10 text-slate-300 text-[10px]">
+    Generated digitally via GadgetAn Futuristic Management Systems.
+</div>
+
+</body></html>

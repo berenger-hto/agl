@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GadgetAn Catalogue - Light Mode</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Orbitron:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "neon-blue": "#00d8ff",
+                        "neon-violet": "#8b5cf6",
+                        "primary": "#00d8ff", 
+                        "primary-dark": "#0ea5e9",
+                        "background-light": "#f8fafc", 
+                        "surface-light": "#ffffff", 
+                        "slate-950": "#0f172a",
+                        "glass-white": "rgba(255, 255, 255, 0.7)",
+                        "glass-border-light": "rgba(0, 216, 255, 0.2)",
+                    },
+                    fontFamily: {
+                        "sans": ["Inter", "sans-serif"],
+                        "display": ["Orbitron", "sans-serif"],
+                        "mono": ["monospace"]
+                    },
+                    boxShadow: {
+                        'neon-blue-soft': '0 0 15px rgba(0, 216, 255, 0.2)',
+                        'neon-violet-soft': '0 0 15px rgba(139, 92, 246, 0.2)',
+                        'glass-soft': '0 8px 32px 0 rgba(148, 163, 184, 0.1)',
+                    }
+                },
+            },
+        }
+    </script>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+        .card-container {
+            perspective: 1000px;
+        }
+        .card-3d {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+        }
+        .card-container:hover .card-3d {
+            transform: translateY(-8px);
+            border-color: rgba(0, 216, 255, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 216, 255, 0.1), 0 0 15px rgba(0, 216, 255, 0.05);
+        }
+        .glass-panel-light {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+        }
+        .grid-pattern-light {
+            background-image: linear-gradient(rgba(0, 216, 255, 0.03) 1px, transparent 1px), 
+                              linear-gradient(90deg, rgba(0, 216, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+    </style>
+</head>
+<body class="bg-background-light font-sans text-slate-800 antialiased min-h-screen flex flex-col overflow-x-hidden selection:bg-neon-blue selection:text-white">
+<div class="fixed inset-0 z-0 grid-pattern-light pointer-events-none"></div>
+<div class="fixed top-[-10%] left-[15%] w-[500px] h-[500px] bg-neon-blue/5 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="fixed bottom-[-5%] right-[5%] w-[400px] h-[400px] bg-neon-violet/5 rounded-full blur-[100px] pointer-events-none"></div>
+<header class="sticky top-0 z-50 w-full glass-panel-light border-b border-slate-200/50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-20">
+<div class="flex items-center gap-3 group cursor-pointer">
+<div class="w-10 h-10 rounded-lg border border-neon-blue/20 bg-white flex items-center justify-center shadow-sm group-hover:shadow-neon-blue-soft transition-all">
+<span class="material-icons-outlined text-neon-blue">dataset</span>
+</div>
+<div class="flex flex-col font-display">
+<span class="text-xl font-bold tracking-wider text-slate-900">GADGET<span class="text-neon-blue">AN</span></span>
+<span class="text-[0.65rem] uppercase tracking-[0.3em] text-slate-500 font-bold">Catalogue UI</span>
+</div>
+</div>
+<nav class="hidden md:flex space-x-10 font-display">
+<a class="text-slate-500 hover:text-neon-blue text-sm font-semibold tracking-widest transition-all" href="#">DASHBOARD</a>
+<a class="text-neon-blue text-sm font-bold tracking-widest border-b-2 border-neon-blue pb-1" href="#">CATALOGUE</a>
+<a class="text-slate-500 hover:text-neon-blue text-sm font-semibold tracking-widest transition-all" href="#">INVENTORY</a>
+<a class="text-slate-500 hover:text-neon-blue text-sm font-semibold tracking-widest transition-all" href="#">ANALYTICS</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="relative p-2 rounded-full text-slate-400 hover:text-neon-blue hover:bg-slate-100 transition-colors">
+<span class="absolute top-2 right-2 w-2 h-2 bg-neon-violet rounded-full shadow-sm"></span>
+<span class="material-icons-outlined">notifications</span>
+</button>
+<div class="h-9 w-9 rounded-full bg-gradient-to-tr from-neon-blue to-neon-violet p-[2px]">
+<div class="h-full w-full rounded-full bg-white flex items-center justify-center">
+<span class="text-xs font-bold text-slate-800 font-display">JD</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main class="relative z-10 flex-grow py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+<div class="mb-12 flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+<div>
+<div class="flex items-center gap-2 text-slate-400 text-xs font-mono mb-3 tracking-widest font-bold">
+<span>SYSTEM</span>
+<span class="material-icons-outlined text-[10px]">chevron_right</span>
+<span class="text-neon-blue">GADGET_DB</span>
+</div>
+<h1 class="text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight uppercase mb-4">
+                Gadget <span class="text-transparent bg-clip-text bg-gradient-to-r from-neon-blue to-neon-violet">Library</span>
+</h1>
+<p class="text-slate-500 max-w-xl text-sm md:text-base font-normal border-l-4 border-neon-blue/20 pl-4">
+                Managing central hardware synchronization. Filter through active units and cybernetic components in the current sector.
+            </p>
+</div>
+<div class="flex flex-wrap gap-3 items-center glass-panel-light p-2 rounded-xl border border-slate-200 shadow-sm">
+<div class="relative group">
+<span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+<span class="material-icons-outlined text-slate-400 group-focus-within:text-neon-blue transition-colors text-lg">search</span>
+</span>
+<input class="bg-slate-50 border border-slate-200 rounded px-4 pl-10 py-2 text-sm text-slate-800 focus:ring-2 focus:ring-neon-blue/20 focus:border-neon-blue/50 w-full md:w-64 placeholder-slate-400 transition-all font-sans" placeholder="Search components..." type="text"/>
+</div>
+<div class="h-6 w-px bg-slate-200 mx-1 hidden sm:block"></div>
+<button class="flex items-center gap-2 px-4 py-2 rounded text-sm font-semibold font-display text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">
+<span class="material-icons-outlined text-lg">filter_list</span>
+<span>FILTER</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 rounded text-sm font-semibold font-display text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors">
+<span class="material-icons-outlined text-lg">sort</span>
+<span>SORT</span>
+</button>
+<div class="h-6 w-px bg-slate-200 mx-1 hidden sm:block"></div>
+<div class="flex gap-1">
+<button class="p-2 rounded text-neon-blue bg-neon-blue/5 border border-neon-blue/20">
+<span class="material-icons-outlined text-lg">grid_view</span>
+</button>
+<button class="p-2 rounded text-slate-400 hover:text-slate-600 transition-colors">
+<span class="material-icons-outlined text-lg">view_list</span>
+</button>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+<div class="card-container group">
+<div class="card-3d relative bg-white/70 backdrop-blur-md rounded-2xl overflow-hidden border border-slate-200/60 shadow-glass-soft h-full flex flex-col">
+<div class="relative h-52 bg-slate-100 overflow-hidden">
+<img alt="Hardware component" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdDXNAraB4o43b6Rp1HisyfnehhrlLlyyla2z1ZSXCJcM1veifzW29kUZK9-3OkYgbCnUwmU-9MGXpcLUJLC7EL7eMtUoFEgjMOeDgmrLyPhpLMvRVOCCO5GrTDqekdZkZcmWqk4SkQu84S5T4JlYYjubYA1I7-o0Pah0hcwqGLToicGa3gxjsbiF3yaN7dYqYgNdCMLtNVCZCMYRFRSJJ0Vqka9TRpAswrviS7WcgfsUeNYG-gk7CXRs7CkDdmNKZDrFl30kmvZo"/>
+<div class="absolute inset-0 bg-gradient-to-t from-white/80 via-transparent to-transparent"></div>
+<div class="absolute top-4 right-4">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold font-display tracking-wider bg-emerald-50 text-emerald-600 border border-emerald-100 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-2 animate-pulse"></span>
+                            STABLE
+                        </span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-lg font-bold font-display text-slate-900 group-hover:text-neon-blue transition-colors">Quantum Core V2</h3>
+<span class="font-mono text-neon-blue font-bold text-sm">899 CR</span>
+</div>
+<p class="text-sm text-slate-500 mb-6 flex-grow font-normal leading-relaxed">
+                        Next-gen processing unit with entanglement capabilities. Ideal for localized reality rendering.
+                    </p>
+<div class="mt-auto space-y-4">
+<div class="flex items-center justify-between text-[10px] font-bold font-mono text-slate-400 uppercase">
+<span>Inventory Level</span>
+<span class="text-emerald-500">84%</span>
+</div>
+<div class="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-emerald-400 w-[84%] shadow-[0_0_8px_rgba(52,211,153,0.4)]"></div>
+</div>
+<button class="w-full py-3 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs font-display font-bold tracking-widest hover:bg-neon-blue hover:border-neon-blue hover:text-white transition-all duration-300 flex items-center justify-center gap-2 shadow-sm">
+<span>VIEW DETAILS</span>
+<span class="material-icons-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="card-container group">
+<div class="card-3d relative bg-white/70 backdrop-blur-md rounded-2xl overflow-hidden border border-slate-200/60 shadow-glass-soft h-full flex flex-col">
+<div class="relative h-52 bg-slate-100 overflow-hidden">
+<img alt="Drone device" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9JZ8ZxnY5HloMNsBptwrRI6sqKhVpZVxVWrd1M_G56rfN_-UI-V0EnfrgW9MRVSmYGW0EAhhXbbCMoVCcQ1cqCvZgljavHzt5JfbqNimMiDbUf3JUDSwpxzDsrbw9KeGmn7nZ9SaSPqGkWypoM9nucCJ04NKkldEL8NThpNBbceSMoFYdWm7tZBrCFCppKuChYc7fb4T_iOpwLvjEPfnVAuBdeuG_Y8I0e3jHHF-v5_OfAKE_WYkD_pUMRMMPqGGFgaxmAtfR8xI"/>
+<div class="absolute inset-0 bg-gradient-to-t from-white/80 via-transparent to-transparent"></div>
+<div class="absolute top-4 right-4">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold font-display tracking-wider bg-amber-50 text-amber-600 border border-amber-100 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-500 mr-2"></span>
+                            LOW STOCK
+                        </span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-lg font-bold font-display text-slate-900 group-hover:text-neon-blue transition-colors">Aero-Scout Mk.IV</h3>
+<span class="font-mono text-neon-blue font-bold text-sm">450 CR</span>
+</div>
+<p class="text-sm text-slate-500 mb-6 flex-grow font-normal leading-relaxed">
+                        Autonomous reconnaissance unit. Stealth coating applied. Includes 4K spectral imaging.
+                    </p>
+<div class="mt-auto space-y-4">
+<div class="flex items-center justify-between text-[10px] font-bold font-mono text-slate-400 uppercase">
+<span>Inventory Level</span>
+<span class="text-amber-500">8%</span>
+</div>
+<div class="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-amber-400 w-[8%] shadow-[0_0_8px_rgba(245,158,11,0.4)]"></div>
+</div>
+<button class="w-full py-3 rounded-xl border border-slate-200 bg-white text-slate-900 text-xs font-display font-bold tracking-widest hover:bg-neon-blue hover:border-neon-blue hover:text-white transition-all duration-300 flex items-center justify-center gap-2 shadow-sm">
+<span>VIEW DETAILS</span>
+<span class="material-icons-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="card-container group">
+<div class="card-3d relative bg-white/70 backdrop-blur-md rounded-2xl overflow-hidden border border-slate-200/60 shadow-glass-soft h-full flex flex-col">
+<div class="relative h-52 bg-slate-100 overflow-hidden grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500">
+<img alt="Data crystal" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-smINfaOaZiKrwE82avolqabWI_GRupzlfU_MiQAvTlSoGyp1Y0cILc8gFp3I87d9AN51wOrlpaE9lyJItvKm4TOOnvCD_CCoTFF2YY07jP34tcxEMZCV2dnXIxZmxNJox7_AFoTYqlibpn4JlxYPZ7gtYxopdnn3T9e3meu3tbHAMyxd-NWrNds8Pv9fLqMwdOa8eTGmVTx5GB2dKGRDaXcylhqtz4JdqVRJfoYIfGzgyXGCrJVPCS3vp7sszqVqNdRlpRFjK9I"/>
+<div class="absolute inset-0 bg-gradient-to-t from-white/80 via-transparent to-transparent"></div>
+<div class="absolute top-4 right-4">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold font-display tracking-wider bg-slate-100 text-slate-500 border border-slate-200">
+                            DEPLETED
+                        </span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-lg font-bold font-display text-slate-900 group-hover:text-neon-blue transition-colors">Neural Interface Hub</h3>
+<span class="font-mono text-neon-blue font-bold text-sm">2,100 CR</span>
+</div>
+<p class="text-sm text-slate-500 mb-6 flex-grow font-normal leading-relaxed">
+                        Direct cortex uplink for enhanced data processing. Requires surgeon certification.
+                    </p>
+<div class="mt-auto space-y-4">
+<div class="flex items-center justify-between text-[10px] font-bold font-mono text-slate-400 uppercase">
+<span>Inventory Level</span>
+<span class="text-rose-500">0%</span>
+</div>
+<div class="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-rose-400 w-0"></div>
+</div>
+<button class="w-full py-3 rounded-xl border border-dashed border-slate-200 bg-slate-50 text-slate-400 text-xs font-display font-bold tracking-widest flex items-center justify-center gap-2 cursor-not-allowed">
+<span>RESTOCKING...</span>
+<span class="material-icons-outlined text-sm">history</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="card-container group">
+<div class="card-3d relative bg-white/70 backdrop-blur-md rounded-2xl overflow-hidden border-2 border-neon-blue/40 shadow-neon-blue-soft h-full flex flex-col">
+<div class="relative h-52 bg-slate-100 overflow-hidden">
+<img alt="Cybernetic arm" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChvoXW41obhzbKFSWxPeBlq9pne_HzzYyw8CgW1IIj_jaWhL6hIBC1bnGJvQ4N_sj6KSroP2aMUJLcbg9doR4JSTRLs9M7tKTxs5SXFpKLRz_Q0VpEtt3eIt4Valhw54lUb-aopuPfCWFtKrNu0P1EQ5JbtIOkUcGCdn0sUewjdXifsnP8l9K7UEC5U08-4KsM3c0Csz0Ay5saoYJH8ZY0VqUngyyzq-66sdOiaq9xvtrvwIlGh4C7bwZvWpR7er20Aul3B5bryWA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-white/80 via-transparent to-transparent"></div>
+<div class="absolute top-4 right-4">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold font-display tracking-wider bg-neon-blue/10 text-neon-blue border border-neon-blue/30 shadow-[0_0_10px_rgba(0,216,255,0.1)]">
+<span class="w-1.5 h-1.5 rounded-full bg-neon-blue mr-2 animate-ping"></span>
+                            NEW ARRIVAL
+                        </span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-lg font-bold font-display text-slate-900 group-hover:text-neon-blue transition-colors">Titan Armament Grip</h3>
+<span class="font-mono text-neon-blue font-bold text-sm">1,250 CR</span>
+</div>
+<p class="text-sm text-slate-500 mb-6 flex-grow font-normal leading-relaxed">
+                        Hydraulic exoskeleton enhancement. Increases grip strength by 400%.
+                    </p>
+<div class="mt-auto space-y-4">
+<div class="flex items-center justify-between text-[10px] font-bold font-mono text-slate-400 uppercase">
+<span>Inventory Level</span>
+<span class="text-slate-900">12 / 15</span>
+</div>
+<div class="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-neon-blue w-[80%] shadow-[0_0_8px_rgba(0,216,255,0.4)]"></div>
+</div>
+<button class="w-full py-3 rounded-xl border border-neon-blue bg-neon-blue text-white text-xs font-display font-bold tracking-widest hover:bg-neon-violet hover:border-neon-violet transition-all duration-300 flex items-center justify-center gap-2 shadow-sm">
+<span>VIEW DETAILS</span>
+<span class="material-icons-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-20 flex flex-col items-center justify-center gap-6">
+<p class="text-[10px] text-slate-400 font-bold font-mono tracking-widest uppercase">System showing 4 of 284 identified units</p>
+<button class="relative overflow-hidden group px-12 py-4 rounded-full bg-white border border-slate-200 text-slate-900 font-display font-bold tracking-widest transition-all hover:border-neon-blue hover:text-neon-blue shadow-sm hover:shadow-neon-blue-soft">
+<span class="relative z-10 flex items-center gap-3 text-sm">
+                INITIALIZE LOAD
+                <span class="material-icons-outlined text-sm">downloading</span>
+</span>
+<div class="absolute inset-0 bg-neon-blue/5 transform scale-y-0 group-hover:scale-y-100 transition-transform origin-bottom duration-300"></div>
+</button>
+</div>
+</main>
+<footer class="relative z-10 bg-white border-t border-slate-200 mt-24 py-12">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="text-[11px] text-slate-400 font-mono text-center md:text-left leading-relaxed">
+<p class="font-bold text-slate-500">GADGETAN SYSTEM V.4.0.2-LIGHT // SECURE AUTHENTICATED ACCESS</p>
+<p class="mt-1">© 2024 GadgetAn Industries. Advanced Material UI Framework.</p>
+</div>
+<div class="flex items-center gap-8 font-mono text-[10px] font-bold">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.3)]"></div>
+<span class="text-slate-500 tracking-wider">NETWORK: SECURE</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 bg-neon-blue rounded-full shadow-[0_0_8px_rgba(0,216,255,0.3)]"></div>
+<span class="text-slate-500 tracking-wider">SYNC: 100%</span>
+</div>
+</div>
+</div>
+</footer>
+
+</body></html>

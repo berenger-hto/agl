@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GadgetAn - Admin Dashboard Light</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3b19e6",
+                        "primary-light": "#6347ff",
+                        "background-light": "#f8f9fc",
+                        "background-dark": "#141121",
+                        "glass-border": "rgba(0, 0, 0, 0.05)",
+                        "glass-bg": "rgba(255, 255, 255, 0.7)",
+                        "neon-accent": "#00f0ff",
+                        "neon-purple": "#c026d3",
+                        "neon-blue": "#3b19e6",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    }
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply bg-background-light text-slate-900 antialiased;
+            }
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3b19e6;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 10px -2px rgba(0, 0, 0, 0.03);
+        }
+        .elevated-card {
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .elevated-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .neon-text-glow {
+            text-shadow: 0 0 10px rgba(59, 25, 230, 0.2);
+        }
+        .chart-grid-line {
+            stroke: rgba(0, 0, 0, 0.03);
+        }
+    </style>
+</head>
+<body class="font-display overflow-hidden h-screen flex transition-colors duration-300">
+<aside class="w-20 lg:w-64 bg-white border-r border-gray-100 flex-shrink-0 flex flex-col justify-between z-20 h-full relative">
+<div>
+<div class="h-20 flex items-center justify-center lg:justify-start lg:px-6 border-b border-gray-50">
+<div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-primary-light flex items-center justify-center shadow-lg shadow-primary/20">
+<span class="material-icons text-white text-xl">dataset</span>
+</div>
+<h1 class="hidden lg:block ml-3 font-bold text-xl tracking-wider text-slate-800">Gadget<span class="text-primary">An</span></h1>
+</div>
+<nav class="mt-8 space-y-2 px-3">
+<a class="flex items-center px-4 py-3 rounded-xl bg-primary/5 text-primary border border-primary/10 group relative overflow-hidden" href="#">
+<span class="material-icons">dashboard</span>
+<span class="hidden lg:block ml-3 font-semibold">Dashboard</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-xl text-slate-500 hover:text-primary hover:bg-slate-50 transition-all group" href="#">
+<span class="material-icons group-hover:text-primary transition-colors">inventory_2</span>
+<span class="hidden lg:block ml-3 font-medium">Production</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-xl text-slate-500 hover:text-primary hover:bg-slate-50 transition-all group" href="#">
+<span class="material-icons group-hover:text-primary transition-colors">analytics</span>
+<span class="hidden lg:block ml-3 font-medium">Sales Analytics</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-xl text-slate-500 hover:text-primary hover:bg-slate-50 transition-all group" href="#">
+<span class="material-icons group-hover:text-primary transition-colors">people</span>
+<span class="hidden lg:block ml-3 font-medium">Personnel</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-xl text-slate-500 hover:text-primary hover:bg-slate-50 transition-all group" href="#">
+<span class="material-icons group-hover:text-primary transition-colors">settings_input_component</span>
+<span class="hidden lg:block ml-3 font-medium">System Health</span>
+</a>
+</nav>
+</div>
+<div class="p-4 border-t border-gray-50">
+<a class="flex items-center px-4 py-3 rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-all" href="#">
+<span class="material-icons">settings</span>
+<span class="hidden lg:block ml-3 font-medium">Settings</span>
+</a>
+<div class="mt-4 flex items-center lg:px-3">
+<img alt="Admin user profile picture showing a smiling man" class="w-10 h-10 rounded-full border-2 border-white shadow-sm object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnd8k1jL3LHz3Kc_PnwV88IcxBfDUnij_Gkf2lJebvuSpeCMpF2CaKCWIftaeX6zBijxu68D8K2dcEr6jjIvSBs3Kir2meypc0XSo2NOqaZ2h78qN0k21OTpgCvFzi7gxJ-D2-G567KNQCuYCtdRC8pdb_5_BT8JpbfzleuA5WXN37EkKtIoGdIyVKwWsuK5W1miUsu8c5yzWLdvixpqQUMAJ7tLi4J9trQBGsJXFSGQ0e0Bcga3qn1CpeXyk-QtUQolJP7dw8fS4"/>
+<div class="hidden lg:block ml-3">
+<p class="text-sm font-bold text-slate-800">Alex Chen</p>
+<p class="text-xs text-slate-500">Super Admin</p>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col h-screen overflow-hidden relative">
+<div class="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="absolute bottom-0 left-20 w-[400px] h-[400px] bg-cyan-400/5 rounded-full blur-[100px] pointer-events-none"></div>
+<header class="h-20 glass-panel border-b border-gray-100 flex items-center justify-between px-8 z-10 shrink-0">
+<div class="flex items-center w-96">
+<div class="relative w-full group">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-icons text-slate-400 group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full bg-white/50 border border-gray-200 rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 placeholder-slate-400 transition-all" placeholder="Search system logs, components..." type="text"/>
+</div>
+</div>
+<div class="flex items-center space-x-4">
+<button class="w-10 h-10 rounded-xl bg-white hover:bg-slate-50 flex items-center justify-center text-slate-500 hover:text-primary transition-all border border-gray-100 shadow-sm relative">
+<span class="material-icons text-[20px]">notifications</span>
+<span class="absolute top-2 right-2.5 w-2 h-2 bg-red-500 rounded-full ring-2 ring-white"></span>
+</button>
+<div class="h-8 w-px bg-gray-100 mx-2"></div>
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest px-3 py-1.5 rounded-lg border border-primary/10 bg-primary/5">System: Online</span>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto overflow-x-hidden p-6 lg:p-10 space-y-8 scroll-smooth">
+<div class="flex flex-col md:flex-row md:items-end justify-between">
+<div>
+<h2 class="text-4xl font-display font-bold text-slate-900 tracking-tight mb-2">Control Center</h2>
+<p class="text-slate-500 text-base">Monitoring your global gadget manufacturing ecosystem.</p>
+</div>
+<div class="mt-6 md:mt-0 flex space-x-3">
+<button class="bg-white hover:bg-slate-50 text-slate-700 text-sm font-semibold px-5 py-2.5 rounded-xl border border-gray-200 transition-all flex items-center shadow-sm">
+<span class="material-icons text-base mr-2">file_download</span> Export
+                </button>
+<button class="bg-primary hover:bg-primary-light text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow-lg shadow-primary/25 transition-all flex items-center">
+<span class="material-icons text-base mr-2">add</span> New Production
+                </button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="elevated-card rounded-2xl p-6 relative overflow-hidden">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-primary/10 rounded-xl text-primary">
+<span class="material-icons">attach_money</span>
+</div>
+<span class="flex items-center text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded-lg">
+<span class="material-icons text-[14px] mr-1">trending_up</span> +12%
+                    </span>
+</div>
+<h3 class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Total Revenue</h3>
+<p class="text-3xl font-bold text-slate-900 neon-text-glow">$4,250,900</p>
+</div>
+<div class="elevated-card rounded-2xl p-6 relative overflow-hidden">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-fuchsia-100 rounded-xl text-fuchsia-600">
+<span class="material-icons">precision_manufacturing</span>
+</div>
+<span class="flex items-center text-xs font-bold text-fuchsia-600 bg-fuchsia-50 px-2.5 py-1 rounded-lg border border-fuchsia-100">
+                        Active
+                    </span>
+</div>
+<h3 class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Ongoing Productions</h3>
+<p class="text-3xl font-bold text-slate-900">84 <span class="text-sm text-slate-400 font-medium tracking-normal">Units</span></p>
+</div>
+<div class="elevated-card rounded-2xl p-6 relative overflow-hidden">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-cyan-100 rounded-xl text-cyan-600">
+<span class="material-icons">shopping_cart</span>
+</div>
+<span class="flex items-center text-xs font-bold text-red-500 bg-red-50 px-2 py-1 rounded-lg">
+<span class="material-icons text-[14px] mr-1">trending_down</span> -2.4%
+                    </span>
+</div>
+<h3 class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">New Orders</h3>
+<p class="text-3xl font-bold text-slate-900">1,205</p>
+</div>
+<div class="elevated-card rounded-2xl p-6 relative overflow-hidden">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-teal-100 rounded-xl text-teal-600">
+<span class="material-icons">dns</span>
+</div>
+<span class="flex items-center text-xs font-bold text-teal-600 bg-teal-50 px-2 py-1 rounded-lg">
+                        Stable
+                    </span>
+</div>
+<h3 class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">System Uptime</h3>
+<p class="text-3xl font-bold text-slate-900">99.8%</p>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="elevated-card rounded-2xl p-8 lg:col-span-2 flex flex-col h-[450px]">
+<div class="flex justify-between items-center mb-10">
+<div>
+<h3 class="text-xl font-bold text-slate-900">Monthly Sales Trends</h3>
+<p class="text-sm text-slate-400 mt-1 font-medium">Analytics overview of revenue stream</p>
+</div>
+<select class="bg-slate-50 border border-gray-100 text-slate-600 text-xs font-semibold rounded-xl px-4 py-2 focus:ring-primary focus:border-primary outline-none transition-all">
+<option>Last 12 Months</option>
+<option>Last 6 Months</option>
+<option>Last 30 Days</option>
+</select>
+</div>
+<div class="flex-1 w-full relative">
+<svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 800 300">
+<line class="chart-grid-line" stroke-width="1" x1="0" x2="800" y1="250" y2="250"></line>
+<line class="chart-grid-line" stroke-width="1" x1="0" x2="800" y1="200" y2="200"></line>
+<line class="chart-grid-line" stroke-width="1" x1="0" x2="800" y1="150" y2="150"></line>
+<line class="chart-grid-line" stroke-width="1" x1="0" x2="800" y1="100" y2="100"></line>
+<line class="chart-grid-line" stroke-width="1" x1="0" x2="800" y1="50" y2="50"></line>
+<defs>
+<linearGradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#3b19e6" stop-opacity="0.15"></stop>
+<stop offset="100%" stop-color="#3b19e6" stop-opacity="0"></stop>
+</linearGradient>
+</defs>
+<path d="M0,250 C100,220 150,150 200,180 S300,240 400,150 S550,50 650,100 S750,80 800,20 V300 H0 Z" fill="url(#chartGradient)"></path>
+<path d="M0,250 C100,220 150,150 200,180 S300,240 400,150 S550,50 650,100 S750,80 800,20" fill="none" filter="drop-shadow(0 4px 10px rgba(59,25,230,0.3))" stroke="#3b19e6" stroke-linecap="round" stroke-width="4"></path>
+<circle cx="200" cy="180" fill="#3b19e6" r="5" stroke="#ffffff" stroke-width="2"></circle>
+<circle cx="400" cy="150" fill="#3b19e6" r="5" stroke="#ffffff" stroke-width="2"></circle>
+<circle cx="650" cy="100" fill="#3b19e6" r="5" stroke="#ffffff" stroke-width="2"></circle>
+</svg>
+<div class="absolute bottom-[-20px] left-0 right-0 flex justify-between text-[11px] font-bold text-slate-400 px-2 uppercase tracking-tighter">
+<span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span>
+</div>
+</div>
+</div>
+<div class="elevated-card rounded-2xl p-8 flex flex-col relative overflow-hidden">
+<h3 class="text-xl font-bold text-slate-900 mb-8">Stock Distribution</h3>
+<div class="flex-1 flex items-center justify-center relative">
+<div class="absolute w-40 h-40 bg-primary/5 rounded-full blur-3xl"></div>
+<div class="w-52 h-52 rounded-full relative flex items-center justify-center" style="background: conic-gradient(
+                                 #3b19e6 0% 45%, 
+                                 #00f0ff 45% 70%, 
+                                 #c026d3 70% 85%, 
+                                 #e2e8f0 85% 100%
+                             );">
+<div class="w-40 h-40 bg-white rounded-full shadow-inner flex flex-col items-center justify-center z-10">
+<span class="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Global Items</span>
+<span class="text-3xl font-black text-slate-900 mt-1">14,230</span>
+</div>
+</div>
+</div>
+<div class="mt-8 space-y-4">
+<div class="flex justify-between items-center text-sm">
+<div class="flex items-center font-bold text-slate-700">
+<span class="w-3 h-3 rounded-full bg-primary mr-3 shadow-sm shadow-primary/40"></span> Processors
+                        </div>
+<span class="font-mono text-slate-400 font-bold">45%</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<div class="flex items-center font-bold text-slate-700">
+<span class="w-3 h-3 rounded-full bg-cyan-400 mr-3 shadow-sm shadow-cyan-400/40"></span> Displays
+                        </div>
+<span class="font-mono text-slate-400 font-bold">25%</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<div class="flex items-center font-bold text-slate-700">
+<span class="w-3 h-3 rounded-full bg-fuchsia-600 mr-3 shadow-sm shadow-fuchsia-600/40"></span> Batteries
+                        </div>
+<span class="font-mono text-slate-400 font-bold">15%</span>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
+<div class="elevated-card rounded-2xl p-8 lg:col-span-2">
+<div class="flex justify-between items-center mb-8">
+<h3 class="text-xl font-bold text-slate-900">Recent Production Logs</h3>
+<a class="text-xs font-bold text-primary hover:underline transition-all uppercase tracking-widest" href="#">View Archive</a>
+</div>
+<div class="space-y-4">
+<div class="flex items-center p-4 rounded-2xl bg-slate-50 hover:bg-white border border-transparent hover:border-slate-100 transition-all cursor-pointer">
+<div class="w-12 h-12 rounded-xl bg-green-100 text-green-600 flex items-center justify-center mr-5 shrink-0">
+<span class="material-icons text-2xl">check_circle</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<h4 class="text-sm font-bold text-slate-800">Quantum Chip Batch #802 Completed</h4>
+<span class="text-xs font-medium text-slate-400">2 min ago</span>
+</div>
+<p class="text-xs text-slate-500 mt-1">Verified: 99.9% yield rate across all sectors.</p>
+</div>
+</div>
+<div class="flex items-center p-4 rounded-2xl bg-slate-50 hover:bg-white border border-transparent hover:border-slate-100 transition-all cursor-pointer">
+<div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center mr-5 shrink-0">
+<span class="material-icons text-2xl">inventory</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<h4 class="text-sm font-bold text-slate-800">Raw Material Restock</h4>
+<span class="text-xs font-medium text-slate-400">45 min ago</span>
+</div>
+<p class="text-xs text-slate-500 mt-1">Received 500 units of Holographic Emitters.</p>
+</div>
+</div>
+<div class="flex items-center p-4 rounded-2xl bg-slate-50 hover:bg-white border border-transparent hover:border-slate-100 transition-all cursor-pointer">
+<div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center mr-5 shrink-0">
+<span class="material-icons text-2xl">warning</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<h4 class="text-sm font-bold text-slate-800">Line B Temperature Alert</h4>
+<span class="text-xs font-medium text-slate-400">2h ago</span>
+</div>
+<p class="text-xs text-slate-500 mt-1">Cooling sequence engaged. System returning to optimal.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="elevated-card rounded-2xl p-8">
+<h3 class="text-xl font-bold text-slate-900 mb-8">Resource Load</h3>
+<div class="space-y-8">
+<div>
+<div class="flex justify-between text-xs font-bold uppercase tracking-widest mb-3">
+<span class="text-slate-400">Mainframe CPU</span>
+<span class="text-slate-900">78%</span>
+</div>
+<div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full shadow-lg shadow-primary/30" style="width: 78%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs font-bold uppercase tracking-widest mb-3">
+<span class="text-slate-400">Memory Allocation</span>
+<span class="text-slate-900">42%</span>
+</div>
+<div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-cyan-400 rounded-full shadow-lg shadow-cyan-400/30" style="width: 42%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs font-bold uppercase tracking-widest mb-3">
+<span class="text-slate-400">Network I/O</span>
+<span class="text-slate-900">1.2 GB/S</span>
+</div>
+<div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-fuchsia-500 rounded-full shadow-lg shadow-fuchsia-500/30" style="width: 60%"></div>
+</div>
+</div>
+<div class="mt-10 relative rounded-2xl overflow-hidden h-36 border border-slate-100 group shadow-inner">
+<img alt="World map showing glowing connection nodes" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3EeN3B9KlcQP8WK3xv7uVVur6S02BM9WQLTExvGlXaichU7WtcYTa9c1BHuzh9rtVuCQ0h6MzR5-cZNuLAp3FRzSr9Tr_GgNcmYMAPEUSHto-dC0O5YQkwnX51rXV8TDE7fktEDyFZg2ibtgxoKDS7B4fw4_HWMdT-kHDAiahQwclyIt2T60-P7aWqnf_JRmIHZt0YNlPdtErLBjWywtstb-Z2zqNjA91EpbeFZJ6KNL7-PtiHgvVMfAbozOc5sVQ1nyJPczGf2k"/>
+<div class="absolute inset-0 bg-gradient-to-t from-white/40 to-transparent"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="bg-white/90 backdrop-blur-md border border-slate-200 px-4 py-1.5 rounded-full text-[10px] font-black uppercase text-slate-800 tracking-widest shadow-lg">Global Nodes Map</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+</body></html>
