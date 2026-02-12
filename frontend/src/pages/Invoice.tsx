@@ -63,7 +63,7 @@ const InvoicePage = () => {
                                     <span className="text-[#3b19e6] font-bold text-2xl tracking-tighter">GadgetAn</span>
                                     <div className="h-2 w-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.4)]"></div>
                                 </div>
-                                <p className="text-slate-500 uppercase tracking-widest text-[10px] font-semibold">Systèmes de Gestion Futuristes</p>
+                                <p className="text-slate-500 uppercase tracking-widest text-[10px] font-semibold">Systèmes de Gestion</p>
                             </div>
                             <div className="text-right">
                                 <h1 className="text-4xl font-light text-[#1e1e24] mb-1 tracking-tight">FACTURE</h1>
@@ -157,7 +157,7 @@ const InvoicePage = () => {
                                     <div className="flex justify-between mb-2">
                                         <span className="text-slate-500">Date de Vente</span>
                                         <span className="text-[#1e1e24] font-mono font-medium">
-                                            {new Date(invoice.date_vente).toLocaleDateString('fr-FR')} {new Date(invoice.date_vente).toLocaleTimeString('fr-FR')}
+                                            {new Date(invoice.date_vente).toLocaleDateString('fr-FR')}
                                         </span>
                                     </div>
                                 </div>
@@ -194,12 +194,12 @@ const InvoicePage = () => {
                     </div>
                 </div>
                 <div className="mt-12 text-center print:hidden">
-                    <p className="text-xs text-slate-400 font-medium">© 2049 GadgetAn Inc. Tous droits réservés.</p>
+                    <p className="text-xs text-slate-400 font-medium">© 2026 GadgetAn Inc. Tous droits réservés.</p>
                 </div>
             </main>
 
             <div className="hidden print:block text-center py-10 text-slate-300 text-[10px]">
-                Généré numériquement via GadgetAn Futuristic Management Systems.
+                Généré numériquement via GadgetAn Management Systems.
             </div>
         </div>
     );
