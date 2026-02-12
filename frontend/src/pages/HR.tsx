@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react';
 import api from '../lib/axios';
 import OrgChart from '../components/OrgChart';
+import EmployeeDetailCard from '../components/EmployeeDetailCard';
 
 interface Employee {
     matricule_employe: number;
     nom_employe: string;
     prenom_employe: string;
     email_employe: string;
-    poste?: string; // Derived from joined tables (Caissier, Administratif, Agent)
+    poste?: string;
+    role_category?: string;
+    matricule_employe_Superviseur?: number;
+    nom_superviseur?: string;
     children?: Employee[];
 }
 
@@ -17,9 +21,18 @@ const HRPage = () => {
     const [viewMode, setViewMode] = useState<'list' | 'tree'>('list');
     const [loading, setLoading] = useState(true);
     const [showModal, setShowModal] = useState(false);
+    const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(null);
+
     const [newEmp, setNewEmp] = useState({
-        nom_employe: '', prenom_employe: '', email_employe: '', role: 'Employe',
-        statut_caissier: 'Actif', code_acces: '', role_agent: 'Ouvrier', poste_administratif: 'Staff'
+        nom_employe: '',
+        prenom_employe: '',
+        email_employe: '',
+        role: 'Employe',
+        matricule_employe_Superviseur: '',
+        statut_caissier: 'Actif',
+        code_acces: '',
+        role_agent: 'Ouvrier',
+        poste_administratif: 'Staff'
     });
 
     useEffect(() => {
@@ -44,8 +57,18 @@ const HRPage = () => {
     const handleCreateEmployee = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            await api.post('/employees', newEmp);
+            const payload = {
+                ...newEmp,
+                matricule_employe_Superviseur: newEmp.matricule_employe_Superviseur ? Number(newEmp.matricule_employe_Superviseur) : null
+            };
+            await api.post('/employees', payload);
             setShowModal(false);
+            // Reset form
+            setNewEmp({
+                nom_employe: '', prenom_employe: '', email_employe: '', role: 'Employe',
+                matricule_employe_Superviseur: '',
+                statut_caissier: 'Actif', code_acces: '', role_agent: 'Ouvrier', poste_administratif: 'Staff'
+            });
             fetchData();
             alert('Employé ajouté !');
         } catch (e) { alert('Erreur ajout employé'); }
@@ -98,7 +121,11 @@ const HRPage = () => {
                     {viewMode === 'list' && (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {employees.map((emp) => (
-                                <div key={emp.matricule_employe} className="bg-white border border-gray-100 rounded-2xl p-6 hover:shadow-lg transition-all group relative overflow-hidden">
+                                <div
+                                    key={emp.matricule_employe}
+                                    onClick={() => setSelectedEmployee(emp)}
+                                    className="bg-white border border-gray-100 rounded-2xl p-6 hover:shadow-lg transition-all group relative overflow-hidden cursor-pointer"
+                                >
                                     <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
                                     <button
                                         onClick={(e) => {
@@ -129,11 +156,19 @@ const HRPage = () => {
                 </>
             )}
 
+            {/* Employee Detail Modal */}
+            {selectedEmployee && (
+                <EmployeeDetailCard
+                    employee={selectedEmployee}
+                    onClose={() => setSelectedEmployee(null)}
+                />
+            )}
+
             {showModal && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" onClick={() => setShowModal(false)}></div>
                     <div className="relative bg-white/90 backdrop-blur-xl border border-white/20 shadow-2xl rounded-3xl p-8 w-full max-w-lg max-h-[90vh] overflow-y-auto transform transition-all scale-100">
-                        <div className="flex justify-between items-center mb-8">
+                        <div className="flex justify-between items-center mb-6">
                             <div>
                                 <h3 className="text-2xl font-display font-bold text-slate-900">Nouveau Membre</h3>
                                 <p className="text-slate-500 text-sm">Ajouter un collaborateur à l'équipe</p>
@@ -143,7 +178,7 @@ const HRPage = () => {
                             </button>
                         </div>
 
-                        <form onSubmit={handleCreateEmployee} className="space-y-6">
+                        <form onSubmit={handleCreateEmployee} className="space-y-5">
                             <div className="grid grid-cols-2 gap-5">
                                 <div className="space-y-2">
                                     <label className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Prénom</label>
@@ -166,6 +201,27 @@ const HRPage = () => {
                                     <input type="email" required placeholder="jean.dupont@gadgetan.com"
                                         className="w-full pl-11 bg-slate-50 border-transparent focus:bg-white focus:border-primary/50 focus:ring-4 focus:ring-primary/10 rounded-2xl px-4 py-3 text-slate-700 font-medium transition-all outline-none"
                                         value={newEmp.email_employe} onChange={e => setNewEmp({ ...newEmp, email_employe: e.target.value })} />
+                                </div>
+                            </div>
+
+                            {/* Superior Selection */}
+                            <div className="space-y-2">
+                                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">Supérieur Hiérarchique (Optionnel)</label>
+                                <div className="relative">
+                                    <span className="material-icons absolute left-4 top-3.5 text-slate-400 text-[20px]">supervisor_account</span>
+                                    <select
+                                        className="w-full pl-11 bg-slate-50 border-transparent focus:bg-white focus:border-primary/50 focus:ring-4 focus:ring-primary/10 rounded-2xl px-4 py-3 text-slate-700 font-medium transition-all outline-none appearance-none"
+                                        value={newEmp.matricule_employe_Superviseur}
+                                        onChange={e => setNewEmp({ ...newEmp, matricule_employe_Superviseur: e.target.value })}
+                                    >
+                                        <option value="">Aucun (Racine)</option>
+                                        {employees.map(emp => (
+                                            <option key={emp.matricule_employe} value={emp.matricule_employe}>
+                                                {emp.prenom_employe} {emp.nom_employe} ({emp.poste || 'Employé'})
+                                            </option>
+                                        ))}
+                                    </select>
+                                    <span className="material-icons absolute right-4 top-3.5 text-slate-400 pointer-events-none">expand_more</span>
                                 </div>
                             </div>
 

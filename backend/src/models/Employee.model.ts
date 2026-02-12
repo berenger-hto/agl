@@ -16,6 +16,7 @@ interface CreateEmployeeDTO {
     nom_employe: string;
     prenom_employe: string;
     email_employe: string;
+    matricule_employe_Superviseur?: number;
     role: 'Employe' | 'Caissier' | 'Agent' | 'Admin';
     // Role specific fields
     statut_caissier?: string;
@@ -28,6 +29,7 @@ export class EmployeeModel {
     static async getAll() {
         const query = `
             SELECT e.*, 
+            CONCAT(s.prenom_employe, ' ', s.nom_employe) as nom_superviseur,
             CASE 
                 WHEN c.matricule_employe IS NOT NULL THEN 'Caissier'
                 WHEN a.matricule_employe IS NOT NULL THEN 'Agent'
@@ -41,6 +43,7 @@ export class EmployeeModel {
                 ELSE 'Employe'
             END as poste
             FROM EMPLOYES e
+            LEFT JOIN EMPLOYES s ON e.matricule_employe_Superviseur = s.matricule_employe
             LEFT JOIN CAISSIERS c ON e.matricule_employe = c.matricule_employe
             LEFT JOIN AGENTS_PRODUCTIONS a ON e.matricule_employe = a.matricule_employe
             LEFT JOIN ADMINISTRATIFS adm ON e.matricule_employe = adm.matricule_employe
@@ -84,8 +87,8 @@ export class EmployeeModel {
             await connection.beginTransaction();
 
             const [res] = await connection.execute<ResultSetHeader>(
-                'INSERT INTO EMPLOYES (nom_employe, prenom_employe, email_employe) VALUES (?, ?, ?)',
-                [data.nom_employe, data.prenom_employe, data.email_employe]
+                'INSERT INTO EMPLOYES (nom_employe, prenom_employe, email_employe, matricule_employe_Superviseur) VALUES (?, ?, ?, ?)',
+                [data.nom_employe, data.prenom_employe, data.email_employe, data.matricule_employe_Superviseur || null]
             );
             const employeeId = res.insertId;
 
