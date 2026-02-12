@@ -8,6 +8,7 @@ export interface Employee {
     email_employe: string;
     matricule_employe_Superviseur: number | null;
     poste?: string;
+    role_category?: string;
     children?: Employee[];
 }
 
@@ -27,6 +28,12 @@ export class EmployeeModel {
     static async getAll() {
         const query = `
             SELECT e.*, 
+            CASE 
+                WHEN c.matricule_employe IS NOT NULL THEN 'Caissier'
+                WHEN a.matricule_employe IS NOT NULL THEN 'Agent'
+                WHEN adm.matricule_employe IS NOT NULL THEN 'Admin'
+                ELSE 'Employe'
+            END as role_category,
             CASE 
                 WHEN c.matricule_employe IS NOT NULL THEN c.statut_caissier
                 WHEN a.matricule_employe IS NOT NULL THEN a.role_agent

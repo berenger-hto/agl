@@ -20,7 +20,7 @@ export class ProductionController {
                 return c.json({ error: 'Missing required fields' }, 400);
             }
 
-            const insertId = await ProductionModel.create(body);
+            const insertId = await ProductionModel.createWithDetails(body);
             return c.json({ success: true, id: insertId }, 201);
         } catch (error) {
             console.error('Error creating production:', error);
