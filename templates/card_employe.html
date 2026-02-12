@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GadgetAn - Transparent Employee Identity Card</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Orbitron:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3b19e6",
+                        "neon-purple": "#7000ff",
+                        "neon-blue": "#00d4ff",
+                        "charcoal": "#1e1e24",
+                        "glass-bg": "rgba(255, 255, 255, 0.45)",
+                    },
+                    fontFamily: {
+                        "inter": ["Inter", "sans-serif"],
+                        "orbitron": ["Orbitron", "sans-serif"],
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            body {@apply bg-[#f8fafc] text-charcoal font-inter min-h-screen flex items-center justify-center p-6;
+                background-image: none !important;
+            }
+        }
+        .glass-card {
+            @apply bg-white/40 backdrop-blur-2xl border border-white/60 relative overflow-hidden;
+            box-shadow: 0 8px 32px 0 rgba(112, 0, 255, 0.08);
+        }
+        .neon-glow-border {
+            position: relative;
+        }
+        .neon-glow-border::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            background: linear-gradient(135deg, rgba(112, 0, 255, 0.4), rgba(0, 212, 255, 0.4));
+            z-index: -1;
+            border-radius: inherit;
+        }
+        .label-text {
+            @apply text-[11px] font-bold text-slate-500 uppercase tracking-[0.15em] font-inter mb-1.5 block;
+        }
+        .value-text {
+            @apply font-orbitron text-sm font-semibold text-charcoal tracking-tight;
+        }
+        .qr-placeholder {
+            background: repeating-conic-gradient(#cbd5e1 0% 25%, transparent 0% 50%) 50% / 4px 4px;
+        }
+        .role-badge {
+            @apply font-orbitron text-[10px] font-black px-2 py-0.5 rounded bg-neon-purple text-white tracking-widest uppercase;
+        }
+    </style>
+</head>
+<body>
+<div class="w-full max-w-md glass-card rounded-[2.5rem] p-10 neon-glow-border">
+<div class="flex justify-between items-start mb-8">
+<div class="relative">
+<div class="w-24 h-24 rounded-2xl p-0.5 bg-gradient-to-tr from-neon-purple via-neon-blue to-white shadow-xl">
+<div class="w-full h-full rounded-2xl overflow-hidden border-2 border-white bg-white">
+<img alt="Employee Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBp1mYx2Xibppk1cczywr9asXsIFECHcKbOsNKqLrkDJm3QN9u2I7jdb5Ux2_rnXboRmOypBfoxgiVEAVxdJ5SeCyNDADnf8ul_1mbSw46Yf-Z0ftCuH3Qtorp3-X1ugTeRuQ1bPlT9QJDxTAg1QN2ZW-NNNVh_TN5rDvbF7U-kAKo2uA-KnrPlnClDNGuimDMwCFyubVPxY3yJXdrjjNdEbzTapRJ4Aih5mfIQbskeJs2g-hLixelJ5-5rAiHa2oQntT-K_9cFABs"/>
+</div>
+</div>
+<div class="absolute -bottom-2 -right-2 w-8 h-8 bg-white rounded-full border border-slate-100 shadow-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-neon-purple text-[18px] font-bold">verified</span>
+</div>
+</div>
+<div class="text-right">
+<div class="flex items-center gap-2 justify-end mb-1">
+<span class="font-orbitron font-black text-charcoal text-xl tracking-tighter">GADGET<span class="text-neon-purple">AN</span></span>
+</div>
+<p class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Management System</p>
+</div>
+</div>
+<div class="mb-8">
+<div class="flex items-center gap-2 mb-1">
+<span class="role-badge">Chief Architect</span>
+</div>
+<div class="flex items-end gap-3">
+<h1 class="font-orbitron text-3xl font-black text-charcoal leading-none">ALEX VANCE</h1>
+</div>
+</div>
+<div class="space-y-5">
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-white/40 p-4 rounded-2xl border border-white/50 shadow-sm">
+<label class="label-text">Matricule</label>
+<div class="flex items-center gap-2">
+<span class="font-orbitron text-xs font-black text-neon-purple">ID-8829-QX</span>
+</div>
+</div>
+<div class="bg-white/40 p-4 rounded-2xl border border-white/50 shadow-sm">
+<label class="label-text">Clearance</label>
+<span class="value-text text-neon-blue">LEVEL V.4</span>
+</div>
+</div>
+<div class="bg-white/40 p-4 rounded-2xl border border-white/50 shadow-sm flex items-center justify-between">
+<div class="w-full">
+<label class="label-text">Node Address</label>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400 text-sm">alternate_email</span>
+<span class="value-text text-[12px] lowercase">alex.v@gadgetan.systems</span>
+</div>
+</div>
+</div>
+<div class="bg-white/40 p-4 rounded-2xl border border-white/50 shadow-sm flex items-center justify-between">
+<div class="w-full">
+<label class="label-text">Assigned Sector</label>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400 text-sm">location_on</span>
+<span class="value-text text-[12px]">SECTOR 7G / INDUSTRIAL SPIRE</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-slate-200/50 flex items-center justify-between">
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+<p class="text-[9px] font-bold text-slate-500 uppercase tracking-[0.2em]">Active Signature</p>
+</div>
+<p class="text-[8px] font-medium text-slate-400 font-mono tracking-tight">ENCRYPT_KEY: 0x8F22A1BC</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-white p-1 rounded-lg border border-slate-200 shadow-sm relative overflow-hidden group">
+<div class="w-full h-full qr-placeholder opacity-40"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-800 text-xl font-light">qr_code_2</span>
+</div>
+</div>
+</div>
+</div>
+<div class="absolute top-0 right-10 w-16 h-1 bg-gradient-to-r from-transparent via-neon-purple to-transparent opacity-30"></div>
+<div class="absolute bottom-10 right-0 w-1 h-12 bg-gradient-to-b from-transparent via-neon-blue to-transparent opacity-30"></div>
+<div class="absolute top-0 right-0 w-32 h-32 bg-neon-purple/5 -mr-16 -mt-16 rounded-full blur-3xl"></div>
+<div class="absolute bottom-0 left-0 w-24 h-24 bg-neon-blue/5 -ml-12 -mb-12 rounded-full blur-2xl"></div>
+</div>
+
+</body></html>

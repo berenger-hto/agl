@@ -213,83 +213,83 @@ const Dashboard = () => {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <div className="elevated-card rounded-2xl p-8 lg:col-span-2 flex flex-col h-[600px]">
-                        <div className="flex justify-between items-center mb-10">
-                            <div>
-                                <h3 className="text-xl font-bold text-slate-900">Tendances des ventes</h3>
-                                <p className="text-sm text-slate-400 mt-1 font-medium">Aperçu analytique des revenus</p>
-                            </div>
-                            <select className="bg-slate-50 border border-gray-100 text-slate-600 text-xs font-semibold rounded-xl px-4 py-2 focus:ring-primary focus:border-primary outline-none transition-all">
-                                <option>12 derniers mois</option>
-                                <option>6 derniers mois</option>
-                                <option>30 derniers jours</option>
-                            </select>
-                        </div>
-                        <div className="flex-1 w-full relative">
-                            <Line options={options} data={data} />
-                        </div>
-                    </div>
 
-                    <div className="elevated-card rounded-2xl p-8 flex flex-col relative overflow-hidden h-[600px]">
-                        <h3 className="text-xl font-bold text-slate-900 mb-8">Répartition des stocks</h3>
-                        <div className="flex-1 flex items-center justify-center relative min-h-[300px]">
-                            <div className="absolute w-60 h-60 bg-primary/5 rounded-full blur-3xl"></div>
-                            <div className="w-72 h-72 rounded-full relative flex items-center justify-center shadow-xl shadow-slate-200/50" style={{ background: conicGradient }}>
-                                <div className="w-52 h-52 bg-white rounded-full shadow-inner flex flex-col items-center justify-center z-10">
-                                    <span className="text-slate-400 text-xs font-bold uppercase tracking-widest">Articles globaux</span>
-                                    <span className="text-4xl font-black text-slate-900 mt-2">{totalItems.toLocaleString()}</span>
-                                </div>
-                            </div>
+                <div className="elevated-card rounded-2xl p-8 lg:col-span-2 flex flex-col h-[600px]">
+                    <div className="flex justify-between items-center mb-10">
+                        <div>
+                            <h3 className="text-xl font-bold text-slate-900">Tendances des ventes</h3>
+                            <p className="text-sm text-slate-400 mt-1 font-medium">Aperçu analytique des revenus</p>
                         </div>
-                        <div className="mt-8 space-y-6 overflow-y-auto pr-2 custom-scrollbar flex-1">
-                            {stats.stockDistribution?.map((item, index) => (
-                                <div key={item.type} className="flex justify-between items-center text-base hover:bg-slate-50 p-2 rounded-lg transition-colors">
-                                    <div className="flex items-center font-bold text-slate-700">
-                                        <span className="w-4 h-4 rounded-full mr-4 shadow-sm" style={{ backgroundColor: COLORS[index % COLORS.length], boxShadow: `0 1px 2px ${COLORS[index % COLORS.length]}40` }}></span> {item.type}
-                                    </div>
-                                    <span className="font-mono text-slate-500 font-bold bg-slate-100 px-2 py-1 rounded-md">{calculatePercentage(item.count)}%</span>
-                                </div>
-                            ))}
-                            {(!stats.stockDistribution || stats.stockDistribution.length === 0) && (
-                                <p className="text-center text-slate-400 text-sm py-4">Aucune donnée de stock disponible</p>
-                            )}
-                        </div>
+                        <select className="bg-slate-50 border border-gray-100 text-slate-600 text-xs font-semibold rounded-xl px-4 py-2 focus:ring-primary focus:border-primary outline-none transition-all">
+                            <option>12 derniers mois</option>
+                            <option>6 derniers mois</option>
+                            <option>30 derniers jours</option>
+                        </select>
+                    </div>
+                    <div className="flex-1 w-full relative">
+                        <Line options={options} data={data} />
                     </div>
                 </div>
-                {showProductionModal && (
-                    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-                        <div className="bg-white rounded-2xl p-8 w-full max-w-md">
-                            <h3 className="text-xl font-bold text-slate-900 mb-6">Nouvelle Production</h3>
-                            <form onSubmit={handleCreateProduction} className="space-y-4">
-                                <div>
-                                    <label className="block text-sm font-bold text-slate-700 mb-1">Date</label>
-                                    <input type="date" required className="w-full border border-gray-200 rounded-xl px-4 py-2"
-                                        value={newProduction.date_production} onChange={e => setNewProduction({ ...newProduction, date_production: e.target.value })} />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-bold text-slate-700 mb-1">Gadget</label>
-                                    <select required className="w-full border border-gray-200 rounded-xl px-4 py-2"
-                                        value={newProduction.id_gadget} onChange={e => setNewProduction({ ...newProduction, id_gadget: Number(e.target.value) })}>
-                                        <option value="">Sélectionner un gadget</option>
-                                        {gadgets.map(g => <option key={g.id_gadget} value={g.id_gadget}>{g.nom_gadget}</option>)}
-                                    </select>
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-bold text-slate-700 mb-1">Quantité</label>
-                                    <input type="number" required min="1" className="w-full border border-gray-200 rounded-xl px-4 py-2"
-                                        value={newProduction.quantite_produite} onChange={e => setNewProduction({ ...newProduction, quantite_produite: Number(e.target.value) })} />
-                                </div>
-                                <div className="flex space-x-3 pt-4">
-                                    <button type="button" onClick={() => setShowProductionModal(false)} className="flex-1 bg-slate-100 text-slate-700 font-bold py-2 rounded-xl">Annuler</button>
-                                    <button type="submit" className="flex-1 bg-primary text-white font-bold py-2 rounded-xl">Créer</button>
-                                </div>
-                            </form>
+
+                <div className="elevated-card rounded-2xl p-8 flex flex-col relative overflow-hidden h-[600px]">
+                    <h3 className="text-xl font-bold text-slate-900 mb-8">Répartition des stocks</h3>
+                    <div className="flex-1 flex items-center justify-center relative min-h-[300px]">
+                        <div className="absolute w-60 h-60 bg-primary/5 rounded-full blur-3xl"></div>
+                        <div className="w-72 h-72 rounded-full relative flex items-center justify-center shadow-xl shadow-slate-200/50" style={{ background: conicGradient }}>
+                            <div className="w-52 h-52 bg-white rounded-full shadow-inner flex flex-col items-center justify-center z-10">
+                                <span className="text-slate-400 text-xs font-bold uppercase tracking-widest">Articles globaux</span>
+                                <span className="text-4xl font-black text-slate-900 mt-2">{totalItems.toLocaleString()}</span>
+                            </div>
                         </div>
                     </div>
-                )}
-            </>
-            );
+                    <div className="mt-8 space-y-6 overflow-y-auto pr-2 custom-scrollbar flex-1">
+                        {stats.stockDistribution?.map((item, index) => (
+                            <div key={item.type} className="flex justify-between items-center text-base hover:bg-slate-50 p-2 rounded-lg transition-colors">
+                                <div className="flex items-center font-bold text-slate-700">
+                                    <span className="w-4 h-4 rounded-full mr-4 shadow-sm" style={{ backgroundColor: COLORS[index % COLORS.length], boxShadow: `0 1px 2px ${COLORS[index % COLORS.length]}40` }}></span> {item.type}
+                                </div>
+                                <span className="font-mono text-slate-500 font-bold bg-slate-100 px-2 py-1 rounded-md">{calculatePercentage(item.count)}%</span>
+                            </div>
+                        ))}
+                        {(!stats.stockDistribution || stats.stockDistribution.length === 0) && (
+                            <p className="text-center text-slate-400 text-sm py-4">Aucune donnée de stock disponible</p>
+                        )}
+                    </div>
+                </div>
+            </div>
+            {showProductionModal && (
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                    <div className="bg-white rounded-2xl p-8 w-full max-w-md">
+                        <h3 className="text-xl font-bold text-slate-900 mb-6">Nouvelle Production</h3>
+                        <form onSubmit={handleCreateProduction} className="space-y-4">
+                            <div>
+                                <label className="block text-sm font-bold text-slate-700 mb-1">Date</label>
+                                <input type="date" required className="w-full border border-gray-200 rounded-xl px-4 py-2"
+                                    value={newProduction.date_production} onChange={e => setNewProduction({ ...newProduction, date_production: e.target.value })} />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-bold text-slate-700 mb-1">Gadget</label>
+                                <select required className="w-full border border-gray-200 rounded-xl px-4 py-2"
+                                    value={newProduction.id_gadget} onChange={e => setNewProduction({ ...newProduction, id_gadget: Number(e.target.value) })}>
+                                    <option value="">Sélectionner un gadget</option>
+                                    {gadgets.map(g => <option key={g.id_gadget} value={g.id_gadget}>{g.nom_gadget}</option>)}
+                                </select>
+                            </div>
+                            <div>
+                                <label className="block text-sm font-bold text-slate-700 mb-1">Quantité</label>
+                                <input type="number" required min="1" className="w-full border border-gray-200 rounded-xl px-4 py-2"
+                                    value={newProduction.quantite_produite} onChange={e => setNewProduction({ ...newProduction, quantite_produite: Number(e.target.value) })} />
+                            </div>
+                            <div className="flex space-x-3 pt-4">
+                                <button type="button" onClick={() => setShowProductionModal(false)} className="flex-1 bg-slate-100 text-slate-700 font-bold py-2 rounded-xl">Annuler</button>
+                                <button type="submit" className="flex-1 bg-primary text-white font-bold py-2 rounded-xl">Créer</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
+        </>
+    );
 };
 
-            export default Dashboard;
+export default Dashboard;
