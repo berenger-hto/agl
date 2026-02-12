@@ -23,12 +23,32 @@ const SalesPage = () => {
     const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
     const [clients, setClients] = useState<{ id_client: number, nom_client: string, prenom_client: string }[]>([]);
+    const [cashiers, setCashiers] = useState<{ matricule_employe: number, nom_employe: string, prenom_employe: string }[]>([]);
     const [selectedClientId, setSelectedClientId] = useState<number | ''>('');
+    const [selectedCashierId, setSelectedCashierId] = useState<number | ''>('');
+    const [accessCode, setAccessCode] = useState('');
 
     useEffect(() => {
         fetchGadgets();
         fetchClients();
+        fetchCashiers();
     }, []);
+
+    const fetchCashiers = async () => {
+        try {
+            const response = await api.get('/employees');
+            // Filter for cashiers (assuming role_category or checking existence in list if backend sends all)
+            // Backend sends all employees with role_category.
+            const cashierList = response.data.filter((emp: any) => emp.role_category === 'Caissier');
+            setCashiers(cashierList);
+            if (cashierList.length > 0) {
+                // Optionally set default, but better to force selection for accountability
+                // setSelectedCashierId(cashierList[0].matricule_employe); 
+            }
+        } catch (error) {
+            console.error('Error fetching cashiers:', error);
+        }
+    };
 
     const fetchClients = async () => {
         try {
@@ -86,10 +106,21 @@ const SalesPage = () => {
             alert('Veuillez sélectionner un client.');
             return;
         }
+        if (!selectedCashierId) {
+            alert('Veuillez sélectionner un caissier.');
+            return;
+        }
+        if (!accessCode) {
+            alert("Veuillez entrer le code d'accès du caissier.");
+            return;
+        }
+
         setProcessing(true);
         try {
             await api.post('/sales', {
                 id_client: Number(selectedClientId),
+                matricule_employe: Number(selectedCashierId),
+                code_acces: accessCode,
                 items: cart.map(item => ({
                     id_gadget: item.id_gadget,
                     quantity: item.quantity
@@ -229,22 +260,56 @@ const SalesPage = () => {
                 </div>
 
                 {/* Client Selection */}
-                <div className="px-6 py-4 border-b border-gray-100 bg-slate-50/50">
-                    <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2">
-                        Client
-                    </label>
-                    <select
-                        value={selectedClientId}
-                        onChange={(e) => setSelectedClientId(Number(e.target.value))}
-                        className="w-full bg-white border-gray-200 rounded-xl py-2.5 px-3 text-sm font-medium focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
-                    >
-                        <option value="" disabled>Sélectionner un client</option>
-                        {clients.map(client => (
-                            <option key={client.id_client} value={client.id_client}>
-                                {client.nom_client} {client.prenom_client}
-                            </option>
-                        ))}
-                    </select>
+                <div className="px-6 py-4 border-b border-gray-100 bg-slate-50/50 space-y-4">
+                    <div>
+                        <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2">
+                            Client
+                        </label>
+                        <select
+                            value={selectedClientId}
+                            onChange={(e) => setSelectedClientId(Number(e.target.value))}
+                            className="w-full bg-white border-gray-200 rounded-xl py-2.5 px-3 text-sm font-medium focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+                        >
+                            <option value="" disabled>Sélectionner un client</option>
+                            {clients.map(client => (
+                                <option key={client.id_client} value={client.id_client}>
+                                    {client.nom_client} {client.prenom_client}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3">
+                        <div>
+                            <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2">
+                                Caissier
+                            </label>
+                            <select
+                                value={selectedCashierId}
+                                onChange={(e) => setSelectedCashierId(Number(e.target.value))}
+                                className="w-full bg-white border-gray-200 rounded-xl py-2.5 px-3 text-sm font-medium focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+                            >
+                                <option value="" disabled>Caissier</option>
+                                {cashiers.map(cashier => (
+                                    <option key={cashier.matricule_employe} value={cashier.matricule_employe}>
+                                        {cashier.prenom_employe}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        <div>
+                            <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2">
+                                Code d'accès
+                            </label>
+                            <input
+                                type="password"
+                                value={accessCode}
+                                onChange={(e) => setAccessCode(e.target.value)}
+                                placeholder="****"
+                                className="w-full bg-white border-gray-200 rounded-xl py-2.5 px-3 text-sm font-medium focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+                            />
+                        </div>
+                    </div>
                 </div>
 
                 {/* Cart Items */}

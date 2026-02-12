@@ -21,19 +21,29 @@ export class SalesController {
                 throw new Error("Client ID is required");
             }
 
+            // Validate Cashier Credentials
+            if (!body.matricule_employe || !body.code_acces) {
+                throw new Error("Cashier selection and access code are required");
+            }
+
+            const cashierId = body.matricule_employe;
+            const accessCode = body.code_acces;
             const clientId = body.id_client;
 
+            // Verify Cashier and Access Code
+            const [cashierRows] = await connection.execute<RowDataPacket[]>(
+                'SELECT * FROM CAISSIERS WHERE matricule_employe = ? AND code_acces = ?',
+                [cashierId, accessCode]
+            );
+
+            if (cashierRows.length === 0) {
+                throw new Error("Invalid cashier credentials");
+            }
+
             // 2. Create Vente
-            // Assuming a logged in user with matricule_employe. Using 1 for now if no auth context yet.
-            // TODO: Get real employee ID from auth middleware
-            const employeeId = 2; // Awa (Caissier) for Demo
-
-            // Ensure logic constraint: Only Caissier can sell. 
-            // Checking if Employee 1 is a Caissier in DB would be good practice here.
-
             const [venteResult] = await connection.execute<any>(
                 'INSERT INTO VENTES (date_vente, matricule_employe, id_client) VALUES (NOW(), ?, ?)',
-                [employeeId, clientId]
+                [cashierId, clientId]
             );
             const venteId = venteResult.insertId;
 
