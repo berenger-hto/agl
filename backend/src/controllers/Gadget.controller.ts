@@ -26,4 +26,18 @@ export class GadgetController {
             return c.json({ error: 'Internal Server Error' }, 500);
         }
     }
+
+    static async delete(c: Context) {
+        try {
+            const id = Number(c.req.param('id'));
+            if (isNaN(id)) {
+                return c.json({ error: 'Invalid ID' }, 400);
+            }
+            await GadgetModel.delete(id);
+            return c.json({ success: true });
+        } catch (error) {
+            console.error('Error deleting gadget:', error);
+            return c.json({ error: 'Internal Server Error' }, 500);
+        }
+    }
 }

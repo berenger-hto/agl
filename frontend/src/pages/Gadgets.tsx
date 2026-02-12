@@ -57,6 +57,18 @@ const GadgetsPage = () => {
         }
     };
 
+    const handleDelete = async (id: number) => {
+        if (window.confirm('Êtes-vous sûr de vouloir supprimer ce gadget ? Cette action supprimera également les stocks et productions associés.')) {
+            try {
+                await api.delete(`/gadgets/${id}`);
+                setGadgets(gadgets.filter(g => g.id_gadget !== id));
+            } catch (error) {
+                console.error("Erreur lors de la suppression", error);
+                alert("Erreur lors de la suppression du gadget.");
+            }
+        }
+    };
+
     return (
         <div className="flex flex-col h-full bg-slate-50 relative overflow-hidden">
             {/* Background Elements */}
@@ -153,8 +165,12 @@ const GadgetsPage = () => {
                                                     <p className="text-sm text-slate-500 truncate">{gadget.description_gadget}</p>
                                                 </td>
                                                 <td className="px-8 py-5 text-right">
-                                                    <button className="p-2 opacity-0 group-hover:opacity-100 hover:bg-slate-100 rounded-lg transition-all">
-                                                        <span className="material-icons-outlined text-slate-400">edit</span>
+                                                    <button
+                                                        onClick={() => handleDelete(gadget.id_gadget)}
+                                                        className="p-2 opacity-0 group-hover:opacity-100 hover:bg-red-50 text-red-400 hover:text-red-600 rounded-lg transition-all"
+                                                        title="Supprimer"
+                                                    >
+                                                        <span className="material-icons-outlined">delete</span>
                                                     </button>
                                                 </td>
                                             </tr>

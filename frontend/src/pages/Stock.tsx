@@ -71,12 +71,9 @@ const StockPage = () => {
                     <h2 className="text-3xl font-display font-bold text-slate-900">Gestion des Stocks</h2>
                     <p className="text-slate-500">Suivi et valorisation des stocks en temps réel.</p>
                 </div>
-                <button className="bg-white hover:bg-slate-50 text-slate-700 text-sm font-semibold px-5 py-2.5 rounded-xl border border-gray-200 transition-all flex items-center shadow-sm">
-                    <span className="material-icons text-base mr-2">inventory</span> Auditer le Stock
-                </button>
             </div>
 
-            <div className="flex flex-col gap-8">
+            <div className="flex flex-row gap-8 w-full">
                 <div className="elevated-card rounded-2xl p-8 lg:col-span-1 flex flex-col justify-center items-center">
                     <div className="relative w-full aspect-square max-w-[300px]">
                         {loading ? (
@@ -96,7 +93,6 @@ const StockPage = () => {
                 <div className="elevated-card rounded-2xl p-0 lg:col-span-2 overflow-hidden flex flex-col">
                     <div className="p-6 border-b border-gray-50 flex justify-between items-center">
                         <h3 className="font-bold text-slate-800">Détails du stock</h3>
-                        <input type="text" placeholder="Rechercher un article..." className="bg-slate-50 border border-gray-100 rounded-lg px-3 py-1.5 text-sm outline-none focus:border-primary/50" />
                     </div>
                     <div className="overflow-x-auto flex-1">
                         <table className="w-full text-left">
