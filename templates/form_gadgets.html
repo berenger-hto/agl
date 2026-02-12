@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Add New Gadget - GadgetAn</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#6366f1",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#0f172a",
+                        "sidebar-light": "#ffffff",
+                        "sidebar-dark": "#1e293b",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "1rem",
+                        'xl': '1.5rem',
+                    },
+                },
+            },
+        };
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass-effect {
+            backdrop-filter: blur(8px);
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        .dark .glass-effect {
+            background-color: rgba(30, 41, 59, 0.8);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-200">
+<div class="flex h-screen overflow-hidden">
+<aside class="w-64 flex-shrink-0 bg-sidebar-light dark:bg-sidebar-dark border-r border-slate-200 dark:border-slate-800 hidden md:flex flex-col">
+<div class="p-6 flex items-center space-x-3">
+<div class="bg-primary p-2 rounded-lg">
+<span class="material-icons-outlined text-white">grid_view</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-slate-800 dark:text-white">Gadget<span class="text-primary">An</span></h1>
+</div>
+<nav class="flex-1 px-4 py-4 space-y-1">
+<a class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-colors" href="#">
+<span class="material-icons-outlined mr-3">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<a class="flex items-center px-4 py-3 bg-primary/10 text-primary rounded-xl transition-colors" href="#">
+<span class="material-icons-outlined mr-3">precision_manufacturing</span>
+<span class="font-medium">Production</span>
+</a>
+<a class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-colors" href="#">
+<span class="material-icons-outlined mr-3">analytics</span>
+<span class="font-medium">Sales Analytics</span>
+</a>
+<a class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-colors" href="#">
+<span class="material-icons-outlined mr-3">people</span>
+<span class="font-medium">Personnel</span>
+</a>
+<a class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-colors" href="#">
+<span class="material-icons-outlined mr-3">monitor_heart</span>
+<span class="font-medium">System Health</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<a class="flex items-center px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-colors mb-4" href="#">
+<span class="material-icons-outlined mr-3">settings</span>
+<span class="font-medium">Settings</span>
+</a>
+<div class="flex items-center p-2 bg-slate-50 dark:bg-slate-800/50 rounded-2xl">
+<img alt="Alex Chen User Avatar" class="w-10 h-10 rounded-xl object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxeDAESxwUqXDOfEN3t7RHoZP_dSs3i45_h-2NZIYpPAONDucYlpZBvjnJwVEGf4GK-uKhY-OxoMNiUMzHqag94r9oBMf2HAPeA9PN48QlRN9d_2QqWDy8NK15Ee1Qmk1I_xwUtvD6rRrAd8aB4bS-bQUk2lqPmrgFYLNan9uBeAr7hRVDqeklgvRmnFM8eG4nIzv_ja_TtCiYkhxtvH9ZTiX8aPJ20tKmGqm8fuu6TWhLkXffRgKLqt6nJZqZz9kw2x6eCF0FHP1z"/>
+<div class="ml-3 overflow-hidden">
+<p class="text-sm font-semibold text-slate-800 dark:text-white truncate">Alex Chen</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Super Admin</p>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col min-w-0 overflow-hidden">
+<header class="h-16 flex items-center justify-between px-8 bg-white/50 dark:bg-slate-900/50 backdrop-blur-md border-bottom border-slate-200 dark:border-slate-800 z-10">
+<div class="flex items-center flex-1">
+<div class="relative w-full max-w-md">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-icons-outlined text-slate-400 text-sm">search</span>
+</span>
+<input class="block w-full pl-10 pr-3 py-2 border border-slate-200 dark:border-slate-700 rounded-xl bg-slate-100/50 dark:bg-slate-800/50 text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="Search system logs, components..." type="text"/>
+</div>
+</div>
+<div class="flex items-center space-x-4">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-icons-outlined">notifications</span>
+</button>
+<div class="px-4 py-1.5 bg-indigo-50 dark:bg-indigo-900/30 rounded-full border border-indigo-100 dark:border-indigo-800 flex items-center space-x-2">
+<span class="flex h-2 w-2 rounded-full bg-indigo-500"></span>
+<span class="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 tracking-wider uppercase">System: Online</span>
+</div>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-8">
+<div class="max-w-2xl mx-auto">
+<div class="mb-6">
+<a class="inline-flex items-center text-sm font-medium text-slate-500 hover:text-primary transition-colors" href="#">
+<span class="material-icons-outlined text-base mr-1">arrow_back</span>
+                            Back to Production
+                        </a>
+</div>
+<div class="mb-8">
+<h2 class="text-3xl font-bold text-slate-900 dark:text-white">Add New Gadget</h2>
+<p class="text-slate-500 dark:text-slate-400 mt-1">Configure and register a new manufacturing unit to the ecosystem.</p>
+</div>
+<div class="bg-white dark:bg-sidebar-dark rounded-3xl shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-200 dark:border-slate-800 overflow-hidden">
+<form action="#" class="p-8 space-y-6" method="POST">
+<div class="space-y-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300" for="gadget-name">Gadget Name</label>
+<input class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder-slate-400" id="gadget-name" name="gadget-name" placeholder="e.g. Quantum Processor v2" type="text"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300" for="gadget-type">Gadget Type</label>
+<div class="relative">
+<select class="w-full appearance-none px-4 py-3 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" id="gadget-type" name="gadget-type">
+<option disabled="" selected="" value="">Select a type</option>
+<option value="sensor">Sensor Array</option>
+<option value="processor">Core Processor</option>
+<option value="actuator">Kinetic Actuator</option>
+<option value="interface">Neural Interface</option>
+<option value="battery">Energy Module</option>
+</select>
+<span class="material-icons-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">expand_more</span>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300" for="gadget-price">Unit Price</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 font-medium">$</span>
+<input class="w-full pl-8 pr-4 py-3 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder-slate-400" id="gadget-price" name="gadget-price" placeholder="0.00" step="0.01" type="number"/>
+</div>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300" for="gadget-description">Description</label>
+<textarea class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder-slate-400" id="gadget-description" name="gadget-description" placeholder="Describe the gadget's specifications, intended use case, and manufacturing requirements..." rows="5"></textarea>
+</div>
+<div class="pt-6 flex flex-col-reverse sm:flex-row items-center justify-end space-y-3 space-y-reverse sm:space-y-0 sm:space-x-4 border-t border-slate-100 dark:border-slate-800 pt-8">
+<button class="w-full sm:w-auto px-8 py-3 rounded-xl text-slate-600 dark:text-slate-400 font-semibold hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" type="button">
+                                    Cancel
+                                </button>
+<button class="w-full sm:w-auto px-8 py-3 bg-primary hover:bg-indigo-700 text-white font-semibold rounded-xl shadow-lg shadow-primary/20 transition-all transform active:scale-[0.98] flex items-center justify-center" type="submit">
+<span class="material-icons-outlined mr-2 text-xl">add_circle_outline</span>
+                                    Create Gadget
+                                </button>
+</div>
+</form>
+</div>
+<div class="mt-8 flex items-start p-4 bg-indigo-50/50 dark:bg-indigo-900/10 border border-indigo-100 dark:border-indigo-900/50 rounded-2xl">
+<span class="material-icons-outlined text-primary mt-0.5 mr-3">info</span>
+<p class="text-sm text-slate-600 dark:text-slate-400">
+<span class="font-semibold text-indigo-700 dark:text-indigo-400">Pro Tip:</span> New gadgets will undergo a 24-hour verification period before appearing in the public sales analytics. Ensure all specifications are accurate to avoid delays.
+                        </p>
+</div>
+</div>
+</div>
+</main>
+</div>
+<button class="fixed bottom-6 right-6 p-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full shadow-lg z-50" onclick="document.documentElement.classList.toggle('dark')">
+<span class="material-icons-outlined dark:hidden">dark_mode</span>
+<span class="material-icons-outlined hidden dark:block text-yellow-400">light_mode</span>
+</button>
+
+</body></html>

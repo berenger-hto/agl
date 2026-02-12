@@ -16,4 +16,14 @@ export class GadgetController {
             return c.json({ error: 'Internal Server Error' }, 500);
         }
     }
+
+    static async getAll(c: Context) {
+        try {
+            const gadgets = await GadgetModel.getAll();
+            return c.json(gadgets);
+        } catch (error) {
+            console.error('Error fetching gadgets:', error);
+            return c.json({ error: 'Internal Server Error' }, 500);
+        }
+    }
 }

@@ -52,6 +52,7 @@ app.post('/api/sales', SalesController.processSale);
 app.get('/api/employees', EmployeeController.getAll);
 app.post('/api/employees', EmployeeController.create);
 app.post('/api/gadgets', GadgetController.create);
+app.get('/api/gadgets', GadgetController.getAll);
 
 const port = Number(process.env.PORT) || 3000;
 console.log(`Server is running on port ${port}`);

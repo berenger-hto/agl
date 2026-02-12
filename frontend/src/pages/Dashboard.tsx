@@ -122,7 +122,7 @@ const Dashboard = () => {
                     <p className="text-slate-500 text-base">Surveillance de votre écosystème global.</p>
                 </div>
                 <div className="mt-6 md:mt-0 flex space-x-3">
-                   
+
                 </div>
             </div>
 

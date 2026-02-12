@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gadget Inventory | GadgetAn</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#4F46E5",
+                        "background-light": "#F9FAFB",
+                        "background-dark": "#0F172A",
+                        "sidebar-light": "#FFFFFF",
+                        "sidebar-dark": "#1E293B",
+                        "card-light": "#FFFFFF",
+                        "card-dark": "#1E293B",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                        body: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "12px",
+                    },
+                },
+            },
+        };
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .sidebar-active {
+            background-color: #F3F4FF;
+            color: #4F46E5;
+        }
+        .dark .sidebar-active {
+            background-color: #312E81;
+            color: #E0E7FF;
+        }::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 10px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex">
+<aside class="w-64 bg-sidebar-light dark:bg-sidebar-dark border-r border-slate-200 dark:border-slate-800 flex flex-col fixed inset-y-0 left-0 z-50">
+<div class="p-6 flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-indigo-200 dark:shadow-none">
+<span class="material-icons-outlined text-white">grid_view</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight">Gadget<span class="text-primary">An</span></h1>
+</div>
+<nav class="flex-1 px-4 mt-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-white rounded-xl transition-all" href="#">
+<span class="material-icons-outlined">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<a class="sidebar-active flex items-center gap-3 px-4 py-3 rounded-xl transition-all" href="#">
+<span class="material-icons-outlined">inventory_2</span>
+<span class="font-medium">Production</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-white rounded-xl transition-all" href="#">
+<span class="material-icons-outlined">bar_chart</span>
+<span class="font-medium">Sales Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-white rounded-xl transition-all" href="#">
+<span class="material-icons-outlined">group</span>
+<span class="font-medium">Personnel</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-white rounded-xl transition-all" href="#">
+<span class="material-icons-outlined">settings_input_component</span>
+<span class="font-medium">System Health</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-100 dark:border-slate-800">
+<button class="flex w-full items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl mb-2" onclick="toggleDarkMode()">
+<span class="material-icons-outlined">dark_mode</span>
+<span class="font-medium">Appearance</span>
+</button>
+<div class="flex items-center gap-3 px-4 py-3">
+<img alt="Alex Chen" class="w-10 h-10 rounded-full border-2 border-slate-100 dark:border-slate-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDd5LaXq_RcY3Lm_cCw-Hyo8GctuKH4uZR2zLzXCDVcbVjxVg1nMvZlh2c1SGprKws1F5YSeX4n3Ey3_mXE11OIz2V06zuVrRKK9A9Dy670D3Zj3n6Y-4AZQmKb_2JNAPgIurkHM_MD_Zr4dmwye7vBmOWcZMQQBpyoh4Kr-QHc6L0lJ_ogInHOt-0yKJmZ1PjwP6yZemq6gK89YT8NU2Pm4Ezbk_CoX_ECPvAs0Mz6tyb9SaBHL84et--g-kfAiBKmHEJjiTBJuUYW"/>
+<div class="overflow-hidden">
+<p class="text-sm font-semibold truncate">Alex Chen</p>
+<p class="text-xs text-slate-500">Super Admin</p>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 ml-64 min-h-screen">
+<header class="h-20 bg-white/80 dark:bg-sidebar-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-40 px-8 flex items-center justify-between">
+<div class="relative w-96">
+<span class="material-icons-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="w-full bg-slate-50 dark:bg-slate-800 border-transparent focus:ring-2 focus:ring-primary/20 focus:border-primary rounded-xl pl-10 text-sm py-2.5" placeholder="Search gadgets, components, or serials..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 relative">
+<span class="material-icons-outlined text-slate-600 dark:text-slate-400">notifications</span>
+<span class="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 border-2 border-white dark:border-slate-800 rounded-full"></span>
+</button>
+<div class="px-3 py-1.5 bg-indigo-50 dark:bg-indigo-900/30 text-primary text-[10px] font-bold uppercase tracking-wider rounded-lg border border-indigo-100 dark:border-indigo-900/50">
+                    System: Online
+                </div>
+</div>
+</header>
+<div class="p-8 max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+<div>
+<h2 class="text-4xl font-bold tracking-tight mb-2">Gadget Inventory</h2>
+<p class="text-slate-500 dark:text-slate-400">Manage and track your global gadget manufacturing stock.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-5 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-all shadow-sm">
+<span class="material-icons-outlined text-lg">file_download</span>
+<span class="font-semibold text-sm">Export List</span>
+</button>
+<button class="flex items-center gap-2 px-6 py-2.5 bg-primary text-white rounded-xl hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200 dark:shadow-none">
+<span class="material-icons-outlined text-lg">add</span>
+<span class="font-semibold text-sm">Add New Gadget</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+<div class="bg-card-light dark:bg-card-dark p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-900/40 flex items-center justify-center text-primary">
+<span class="material-icons-outlined">inventory_2</span>
+</div>
+<span class="text-[10px] font-bold px-2 py-1 bg-green-50 dark:bg-green-900/30 text-green-600 rounded-lg">+12%</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider mb-1">Total Gadgets</p>
+<h3 class="text-2xl font-bold">14,230</h3>
+</div>
+<div class="bg-card-light dark:bg-card-dark p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-900/40 flex items-center justify-center text-purple-600">
+<span class="material-icons-outlined">precision_manufacturing</span>
+</div>
+<span class="text-[10px] font-bold px-2 py-1 bg-purple-50 dark:bg-purple-900/30 text-purple-600 rounded-lg">Active</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider mb-1">Ongoing Production</p>
+<h3 class="text-2xl font-bold">84 <span class="text-sm font-medium text-slate-400">Units</span></h3>
+</div>
+<div class="bg-card-light dark:bg-card-dark p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-xl bg-cyan-50 dark:bg-cyan-900/40 flex items-center justify-center text-cyan-600">
+<span class="material-icons-outlined">shopping_cart</span>
+</div>
+<span class="text-[10px] font-bold px-2 py-1 bg-red-50 dark:bg-red-900/30 text-red-600 rounded-lg">-2.4%</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider mb-1">Pending Orders</p>
+<h3 class="text-2xl font-bold">1,205</h3>
+</div>
+<div class="bg-card-light dark:bg-card-dark p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-900/40 flex items-center justify-center text-emerald-600">
+<span class="material-icons-outlined">memory</span>
+</div>
+<span class="text-[10px] font-bold px-2 py-1 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 rounded-lg">Stable</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider mb-1">Stock Health</p>
+<h3 class="text-2xl font-bold">99.8%</h3>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-3xl shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden">
+<div class="p-6 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<h4 class="font-bold text-lg">Inventory Database</h4>
+<div class="flex gap-2">
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
+<span class="material-icons-outlined text-slate-500">filter_list</span>
+</button>
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
+<span class="material-icons-outlined text-slate-500">more_vert</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="text-xs font-bold uppercase tracking-wider text-slate-400 bg-slate-50/50 dark:bg-slate-800/30">
+<th class="px-8 py-5">Gadget Name</th>
+<th class="px-6 py-5">Type</th>
+<th class="px-6 py-5 text-right">Price</th>
+<th class="px-6 py-5">Stock Level</th>
+<th class="px-6 py-5">Description</th>
+<th class="px-8 py-5 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-50 dark:divide-slate-800/50">
+<tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/30 transition-colors group">
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-indigo-100 dark:bg-indigo-900/50 rounded-lg flex items-center justify-center text-primary font-bold">NP</div>
+<div>
+<p class="font-bold">Neural Processor v2</p>
+<p class="text-xs text-slate-400">SKU: GA-902-NP</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-[11px] font-bold rounded-full uppercase tracking-tight">Processor</span>
+</td>
+<td class="px-6 py-5 text-right font-medium">$450.00</td>
+<td class="px-6 py-5">
+<div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1.5 max-w-[100px]">
+<div class="bg-primary h-1.5 rounded-full" style="width: 75%"></div>
+</div>
+<span class="text-[10px] text-slate-400 mt-1 block">1,240 units</span>
+</td>
+<td class="px-6 py-5 max-w-xs">
+<p class="text-sm text-slate-500 truncate">High-efficiency neural processing unit for AI workloads.</p>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="p-2 opacity-0 group-hover:opacity-100 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all">
+<span class="material-icons-outlined text-slate-400">edit</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/30 transition-colors group">
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-cyan-100 dark:bg-cyan-900/50 rounded-lg flex items-center justify-center text-cyan-600 font-bold">OD</div>
+<div>
+<p class="font-bold">OLED Flex-Panel</p>
+<p class="text-xs text-slate-400">SKU: GA-331-OD</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-cyan-50 dark:bg-cyan-900/30 text-cyan-600 dark:text-cyan-400 text-[11px] font-bold rounded-full uppercase tracking-tight">Display</span>
+</td>
+<td class="px-6 py-5 text-right font-medium">$299.00</td>
+<td class="px-6 py-5">
+<div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1.5 max-w-[100px]">
+<div class="bg-red-500 h-1.5 rounded-full" style="width: 15%"></div>
+</div>
+<span class="text-[10px] text-red-500 mt-1 block">210 units (Low)</span>
+</td>
+<td class="px-6 py-5 max-w-xs">
+<p class="text-sm text-slate-500 truncate">Foldable high-contrast OLED display module.</p>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="p-2 opacity-0 group-hover:opacity-100 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all">
+<span class="material-icons-outlined text-slate-400">edit</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/30 transition-colors group">
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/50 rounded-lg flex items-center justify-center text-purple-600 font-bold">LC</div>
+<div>
+<p class="font-bold">Li-Ion Cell Pack</p>
+<p class="text-xs text-slate-400">SKU: GA-110-LC</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 text-[11px] font-bold rounded-full uppercase tracking-tight">Battery</span>
+</td>
+<td class="px-6 py-5 text-right font-medium">$85.00</td>
+<td class="px-6 py-5">
+<div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1.5 max-w-[100px]">
+<div class="bg-primary h-1.5 rounded-full" style="width: 90%"></div>
+</div>
+<span class="text-[10px] text-slate-400 mt-1 block">4,800 units</span>
+</td>
+<td class="px-6 py-5 max-w-xs">
+<p class="text-sm text-slate-500 truncate">Large capacity battery pack for mobile devices.</p>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="p-2 opacity-0 group-hover:opacity-100 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all">
+<span class="material-icons-outlined text-slate-400">edit</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/30 transition-colors group">
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-amber-100 dark:bg-amber-900/50 rounded-lg flex items-center justify-center text-amber-600 font-bold">CS</div>
+<div>
+<p class="font-bold">CMOS Sensor Pro</p>
+<p class="text-xs text-slate-400">SKU: GA-404-CS</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 text-[11px] font-bold rounded-full uppercase tracking-tight">Camera</span>
+</td>
+<td class="px-6 py-5 text-right font-medium">$120.00</td>
+<td class="px-6 py-5">
+<div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1.5 max-w-[100px]">
+<div class="bg-emerald-500 h-1.5 rounded-full" style="width: 45%"></div>
+</div>
+<span class="text-[10px] text-slate-400 mt-1 block">850 units</span>
+</td>
+<td class="px-6 py-5 max-w-xs">
+<p class="text-sm text-slate-500 truncate">48MP high-resolution camera sensor module.</p>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="p-2 opacity-0 group-hover:opacity-100 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all">
+<span class="material-icons-outlined text-slate-400">edit</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-sm text-slate-500">
+<p>Showing 1 to 4 of 24 entries</p>
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-100 transition-colors">Previous</button>
+<button class="px-4 py-2 bg-primary text-white border border-primary rounded-lg shadow-sm">1</button>
+<button class="px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-100 transition-colors">2</button>
+<button class="px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-100 transition-colors">3</button>
+<button class="px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-100 transition-colors">Next</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<div class="fixed bottom-8 right-8 bg-slate-900 text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-4 translate-y-24 transition-transform" id="toast">
+<div class="w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center">
+<span class="material-icons-outlined text-[14px]">check</span>
+</div>
+<p class="font-medium text-sm">New gadget successfully added to inventory.</p>
+</div>
+
+</body></html>

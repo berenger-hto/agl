@@ -9,8 +9,10 @@ const Sidebar = () => {
     const navItems = [
         { name: 'Tableau de bord', icon: 'dashboard', path: '/' },
         { name: 'Production', icon: 'inventory_2', path: '/production' },
+        { name: 'Gadgets', icon: 'pets', path: '/gadgets' },
         { name: 'Stocks', icon: 'analytics', path: '/stocks' },
         { name: 'Ventes', icon: 'point_of_sale', path: '/sales' },
+
         { name: 'Personnel', icon: 'people', path: '/hr' },
     ];
 

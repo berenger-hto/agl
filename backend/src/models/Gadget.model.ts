@@ -21,8 +21,13 @@ export class GadgetModel {
         return result.insertId;
     }
 
-    static async getAll() { // Useful for dropdowns
-        const [rows] = await pool.execute('SELECT * FROM GADGETS');
+    static async getAll() {
+        const query = `
+            SELECT g.*, COALESCE(s.quantite_disponible, 0) as quantite_disponible 
+            FROM GADGETS g 
+            LEFT JOIN STOCKS s ON g.id_gadget = s.id_gadget
+        `;
+        const [rows] = await pool.execute(query);
         return rows;
     }
 }

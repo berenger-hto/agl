@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom
 import MainLayout from './components/layout/MainLayout.tsx';
 import Dashboard from './pages/Dashboard.tsx';
 import ProductionPage from './pages/Production.tsx';
+import GadgetsPage from './pages/Gadgets.tsx';
 import StockPage from './pages/Stock.tsx';
 import SalesPage from './pages/Sales.tsx';
 import HRPage from './pages/HR.tsx';
@@ -27,6 +28,7 @@ function App() {
             <Route path="/" element={<MainLayout />}>
               <Route index element={<Dashboard />} />
               <Route path="production" element={<ProductionPage />} />
+              <Route path="gadgets" element={<GadgetsPage />} />
               <Route path="stocks" element={<StockPage />} />
               <Route path="sales" element={<SalesPage />} />
               <Route path="hr" element={<HRPage />} />
