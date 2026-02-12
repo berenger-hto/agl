@@ -64,6 +64,19 @@ const ClientsPage = () => {
         }
     };
 
+    const handleDelete = async (id: number) => {
+        if (window.confirm('Êtes-vous sûr de vouloir supprimer ce client ? Toutes les ventes associées seront également supprimées.')) {
+            try {
+                await api.delete(`/clients/${id}`);
+                fetchClients(); // Refresh list
+                alert('Client supprimé avec succès.');
+            } catch (error) {
+                console.error('Error deleting client:', error);
+                alert("Erreur lors de la suppression du client.");
+            }
+        }
+    };
+
     return (
         <div className="flex p-8 gap-8 h-full overflow-hidden relative">
             {/* Main Content */}
@@ -167,8 +180,11 @@ const ClientsPage = () => {
                                             </td>
                                             <td className="px-6 py-4">
                                                 <div className="flex justify-center gap-2">
-                                                    <button className="p-2 hover:bg-white rounded-lg text-slate-400 hover:text-primary transition-all shadow-sm border border-transparent hover:border-primary/20">
-                                                        <span className="material-icons text-lg">edit</span>
+                                                    <button
+                                                        onClick={() => handleDelete(client.id_client)}
+                                                        className="p-2 text-slate-400 hover:text-red-500 transition-all cursor-pointer border border-transparent"
+                                                    >
+                                                        <span className="material-icons text-lg">delete</span>
                                                     </button>
                                                 </div>
                                             </td>
@@ -198,7 +214,7 @@ const ClientsPage = () => {
 
                 <div className="flex-1 overflow-y-auto p-6 custom-scrollbar">
                     <form onSubmit={handleSubmit} className="space-y-6">
-                        
+
 
                         <div className="grid grid-cols-2 gap-4">
                             <div className="space-y-1.5">

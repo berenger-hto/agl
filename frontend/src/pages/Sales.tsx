@@ -22,9 +22,25 @@ const SalesPage = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
+    const [clients, setClients] = useState<{ id_client: number, nom_client: string, prenom_client: string }[]>([]);
+    const [selectedClientId, setSelectedClientId] = useState<number | ''>('');
+
     useEffect(() => {
         fetchGadgets();
+        fetchClients();
     }, []);
+
+    const fetchClients = async () => {
+        try {
+            const response = await api.get('/clients');
+            setClients(response.data);
+            if (response.data.length > 0) {
+                setSelectedClientId(response.data[0].id_client);
+            }
+        } catch (error) {
+            console.error('Error fetching clients:', error);
+        }
+    };
 
     const fetchGadgets = async () => {
         try {
@@ -66,9 +82,14 @@ const SalesPage = () => {
     };
 
     const handleCheckout = async () => {
+        if (!selectedClientId) {
+            alert('Veuillez sélectionner un client.');
+            return;
+        }
         setProcessing(true);
         try {
             await api.post('/sales', {
+                id_client: Number(selectedClientId),
                 items: cart.map(item => ({
                     id_gadget: item.id_gadget,
                     quantity: item.quantity
@@ -156,8 +177,8 @@ const SalesPage = () => {
                                     className="group bg-white rounded-3xl p-4 border border-transparent hover:border-primary/20 hover:shadow-xl transition-all duration-300 text-left relative overflow-hidden flex flex-col h-[320px]"
                                 >
                                     <div className={`absolute top-4 right-4 z-10 backdrop-blur-md text-white text-[9px] font-bold px-2.5 py-1 rounded-full shadow-lg ${gadget.quantite_disponible === 0 ? 'bg-red-500/90 shadow-red-500/20' :
-                                            gadget.quantite_disponible <= 5 ? 'bg-orange-500/90 shadow-orange-500/20' :
-                                                'bg-slate-900/90 shadow-slate-900/20'
+                                        gadget.quantite_disponible <= 5 ? 'bg-orange-500/90 shadow-orange-500/20' :
+                                            'bg-slate-900/90 shadow-slate-900/20'
                                         }`}>
                                         {gadget.quantite_disponible === 0 ? 'RUPTURE' :
                                             gadget.quantite_disponible <= 5 ? `FAIBLE STOCK: ${gadget.quantite_disponible}` :
@@ -205,6 +226,25 @@ const SalesPage = () => {
                             {cart.reduce((acc, item) => acc + item.quantity, 0)} articles
                         </span>
                     </div>
+                </div>
+
+                {/* Client Selection */}
+                <div className="px-6 py-4 border-b border-gray-100 bg-slate-50/50">
+                    <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2">
+                        Client
+                    </label>
+                    <select
+                        value={selectedClientId}
+                        onChange={(e) => setSelectedClientId(Number(e.target.value))}
+                        className="w-full bg-white border-gray-200 rounded-xl py-2.5 px-3 text-sm font-medium focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+                    >
+                        <option value="" disabled>Sélectionner un client</option>
+                        {clients.map(client => (
+                            <option key={client.id_client} value={client.id_client}>
+                                {client.nom_client} {client.prenom_client}
+                            </option>
+                        ))}
+                    </select>
                 </div>
 
                 {/* Cart Items */}

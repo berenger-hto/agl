@@ -17,11 +17,11 @@ export class SalesController {
                 throw new Error("No items in cart");
             }
 
-            // 1. Create Default Client if needed (Simplified: Using ID 1 or a generic one)
-            // In a real app, we would select or create a client.
-            // Ensuring Client 1 exists for this demo
-            await connection.execute('INSERT IGNORE INTO CLIENTS (id_client, nom_client) VALUES (1, "Walk-in Customer")');
-            const clientId = 1;
+            if (!body.id_client) {
+                throw new Error("Client ID is required");
+            }
+
+            const clientId = body.id_client;
 
             // 2. Create Vente
             // Assuming a logged in user with matricule_employe. Using 1 for now if no auth context yet.

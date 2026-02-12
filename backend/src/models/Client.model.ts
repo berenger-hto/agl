@@ -42,7 +42,22 @@ export class ClientModel {
     }
 
     static async delete(id: number): Promise<void> {
-        const query = 'DELETE FROM CLIENTS WHERE id_client = ?';
-        await pool.execute(query, [id]);
+        const connection = await pool.getConnection();
+        try {
+            await connection.beginTransaction();
+
+            // 1. Delete VENTES (Cascades to FACTURES and CONCERNER)
+            await connection.execute('DELETE FROM VENTES WHERE id_client = ?', [id]);
+
+            // 2. Delete CLIENT
+            await connection.execute('DELETE FROM CLIENTS WHERE id_client = ?', [id]);
+
+            await connection.commit();
+        } catch (error) {
+            await connection.rollback();
+            throw error;
+        } finally {
+            connection.release();
+        }
     }
 }

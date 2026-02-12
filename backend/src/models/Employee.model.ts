@@ -115,4 +115,24 @@ export class EmployeeModel {
             connection.release();
         }
     }
+
+    static async delete(id: number): Promise<void> {
+        const connection = await pool.getConnection();
+        try {
+            await connection.beginTransaction();
+
+            // 1. Remove from PARTICIPER (if they are an agent and participated in productions)
+            await connection.execute('DELETE FROM PARTICIPER WHERE matricule_employe = ?', [id]);
+
+            // 2. Delete from EMPLOYES (Cascades to CAISSIERS, AGENTS_PRODUCTIONS, ADMINISTRATIFS due to DB constraints)
+            await connection.execute('DELETE FROM EMPLOYES WHERE matricule_employe = ?', [id]);
+
+            await connection.commit();
+        } catch (error) {
+            await connection.rollback();
+            throw error;
+        } finally {
+            connection.release();
+        }
+    }
 }

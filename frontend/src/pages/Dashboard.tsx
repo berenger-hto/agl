@@ -137,7 +137,7 @@ const Dashboard = () => {
                         </span>
                     </div>
                     <h3 className="text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Revenu Total</h3>
-                    <p className="text-3xl font-bold text-slate-900 neon-text-glow">${Number(stats.revenue).toLocaleString()}</p>
+                    <p className="text-3xl font-bold text-slate-900 neon-text-glow">{Number(stats.revenue).toLocaleString()} FCFA</p>
                 </div>
 
                 <div className="elevated-card rounded-2xl p-6 relative overflow-hidden">

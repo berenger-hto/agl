@@ -34,4 +34,16 @@ export class EmployeeController {
             return c.json({ error: 'Internal Server Error' }, 500);
         }
     }
+    static async delete(c: Context) {
+        try {
+            const id = Number(c.req.param('id'));
+            if (isNaN(id)) return c.json({ error: 'Invalid ID' }, 400);
+
+            await EmployeeModel.delete(id);
+            return c.json({ success: true });
+        } catch (error) {
+            console.error('Error deleting employee:', error);
+            return c.json({ error: 'Internal Server Error' }, 500);
+        }
+    }
 }

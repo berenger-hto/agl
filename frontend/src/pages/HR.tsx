@@ -51,6 +51,19 @@ const HRPage = () => {
         } catch (e) { alert('Erreur ajout employé'); }
     };
 
+    const handleDelete = async (id: number) => {
+        if (window.confirm('Êtes-vous sûr de vouloir supprimer cet employé ? Cette action est irréversible.')) {
+            try {
+                await api.delete(`/employees/${id}`);
+                fetchData();
+                alert('Employé supprimé avec succès.');
+            } catch (error) {
+                console.error('Error deleting employee:', error);
+                alert("Erreur lors de la suppression de l'employé.");
+            }
+        }
+    };
+
     return (
         <div className="space-y-6">
             <div className="flex justify-between items-center">
@@ -87,6 +100,16 @@ const HRPage = () => {
                             {employees.map((emp) => (
                                 <div key={emp.matricule_employe} className="bg-white border border-gray-100 rounded-2xl p-6 hover:shadow-lg transition-all group relative overflow-hidden">
                                     <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
+                                    <button
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleDelete(emp.matricule_employe);
+                                        }}
+                                        className="absolute top-4 right-4 p-2 text-slate-400 hover:text-red-500 transition-colors z-20"
+                                        title="Supprimer"
+                                    >
+                                        <span className="material-icons text-lg">delete</span>
+                                    </button>
                                     <div className="flex items-start space-x-4 relative z-10">
                                         <div className="w-14 h-14 rounded-xl bg-slate-100 flex items-center justify-center text-slate-400 text-2xl font-bold uppercase">
                                             {emp.prenom_employe[0]}{emp.nom_employe[0]}

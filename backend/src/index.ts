@@ -32,6 +32,7 @@ app.get('/health', async (c) => {
 import { ProductionController } from './controllers/Production.controller.js';
 import { StockController } from './controllers/Stock.controller.js';
 import { SalesController } from './controllers/Sales.controller.js';
+import { ClientController } from './controllers/Client.controller.js';
 import { EmployeeController } from './controllers/Employee.controller.js';
 import { AuthController } from './controllers/Auth.controller.js';
 import { GadgetController } from './controllers/Gadget.controller.js';
@@ -55,11 +56,13 @@ app.post('/api/gadgets', GadgetController.create);
 app.get('/api/gadgets', GadgetController.getAll);
 app.delete('/api/gadgets/:id', GadgetController.delete);
 
-import { ClientController } from './controllers/Client.controller.js';
+
 app.get('/api/clients', ClientController.getAll);
 app.post('/api/clients', ClientController.create);
 app.put('/api/clients/:id', ClientController.update);
 app.delete('/api/clients/:id', ClientController.delete);
+
+app.delete('/api/employees/:id', EmployeeController.delete);
 
 const port = Number(process.env.PORT) || 3000;
 console.log(`Server is running on port ${port}`);
