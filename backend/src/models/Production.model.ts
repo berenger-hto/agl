@@ -68,7 +68,24 @@ export class ProductionModel {
         }
     }
     static async getAll() {
-        const [rows] = await pool.execute<RowDataPacket[]>('SELECT * FROM PRODUCTIONS ORDER BY date_production DESC');
+        const query = `
+            SELECT 
+                p.id_production, p.date_production, p.quantite_produite,
+                g.id_gadget, g.nom_gadget, g.type_gadget,
+                GROUP_CONCAT(e.nom_employe SEPARATOR ',') as agent_names,
+                GROUP_CONCAT(e.prenom_employe SEPARATOR ',') as agent_firstnames,
+                COUNT(pa.matricule_employe) as agent_count
+            FROM PRODUCTIONS p
+            JOIN GADGETS g ON p.id_gadget = g.id_gadget
+            LEFT JOIN PARTICIPER pa ON p.id_production = pa.id_production
+            LEFT JOIN EMPLOYES e ON pa.matricule_employe = e.matricule_employe
+            GROUP BY p.id_production
+            ORDER BY p.date_production DESC
+        `;
+        const [rows] = await pool.execute<RowDataPacket[]>(query);
+
+        // Transform rows to match UI needs (splitting agents if needed, though simple count might suffice for now based on template avatars)
+        // For the template, we need a list of agents. simplified here.
         return rows;
     }
 
