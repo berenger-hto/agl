@@ -52,14 +52,12 @@ const ProductionPage = () => {
     const fetchInitialData = async () => {
         try {
             const [gadgetRes, empRes, prodRes] = await Promise.all([
-                api.get('/stocks'), // Assuming stocks endpoint returns gadgets info or check if separate gadget endpoint exists
+                api.get('/gadgets'),
                 api.get('/employees'),
                 api.get('/productions')
             ]);
 
-            // Map stocks to unique gadgets if needed, or use gadget endpoint if available.
-            // Based on previous code: api.get('/stocks') returning { id_gadget, nom_gadget }
-            setGadgets(gadgetRes.data.map((s: any) => ({ id_gadget: s.id_gadget, nom_gadget: s.nom_gadget })));
+            setGadgets(gadgetRes.data);
             setEmployees(empRes.data);
             setProductions(prodRes.data);
         } catch (e) {
