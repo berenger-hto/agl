@@ -38,4 +38,18 @@ export class StockModel {
         const [rows] = await pool.execute<RowDataPacket[]>('SELECT COUNT(*) as count FROM STOCKS WHERE quantite_disponible < ?', [threshold]);
         return rows[0].count;
     }
+
+    static async getDistribution() {
+        const query = `
+            SELECT 
+                g.type_gadget as type, 
+                COUNT(*) as count,
+                SUM(s.quantite_disponible) as total_quantity
+            FROM STOCKS s
+            JOIN GADGETS g ON s.id_gadget = g.id_gadget
+            GROUP BY g.type_gadget
+        `;
+        const [rows] = await pool.execute<RowDataPacket[]>(query);
+        return rows;
+    }
 }
