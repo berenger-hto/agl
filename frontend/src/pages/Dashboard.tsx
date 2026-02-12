@@ -122,12 +122,7 @@ const Dashboard = () => {
                     <p className="text-slate-500 text-base">Surveillance de votre écosystème global.</p>
                 </div>
                 <div className="mt-6 md:mt-0 flex space-x-3">
-                    <button className="bg-white hover:bg-slate-50 text-slate-700 text-sm font-semibold px-5 py-2.5 rounded-xl border border-gray-200 transition-all flex items-center shadow-sm">
-                        <span className="material-icons text-base mr-2">file_download</span> Exporter
-                    </button>
-                    <button onClick={() => setShowProductionModal(true)} className="bg-primary hover:bg-primary-light text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow-lg shadow-primary/25 transition-all flex items-center">
-                        <span className="material-icons text-base mr-2">add</span> Nouvelle Production
-                    </button>
+                   
                 </div>
             </div>
 
