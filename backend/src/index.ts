@@ -50,6 +50,8 @@ app.get('/api/productions', ProductionController.getAll);
 app.post('/api/productions', ProductionController.create);
 app.get('/api/stocks', StockController.getAll);
 app.post('/api/sales', SalesController.processSale);
+app.get('/api/sales', SalesController.getSalesHistory);
+app.get('/api/sales/:id', SalesController.getInvoice);
 app.get('/api/employees', EmployeeController.getAll);
 app.post('/api/employees', EmployeeController.create);
 app.post('/api/gadgets', GadgetController.create);

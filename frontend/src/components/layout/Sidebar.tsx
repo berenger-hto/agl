@@ -12,6 +12,7 @@ const Sidebar = () => {
         { name: 'Gadgets', icon: 'pets', path: '/gadgets' },
         { name: 'Stocks', icon: 'analytics', path: '/stocks' },
         { name: 'Ventes', icon: 'point_of_sale', path: '/sales' },
+        { name: 'Factures', icon: 'receipt_long', path: '/invoices' },
         { name: 'Clients', icon: 'groups', path: '/clients' },
         { name: 'Personnel', icon: 'people', path: '/hr' },
     ];

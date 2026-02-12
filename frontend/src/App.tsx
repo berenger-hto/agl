@@ -9,6 +9,8 @@ import ClientsPage from './pages/Clients.tsx';
 import HRPage from './pages/HR.tsx';
 import Login from './pages/Login.tsx';
 import { AuthProvider, useAuth } from './context/AuthContext.tsx';
+import InvoicesListPage from './pages/InvoicesList.tsx';
+import InvoicePage from './pages/Invoice.tsx';
 
 const ProtectedRoute = () => {
   const { isAuthenticated, loading } = useAuth();
@@ -32,9 +34,11 @@ function App() {
               <Route path="gadgets" element={<GadgetsPage />} />
               <Route path="stocks" element={<StockPage />} />
               <Route path="sales" element={<SalesPage />} />
+              <Route path="invoices" element={<InvoicesListPage />} />
               <Route path="clients" element={<ClientsPage />} />
               <Route path="hr" element={<HRPage />} />
             </Route>
+            <Route path="/sales/:id" element={<InvoicePage />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import api from '../lib/axios';
 
 interface Gadget {
@@ -27,12 +28,26 @@ const SalesPage = () => {
     const [selectedClientId, setSelectedClientId] = useState<number | ''>('');
     const [selectedCashierId, setSelectedCashierId] = useState<number | ''>('');
     const [accessCode, setAccessCode] = useState('');
+    const [showHistory, setShowHistory] = useState(false);
+    const [salesHistory, setSalesHistory] = useState<any[]>([]);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchGadgets();
         fetchClients();
         fetchCashiers();
+        fetchSalesHistory();
     }, []);
+
+    const fetchSalesHistory = async () => {
+        try {
+            const response = await api.get('/sales');
+            setSalesHistory(response.data);
+        } catch (error) {
+            console.error('Error fetching sales history:', error);
+        }
+    };
 
     const fetchCashiers = async () => {
         try {
@@ -117,7 +132,7 @@ const SalesPage = () => {
 
         setProcessing(true);
         try {
-            await api.post('/sales', {
+            const response = await api.post('/sales', {
                 id_client: Number(selectedClientId),
                 matricule_employe: Number(selectedCashierId),
                 code_acces: accessCode,
@@ -126,9 +141,15 @@ const SalesPage = () => {
                     quantity: item.quantity
                 }))
             });
-            alert('Vente terminée avec succès !');
+            // alert('Vente terminée avec succès !'); // Removed to just redirect
             setCart([]);
             fetchGadgets(); // Refresh stock
+            fetchSalesHistory();
+            if (response.data.invoiceNumber) {
+                navigate(`/sales/${response.data.invoiceNumber}`);
+            } else {
+                alert('Vente réussie, mais impossible de charger la facture.');
+            }
         } catch (error) {
             console.error('Checkout failed:', error);
             alert('Échec du paiement. Veuillez réessayer.');
@@ -250,13 +271,22 @@ const SalesPage = () => {
             {/* Right Section: Cart Sidebar */}
             <div className="w-[420px] flex-none flex flex-col bg-white border-l border-gray-200 z-40 shadow-xl shadow-slate-200/50">
                 {/* Sidebar Header */}
-                <div className="p-6 pb-4 border-b border-gray-100">
-                    <div className="flex items-center justify-between mb-4">
-                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Panier Actuel</span>
+                <div className="p-6 pb-4 border-b border-gray-100 flex justify-between items-center">
+                    <div>
+                        <div className="flex items-center justify-between mb-1">
+                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Panier Actuel</span>
+                        </div>
                         <span className="px-2 py-1 bg-primary/10 text-primary rounded text-[10px] font-bold">
                             {cart.reduce((acc, item) => acc + item.quantity, 0)} articles
                         </span>
                     </div>
+                    <button
+                        onClick={() => setShowHistory(true)}
+                        className="p-2 text-slate-400 hover:text-primary hover:bg-slate-50 rounded-xl transition-all"
+                        title="Historique des ventes"
+                    >
+                        <span className="material-icons">history</span>
+                    </button>
                 </div>
 
                 {/* Client Selection */}
@@ -400,6 +430,44 @@ const SalesPage = () => {
                     </div>
                 </div>
             </div>
+            {showHistory && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+                    <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" onClick={() => setShowHistory(false)}></div>
+                    <div className="relative bg-white border border-gray-200 shadow-2xl rounded-3xl p-6 w-full max-w-2xl max-h-[80vh] flex flex-col">
+                        <div className="flex justify-between items-center mb-6">
+                            <h3 className="text-xl font-bold text-slate-900">Historique des Ventes</h3>
+                            <button onClick={() => setShowHistory(false)} className="p-2 hover:bg-slate-100 rounded-full transition-colors text-slate-400 hover:text-slate-600">
+                                <span className="material-icons">close</span>
+                            </button>
+                        </div>
+                        <div className="overflow-y-auto custom-scrollbar flex-1 space-y-3 pr-2">
+                            {salesHistory.length === 0 ? (
+                                <p className="text-center text-slate-400 py-8">Aucune vente récente.</p>
+                            ) : (
+                                salesHistory.map((sale: any) => (
+                                    <div key={sale.numero_facture}
+                                        onClick={() => navigate(`/sales/${sale.numero_facture}`)}
+                                        className="flex items-center justify-between p-4 rounded-xl border border-gray-100 hover:border-primary/30 hover:bg-primary/5 cursor-pointer transition-all group"
+                                    >
+                                        <div>
+                                            <p className="font-bold text-slate-900 group-hover:text-primary transition-colors">#{sale.numero_facture}</p>
+                                            <p className="text-xs text-slate-500">
+                                                {new Date(sale.date_facture).toLocaleDateString('fr-FR')} • {sale.nom_client} {sale.prenom_client}
+                                            </p>
+                                        </div>
+                                        <div className="text-right">
+                                            <p className="font-black text-slate-900">
+                                                {Number(sale.montant_total).toLocaleString('fr-FR', { style: 'currency', currency: 'XOF' })}
+                                            </p>
+                                            <p className="text-[10px] text-slate-400">Vendeur: {sale.vendeur}</p>
+                                        </div>
+                                    </div>
+                                ))
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

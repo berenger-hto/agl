@@ -103,4 +103,77 @@ export class SalesController {
             connection.release();
         }
     }
+
+    static async getInvoice(c: Context) {
+        const id = c.req.param('id');
+        try {
+            const [rows] = await pool.execute<RowDataPacket[]>(`
+                SELECT 
+                    f.numero_facture, 
+                    f.date_facture, 
+                    f.montant_total,
+                    v.date_vente,
+                    c.nom_client,
+                    c.prenom_client,
+                    c.email_client,
+                    e.nom_employe as nom_vendeur,
+                    e.prenom_employe as prenom_vendeur
+                FROM FACTURES f
+                JOIN VENTES v ON f.id_vente = v.id_vente
+                JOIN CLIENTS c ON v.id_client = c.id_client
+                JOIN EMPLOYES e ON v.matricule_employe = e.matricule_employe
+                WHERE f.numero_facture = ? OR v.id_vente = ?
+            `, [id, id]);
+
+            if (rows.length === 0) {
+                return c.json({ error: 'Invoice not found' }, 404);
+            }
+
+            const invoice = rows[0];
+
+            // Get items
+            const [items] = await pool.execute<RowDataPacket[]>(`
+                SELECT 
+                    g.nom_gadget,
+                    g.type_gadget,
+                    c.quantite_vendue,
+                    c.prix_unitaire_appliquer,
+                    (c.quantite_vendue * c.prix_unitaire_appliquer) as total_ligne
+                FROM CONCERNER c
+                JOIN GADGETS g ON c.id_gadget = g.id_gadget
+                JOIN VENTES v ON c.id_vente = v.id_vente
+                LEFT JOIN FACTURES f ON f.id_vente = v.id_vente
+                WHERE f.numero_facture = ? OR v.id_vente = ?
+            `, [id, id]);
+
+            return c.json({ ...invoice, items });
+        } catch (error) {
+            console.error('Error fetching invoice:', error);
+            return c.json({ error: 'Internal Server Error' }, 500);
+        }
+    }
+
+    static async getSalesHistory(c: Context) {
+        try {
+            const [rows] = await pool.execute<RowDataPacket[]>(`
+                SELECT 
+                    f.numero_facture, 
+                    f.date_facture, 
+                    f.montant_total,
+                    c.nom_client,
+                    c.prenom_client,
+                    e.prenom_employe as vendeur
+                FROM FACTURES f
+                JOIN VENTES v ON f.id_vente = v.id_vente
+                JOIN CLIENTS c ON v.id_client = c.id_client
+                JOIN EMPLOYES e ON v.matricule_employe = e.matricule_employe
+                ORDER BY f.date_facture DESC
+                LIMIT 50
+            `);
+            return c.json(rows);
+        } catch (error) {
+            console.error('Error fetching sales history:', error);
+            return c.json({ error: 'Internal Server Error' }, 500);
+        }
+    }
 }
