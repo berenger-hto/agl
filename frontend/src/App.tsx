@@ -5,6 +5,7 @@ import ProductionPage from './pages/Production.tsx';
 import GadgetsPage from './pages/Gadgets.tsx';
 import StockPage from './pages/Stock.tsx';
 import SalesPage from './pages/Sales.tsx';
+import ClientsPage from './pages/Clients.tsx';
 import HRPage from './pages/HR.tsx';
 import Login from './pages/Login.tsx';
 import { AuthProvider, useAuth } from './context/AuthContext.tsx';
@@ -31,6 +32,7 @@ function App() {
               <Route path="gadgets" element={<GadgetsPage />} />
               <Route path="stocks" element={<StockPage />} />
               <Route path="sales" element={<SalesPage />} />
+              <Route path="clients" element={<ClientsPage />} />
               <Route path="hr" element={<HRPage />} />
             </Route>
           </Route>
