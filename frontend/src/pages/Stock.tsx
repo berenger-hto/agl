@@ -112,7 +112,7 @@ const StockPage = () => {
                                     <tr key={stock.id_stock} className="group hover:bg-slate-50/50 transition-colors">
                                         <td className="px-6 py-4 font-semibold text-slate-800">{stock.nom_gadget}</td>
                                         <td className="px-6 py-4 text-sm text-slate-500">{stock.type_gadget}</td>
-                                        <td className="px-6 py-4 font-mono text-sm text-slate-600">${stock.prix_vente_gadget}</td>
+                                        <td className="px-6 py-4 font-mono text-sm text-slate-600">{stock.prix_vente_gadget} FCFA</td>
                                         <td className="px-6 py-4 font-bold text-slate-800">{stock.quantite_disponible}</td>
                                         <td className="px-6 py-4">
                                             {stock.quantite_disponible < 10 ? (
