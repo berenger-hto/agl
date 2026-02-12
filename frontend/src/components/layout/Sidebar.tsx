@@ -1,11 +1,13 @@
 import { Link, useLocation } from 'react-router-dom';
 import clsx from 'clsx';
+import { useAuth } from '../../context/AuthContext';
 
 const Sidebar = () => {
     const location = useLocation();
+    const { user } = useAuth();
 
     const navItems = [
-        { name: 'Dashboard', icon: 'dashboard', path: '/' },
+        { name: 'Tableau de bord', icon: 'dashboard', path: '/' },
         { name: 'Production', icon: 'inventory_2', path: '/production' },
         { name: 'Stocks', icon: 'analytics', path: '/stocks' },
         { name: 'Ventes', icon: 'point_of_sale', path: '/sales' },
@@ -49,8 +51,8 @@ const Sidebar = () => {
                         <span className="material-icons">person</span>
                     </div>
                     <div className="hidden lg:block ml-3">
-                        <p className="text-sm font-bold text-slate-800">Admin</p>
-                        <p className="text-xs text-slate-500">Super Admin</p>
+                        <p className="text-sm font-bold text-slate-800">{user?.name || 'Utilisateur'}</p>
+                        <p className="text-xs text-slate-500">{user?.role || 'Membre'}</p>
                     </div>
                 </div>
             </div>

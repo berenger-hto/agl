@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gest PME - Présentation</title>
+
+  <!-- Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Orbitron:wght@600;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'neon-blue': '#0066cc',
+            'neon-pink': '#d60045',
+            'neon-purple': '#9300d6',
+            'light-bg': '#f8fafc',
+            'glass': 'rgba(0, 0, 0, 0.05)',
+          },
+          fontFamily: {
+            'sans': ['Inter', 'sans-serif'],
+            'display': ['Orbitron', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Reset for Reveal.js compatibility with Tailwind */
+    .reveal {
+      background-color: #f8fafc;
+      color: #1e293b;
+    }
+
+    /* Glassmorphism Cards */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.05);
+    }
+
+    /* Override Reveal's default centering to allow Tailwind flex layouts */
+    .reveal .slides section {
+      height: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+      display: flex !important;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Typography sizing fixes */
+    h1,
+    h2,
+    h3,
+    h4 {
+      line-height: 1.2 !important;
+    }
+
+    p {
+      text-align: justify !important;
+      hyphens: auto !important;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 3px;
+    }
+
+    img {
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+
+<body class="bg-light-bg h-screen w-screen overflow-hidden">
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: TITRE -->
+      <section>
+        <div class="w-full max-w-5xl relative">
+          <!-- Background Elements -->
+          <div
+            class="absolute top-0 right-0 w-64 h-64 bg-neon-blue rounded-full mix-blend-multiply filter blur-[80px] opacity-20 animate-pulse pointer-events-none">
+          </div>
+          <div
+            class="absolute bottom-0 left-0 w-64 h-64 bg-neon-pink rounded-full mix-blend-multiply filter blur-[80px] opacity-20 animate-pulse pointer-events-none"
+            style="animation-delay: 2s"></div>
+
+          <div class="z-10 text-center glass-card p-12 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-neon-blue to-neon-purple"></div>
+
+            <h1
+              class="text-6xl font-display font-black text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-slate-600 mb-6">
+              Gest PME
+            </h1>
+            <h2 class="text-2xl font-sans font-light text-slate-500 mb-8 uppercase tracking-widest">
+              Gestion Complète pour PME de Gadgets
+            </h2>
+
+            <div class="grid grid-cols-2 gap-8 text-left w-full max-w-3xl mx-auto mt-12">
+              <div class="border-l-4 border-neon-blue pl-4">
+                <h3 class="text-neon-blue font-bold uppercase text-sm tracking-wider mb-2">Objectif</h3>
+                <p class="text-slate-700">Centraliser la production, les ventes, les stocks et les RH dans une interface
+                  unique et moderne.</p>
+              </div>
+              <div class="border-l-4 border-neon-pink pl-4">
+                <h3 class="text-neon-pink font-bold uppercase text-sm tracking-wider mb-2">Technologies</h3>
+                <p class="text-slate-700">React, Hono (Node.js), MySQL</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: CONTEXTE & INTRO -->
+      <section>
+        <div class="w-full max-w-6xl grid grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 class="text-4xl font-display font-bold text-slate-900 mb-6 border-b-2 border-slate-200 pb-2">
+              Contexte
+            </h2>
+            <p class="text-xl text-slate-600 mb-6 leading-relaxed">
+              Une PME spécialisée dans les gadgets animaliers (croquettes, jouets, accessoires) fait face à des défis de
+              gestion.
+              L'absence de système centralisé entraîne des erreurs de stock, une facturation lente et une gestion du
+              personnel opaque.
+            </p>
+            <div class="glass-card p-4 border-l-4 border-neon-purple">
+              <p class="text-slate-800 font-bold">Solution :</p>
+              <p class="text-slate-600">Une application web intégrée pour piloter l'ensemble de l'activité.</p>
+            </div>
+          </div>
+          <div class="relative">
+            <!-- Image Placeholder: Dashboard or Office -->
+            <img src="/assets/office_meeting_production_1770842432980.png" alt="Office Meeting"
+              class="w-full h-auto rounded-lg shadow-2xl transform rotate-2 hover:rotate-0 transition duration-500">
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: DICTIONNAIRE DE DONNEES -->
+      <section>
+        <div class="w-full max-w-6xl">
+          <h2 class="text-3xl font-display font-bold text-slate-900 mb-10 text-center">Données Clés</h2>
+          <div class="grid grid-cols-3 gap-6">
+            <!-- Entity Cards -->
+            <div class="glass-card p-6 border-t-4 border-neon-blue hover:-translate-y-2 transition duration-300">
+              <h3 class="text-xl font-bold text-slate-800 mb-3">Produits</h3>
+              <ul class="text-sm text-slate-600 space-y-2">
+                <li>📦 <b>Gadget</b>: Nom, Type, Prix</li>
+                <li>🏭 <b>Production</b>: Date, Qté</li>
+                <li>📊 <b>Stock</b>: Qté dispo</li>
+              </ul>
+            </div>
+
+            <div class="glass-card p-6 border-t-4 border-neon-pink hover:-translate-y-2 transition duration-300">
+              <h3 class="text-xl font-bold text-slate-800 mb-3">Commercial</h3>
+              <ul class="text-sm text-slate-600 space-y-2">
+                <li>🤝 <b>Client</b>: Contact, Email</li>
+                <li>🛍️ <b>Vente</b>: Date, Caissier</li>
+                <li>📄 <b>Facture</b>: Montant, Date</li>
+              </ul>
+            </div>
+
+            <div class="glass-card p-6 border-t-4 border-neon-purple hover:-translate-y-2 transition duration-300">
+              <h3 class="text-xl font-bold text-slate-800 mb-3">RH</h3>
+              <ul class="text-sm text-slate-600 space-y-2">
+                <li>👤 <b>Employé</b>: Matricule, Rôle</li>
+                <li>👔 <b>Rôles</b>: Caissier, Prod, Admin</li>
+                <li>🧬 <b>Héritage</b>: Partition & Totalité</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: REGLES DE GESTION -->
+      <section>
+        <div class="w-full max-w-5xl">
+          <h2 class="text-3xl font-display font-bold text-slate-900 mb-8 flex items-center">
+            <span class="w-12 h-1 bg-slate-900 mr-4"></span> Règles de Gestion
+          </h2>
+          <div class="grid grid-cols-2 gap-8">
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <span
+                  class="bg-neon-blue text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 shrink-0">1</span>
+                <p class="text-slate-700"><b>Stocks dynamiques :</b> Le stock augmente à la production et diminue à la
+                  vente.</p>
+              </div>
+              <div class="flex items-start">
+                <span
+                  class="bg-neon-pink text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 shrink-0">2</span>
+                <p class="text-slate-700"><b>Traçabilité :</b> Chaque vente est liée à un client unique et un caissier
+                  identifié.</p>
+              </div>
+            </div>
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <span
+                  class="bg-neon-purple text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 shrink-0">3</span>
+                <p class="text-slate-700"><b>Production :</b> Une production concerne un seul type de gadget mais peut
+                  impliquer plusieurs agents.</p>
+              </div>
+              <div class="flex items-start">
+                <span
+                  class="bg-slate-800 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 shrink-0">4</span>
+                <p class="text-slate-700"><b>Facturation :</b> Génération automatique d'une facture unique par vente.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: BASE DE DONNEES -->
+      <section>
+        <div class="w-full max-w-6xl grid grid-cols-2 gap-8 items-center">
+          <div class="order-2">
+            <h2 class="text-3xl font-display font-bold text-slate-900 mb-6">Conception BDD</h2>
+            <p class="text-slate-600 mb-4">Le modèle relationnel (MLR) assure l'intégrité des données grâce à des clés
+              étrangères strictes.</p>
+            <ul
+              class="space-y-2 text-sm text-slate-500 font-mono bg-white p-4 rounded border border-slate-200 shadow-inner">
+              <li><b>EMPLOYES</b> (<u>matricule</u>, nom...)</li>
+              <li><b>GADGETS</b> (<u>id</u>, prix, stock...)</li>
+              <li><b>CONCERNER</b> (<u>#gadget, #vente</u>, qté...)</li>
+            </ul>
+          </div>
+          <div class="order-1">
+            <img src="/assets/database_concept_1770842364279.png" alt="Database Schema"
+              class="w-full rounded-xl shadow-lg border border-slate-100">
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: ARCHITECTURE -->
+      <section>
+        <div class="w-full max-w-6xl text-center">
+          <h2 class="text-4xl font-display font-bold text-slate-900 mb-12">Architecture Technique</h2>
+          <div class="grid grid-cols-4 gap-6">
+            <div class="glass-card p-6 flex flex-col items-center">
+              <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-3xl">⚛️</div>
+              <h3 class="font-bold text-slate-800">Frontend</h3>
+              <p class="text-sm text-slate-500 mt-2">React + Vite<br>SPA Responsive</p>
+            </div>
+            <div class="glass-card p-6 flex flex-col items-center">
+              <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4 text-3xl">🟢</div>
+              <h3 class="font-bold text-slate-800">Backend</h3>
+              <p class="text-sm text-slate-500 mt-2">Hono (Node.js)<br>API REST Rapide</p>
+            </div>
+            <div class="glass-card p-6 flex flex-col items-center">
+              <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-4 text-3xl">🐬</div>
+              <h3 class="font-bold text-slate-800">Database</h3>
+              <p class="text-sm text-slate-500 mt-2">MySQL 8.0<br>Relationnel</p>
+            </div>
+            <div class="glass-card p-6 flex flex-col items-center">
+              <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mb-4 text-3xl">📈</div>
+              <h3 class="font-bold text-slate-800">Data Viz</h3>
+              <p class="text-sm text-slate-500 mt-2">Chart.js<br>Stats en temps réel</p>
+            </div>
+          </div>
+          <div class="mt-12 flex justify-center opacity-80 hover:opacity-100 transition">
+            <img src="/assets/tech_stack_abstract_1770842347727.png" alt="Tech Stack" class="h-48 rounded-lg shadow-md">
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: UI / UX & DEMO -->
+      <section>
+        <div class="w-full max-w-6xl relative">
+          <div class="absolute -top-10 -right-10 z-0 opacity-20">
+            <div class="w-64 h-64 bg-neon-blue rounded-full filter blur-3xl"></div>
+          </div>
+          <h2 class="text-3xl font-display font-bold text-slate-900 mb-8 relative z-10 w-full text-left">
+            Interface & Démonstration
+          </h2>
+
+          <div class="grid grid-cols-5 gap-8">
+            <div class="col-span-2 space-y-6 pt-8">
+              <h3 class="text-xl font-bold text-slate-700">Parcours Utilisateur</h3>
+              <ol class="relative border-l border-slate-200 ml-3 space-y-6">
+                <li class="mb-10 ml-6">
+                  <span
+                    class="absolute flex items-center justify-center w-6 h-6 bg-neon-blue rounded-full -left-3 ring-8 ring-white">
+                    <svg class="w-2.5 h-2.5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0H6a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                    </svg>
+                  </span>
+                  <h3 class="flex items-center mb-1 text-lg font-semibold text-slate-900">Admin 🚀</h3>
+                  <p class="mb-4 text-base font-normal text-slate-500">Connexion, Ajout d'employés et de gadgets.</p>
+                </li>
+                <li class="mb-10 ml-6">
+                  <span
+                    class="absolute flex items-center justify-center w-6 h-6 bg-neon-pink rounded-full -left-3 ring-8 ring-white">
+                    <svg class="w-2.5 h-2.5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                    </svg>
+                  </span>
+                  <h3 class="mb-1 text-lg font-semibold text-slate-900">Production ⚙️</h3>
+                  <p class="text-base font-normal text-slate-500">Lancement prod -> Stock augmente.</p>
+                </li>
+                <li class="ml-6">
+                  <span
+                    class="absolute flex items-center justify-center w-6 h-6 bg-neon-purple rounded-full -left-3 ring-8 ring-white">
+                    <svg class="w-2.5 h-2.5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+                    </svg>
+                  </span>
+                  <h3 class="mb-1 text-lg font-semibold text-slate-900">Ventes 💰</h3>
+                  <p class="text-base font-normal text-slate-500">Encaissement -> Stock diminue + Facture.</p>
+                </li>
+              </ol>
+            </div>
+            <div class="col-span-3 relative">
+              <img src="/assets/gest_pme_dashboard_1770842319477.png" alt="App Dashboard"
+                class="w-full h-auto rounded-lg shadow-2xl border-4 border-slate-100">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: CONCLUSION -->
+      <section>
+        <div class="w-full max-w-4xl text-center">
+          <div class="glass-card p-12 border-t-8 border-gradient-to-r from-neon-blue to-neon-purple">
+            <h2
+              class="text-4xl font-display font-black text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-slate-600 mb-8">
+              CONCLUSION
+            </h2>
+            <p class="text-2xl text-slate-600 leading-relaxed mb-8">
+              <b>Gest PME</b> offre une réponse concrète aux besoins de digitalisation de l'entreprise.
+              <br><br>
+              Une solution <b>robuste</b>, <b>modulaire</b> et <b>esthétique</b>, prête à accompagner la croissance de
+              la PME.
+            </p>
+            <div class="flex justify-center gap-4">
+              <span class="px-4 py-2 bg-slate-100 rounded-full text-slate-600 font-bold">MERISE</span>
+              <span class="px-4 py-2 bg-slate-100 rounded-full text-slate-600 font-bold">REACT</span>
+              <span class="px-4 py-2 bg-slate-100 rounded-full text-slate-600 font-bold">HONO</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>

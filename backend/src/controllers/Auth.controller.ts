@@ -29,11 +29,29 @@ export class AuthController {
             }
 
             const user = rows[0];
+            let role = 'Employe';
+
+            // Determine role
+            const [caissiers] = await pool.execute<RowDataPacket[]>('SELECT * FROM CAISSIERS WHERE matricule_employe = ?', [user.matricule_employe]);
+            if (caissiers.length > 0) role = 'Caissier';
+
+            const [agents] = await pool.execute<RowDataPacket[]>('SELECT * FROM AGENTS_PRODUCTIONS WHERE matricule_employe = ?', [user.matricule_employe]);
+            if (agents.length > 0) role = 'Agent';
+
+            const [admins] = await pool.execute<RowDataPacket[]>('SELECT * FROM ADMINISTRATIFS WHERE matricule_employe = ?', [user.matricule_employe]);
+            if (admins.length > 0) role = 'Admin';
 
             // TODO: Implement proper Session/Cookie setting.
             // For Hono we can set a signed cookie.
 
-            return c.json({ success: true, user: { id: user.matricule_employe, name: user.nom_employe } });
+            return c.json({
+                success: true,
+                user: {
+                    id: user.matricule_employe,
+                    name: `${user.prenom_employe} ${user.nom_employe}`,
+                    role: role
+                }
+            });
 
         } catch (error) {
             console.error('Login error:', error);

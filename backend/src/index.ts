@@ -34,6 +34,7 @@ import { StockController } from './controllers/Stock.controller.js';
 import { SalesController } from './controllers/Sales.controller.js';
 import { EmployeeController } from './controllers/Employee.controller.js';
 import { AuthController } from './controllers/Auth.controller.js';
+import { GadgetController } from './controllers/Gadget.controller.js';
 
 import { authMiddleware } from './middleware/Auth.middleware.js';
 
@@ -49,6 +50,8 @@ app.post('/api/productions', ProductionController.create);
 app.get('/api/stocks', StockController.getAll);
 app.post('/api/sales', SalesController.processSale);
 app.get('/api/employees', EmployeeController.getAll);
+app.post('/api/employees', EmployeeController.create);
+app.post('/api/gadgets', GadgetController.create);
 
 const port = Number(process.env.PORT) || 3000;
 console.log(`Server is running on port ${port}`);

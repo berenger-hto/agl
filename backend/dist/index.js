@@ -8,7 +8,7 @@ dotenv.config();
 const app = new Hono();
 app.use('*', logger());
 app.use('*', cors({
-    origin: ['http://localhost:5173'], // Vite default port
+    origin: ['http://localhost:5173', 'http://localhost:4173'], // Vite default port
     credentials: true,
 }));
 import { DashboardController } from './controllers/Dashboard.controller.js';

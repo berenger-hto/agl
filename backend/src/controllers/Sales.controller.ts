@@ -26,7 +26,7 @@ export class SalesController {
             // 2. Create Vente
             // Assuming a logged in user with matricule_employe. Using 1 for now if no auth context yet.
             // TODO: Get real employee ID from auth middleware
-            const employeeId = 1;
+            const employeeId = 2; // Awa (Caissier) for Demo
 
             // Ensure logic constraint: Only Caissier can sell. 
             // Checking if Employee 1 is a Caissier in DB would be good practice here.

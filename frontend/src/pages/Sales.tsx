@@ -80,12 +80,12 @@ const SalesPage = () => {
                     quantity: item.quantity
                 }))
             });
-            alert('Sale completed successfully!');
+            alert('Vente terminée avec succès !');
             setCart([]);
             fetchGadgets(); // Refresh stock
         } catch (error) {
             console.error('Checkout failed:', error);
-            alert('Checkout failed. Please try again.');
+            alert('Échec du paiement. Veuillez réessayer.');
         } finally {
             setProcessing(false);
         }
@@ -95,13 +95,13 @@ const SalesPage = () => {
         <div className="h-[calc(100vh-140px)] flex flex-col md:flex-row gap-6">
             <div className="flex-1 flex flex-col min-h-0">
                 <div className="mb-6">
-                    <h2 className="text-3xl font-display font-bold text-slate-900">Point of Sale</h2>
-                    <p className="text-slate-500">Process new sales orders.</p>
+                    <h2 className="text-3xl font-display font-bold text-slate-900">Point de Vente</h2>
+                    <p className="text-slate-500">Traiter les nouvelles commandes.</p>
                 </div>
 
                 <div className="flex-1 overflow-y-auto pr-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pb-4">
                     {loading ? (
-                        <div className="col-span-full text-center text-slate-500">Loading catalog...</div>
+                        <div className="col-span-full text-center text-slate-500">Chargement du catalogue...</div>
                     ) : gadgets.map(gadget => (
                         <div key={gadget.id_gadget}
                             onClick={() => addToCart(gadget)}
@@ -123,15 +123,15 @@ const SalesPage = () => {
 
             <div className="w-full md:w-96 bg-white border-l border-gray-100 flex flex-col shadow-2xl z-30 md:rounded-l-3xl">
                 <div className="p-6 border-b border-gray-50">
-                    <h3 className="font-bold text-xl text-slate-800">Current Order</h3>
-                    <p className="text-sm text-slate-500">{cart.length} items selected</p>
+                    <h3 className="font-bold text-xl text-slate-800">Commande Actuelle</h3>
+                    <p className="text-sm text-slate-500">{cart.length} articles sélectionnés</p>
                 </div>
 
                 <div className="flex-1 overflow-y-auto p-4 space-y-4">
                     {cart.length === 0 ? (
                         <div className="h-full flex flex-col items-center justify-center text-slate-400 opacity-50">
                             <span className="material-icons text-4xl mb-2">shopping_basket</span>
-                            <p className="text-sm">Basket is empty</p>
+                            <p className="text-sm">Le panier est vide</p>
                         </div>
                     ) : (
                         cart.map(item => (
@@ -171,7 +171,7 @@ const SalesPage = () => {
                         ) : (
                             <span className="material-icons mr-2">check_circle</span>
                         )}
-                        {processing ? 'Processing...' : 'Complete Sale'}
+                        {processing ? 'Traitement...' : 'Terminer la Vente'}
                     </button>
                 </div>
             </div>

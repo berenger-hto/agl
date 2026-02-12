@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GadgetAn - New Production Stepper</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Orbitron:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#3b19e6",
+                        "primary-light": "#6347ff",
+                        "background-light": "#f8f9fc",
+                        "background-dark": "#141121",
+                        "glass-border": "rgba(0, 0, 0, 0.05)",
+                        "glass-bg": "rgba(255, 255, 255, 0.7)",
+                        "neon-accent": "#00f2ff",
+                        "neon-purple": "#c026d3",
+                        "neon-blue": "#3b19e6",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "orbitron": ["Orbitron", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    }
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply bg-background-light text-slate-900 antialiased;
+            }
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        }
+        .elevated-card {
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+        }
+        .neon-button {
+            background: #00f2ff;
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+        .neon-button:hover {
+            box-shadow: 0 0 25px rgba(0, 242, 255, 0.6);
+            transform: translateY(-1px);
+        }
+        .stepper-line {
+            background: linear-gradient(90deg, #3b19e6 0%, #00f2ff 100%);
+        }
+        .custom-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #3b19e6;
+            cursor: pointer;
+            border-radius: 50%;
+            border: 3px solid #00f2ff;
+            box-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+        }
+        .custom-range::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #3b19e6;
+            cursor: pointer;
+            border-radius: 50%;
+            border: 3px solid #00f2ff;
+            box-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+        }
+    </style>
+</head>
+<body class="font-display overflow-hidden h-screen flex">
+<aside class="w-20 lg:w-64 bg-white border-r border-gray-100 flex-shrink-0 flex flex-col justify-between z-10 h-full relative">
+<div>
+<div class="h-20 flex items-center justify-center lg:justify-start lg:px-6 border-b border-gray-50">
+<div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-primary-light flex items-center justify-center shadow-lg shadow-primary/20">
+<span class="material-icons text-white text-xl">dataset</span>
+</div>
+<h1 class="hidden lg:block ml-3 font-bold text-xl tracking-wider text-slate-800">Gadget<span class="text-primary">An</span></h1>
+</div>
+<nav class="mt-8 space-y-2 px-3">
+<a class="flex items-center px-4 py-3 rounded-xl bg-slate-50 text-slate-500 border border-transparent" href="#">
+<span class="material-icons">dashboard</span>
+<span class="hidden lg:block ml-3 font-semibold">Dashboard</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-xl bg-primary/5 text-primary border border-primary/10 group relative overflow-hidden" href="#">
+<span class="material-icons">inventory_2</span>
+<span class="hidden lg:block ml-3 font-medium">Production</span>
+</a>
+</nav>
+</div>
+<div class="p-4 border-t border-gray-50">
+<div class="flex items-center lg:px-3">
+<img alt="Admin user" class="w-10 h-10 rounded-full border-2 border-white shadow-sm object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnd8k1jL3LHz3Kc_PnwV88IcxBfDUnij_Gkf2lJebvuSpeCMpF2CaKCWIftaeX6zBijxu68D8K2dcEr6jjIvSBs3Kir2meypc0XSo2NOqaZ2h78qN0k21OTpgCvFzi7gxJ-D2-G567KNQCuYCtdRC8pdb_5_BT8JpbfzleuA5WXN37EkKtIoGdIyVKwWsuK5W1miUsu8c5yzWLdvixpqQUMAJ7tLi4J9trQBGsJXFSGQ0e0Bcga3qn1CpeXyk-QtUQolJP7dw8fS4"/>
+<div class="hidden lg:block ml-3">
+<p class="text-sm font-bold text-slate-800">Alex Chen</p>
+<p class="text-xs text-slate-500">Super Admin</p>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col h-screen overflow-hidden relative bg-background-light">
+<div class="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
+<header class="h-20 bg-white/80 backdrop-blur-md border-b border-gray-100 flex items-center justify-between px-8 z-10 shrink-0">
+<div class="flex items-center w-96">
+<h2 class="text-xl font-bold text-slate-800">Production Control</h2>
+</div>
+<div class="flex items-center space-x-4">
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest px-3 py-1.5 rounded-lg border border-primary/10 bg-primary/5">System: Online</span>
+</div>
+</header>
+<div class="flex-1 p-8 opacity-40 grayscale-[0.5]">
+<div class="grid grid-cols-4 gap-6 mb-8">
+<div class="h-32 elevated-card rounded-2xl"></div>
+<div class="h-32 elevated-card rounded-2xl"></div>
+<div class="h-32 elevated-card rounded-2xl"></div>
+<div class="h-32 elevated-card rounded-2xl"></div>
+</div>
+<div class="h-96 elevated-card rounded-2xl"></div>
+</div>
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/10 backdrop-blur-sm">
+<div class="glass-panel w-full max-w-4xl rounded-[2rem] overflow-hidden shadow-2xl flex flex-col border border-white/50">
+<div class="p-8 pb-4 border-b border-gray-100">
+<div class="flex items-center justify-between mb-8">
+<h2 class="font-orbitron text-2xl font-bold tracking-tight text-slate-900">NEW PRODUCTION CYCLE</h2>
+<button class="p-2 hover:bg-slate-100 rounded-full transition-colors">
+<span class="material-icons text-slate-400">close</span>
+</button>
+</div>
+<div class="relative flex items-center justify-between px-12">
+<div class="absolute top-1/2 left-0 w-full h-0.5 bg-gray-100 -translate-y-1/2 z-0"></div>
+<div class="absolute top-1/2 left-0 w-1/3 h-0.5 stepper-line -translate-y-1/2 z-0"></div>
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white ring-8 ring-white shadow-lg">
+<span class="material-icons text-sm">settings</span>
+</div>
+<span class="mt-2 font-orbitron text-[10px] font-bold uppercase tracking-tighter text-primary">01: Details</span>
+</div>
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-white border-2 border-gray-200 flex items-center justify-center text-slate-400 ring-8 ring-white shadow-sm">
+<span class="material-icons text-sm">precision_manufacturing</span>
+</div>
+<span class="mt-2 font-orbitron text-[10px] font-bold uppercase tracking-tighter text-slate-400">02: Agents</span>
+</div>
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-10 h-10 rounded-full bg-white border-2 border-gray-200 flex items-center justify-center text-slate-400 ring-8 ring-white shadow-sm">
+<span class="material-icons text-sm">verified</span>
+</div>
+<span class="mt-2 font-orbitron text-[10px] font-bold uppercase tracking-tighter text-slate-400">03: Confirm</span>
+</div>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto p-10 max-h-[60vh]">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-6">
+<div class="space-y-2">
+<label class="text-xs font-bold text-slate-500 uppercase tracking-widest flex items-center">
+<span class="material-symbols-outlined text-[18px] mr-2">devices</span>
+                                    Gadget Selection
+                                </label>
+<div class="relative">
+<select class="w-full bg-white border-gray-200 rounded-xl py-3 pl-4 pr-10 text-slate-800 font-medium focus:ring-2 focus:ring-primary/20 focus:border-primary appearance-none transition-all">
+<option>X-1 Quantum Module</option>
+<option>Neural Link v4.2</option>
+<option>Holographic Emitter Gen 2</option>
+<option>Bio-Sync Battery Pack</option>
+</select>
+<span class="material-icons absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold text-slate-500 uppercase tracking-widest flex items-center">
+<span class="material-symbols-outlined text-[18px] mr-2">calendar_today</span>
+                                    Initiation Date
+                                </label>
+<input class="w-full bg-white border-gray-200 rounded-xl py-3 px-4 text-slate-800 font-medium focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" type="date" value="2023-10-24"/>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold text-slate-500 uppercase tracking-widest flex items-center">
+<span class="material-symbols-outlined text-[18px] mr-2">priority_high</span>
+                                    Priority Level
+                                </label>
+<div class="flex gap-3">
+<button class="flex-1 py-2 px-4 rounded-lg border-2 border-primary bg-primary/5 text-primary text-xs font-bold transition-all">NORMAL</button>
+<button class="flex-1 py-2 px-4 rounded-lg border-2 border-gray-100 text-slate-400 text-xs font-bold hover:border-amber-200 transition-all">HIGH</button>
+<button class="flex-1 py-2 px-4 rounded-lg border-2 border-gray-100 text-slate-400 text-xs font-bold hover:border-red-200 transition-all">CRITICAL</button>
+</div>
+</div>
+</div>
+<div class="space-y-6">
+<div class="space-y-4">
+<div class="flex justify-between items-end">
+<label class="text-xs font-bold text-slate-500 uppercase tracking-widest flex items-center">
+<span class="material-symbols-outlined text-[18px] mr-2">layers</span>
+                                        Production Quantity
+                                    </label>
+<span class="text-2xl font-orbitron font-black text-primary">1,250</span>
+</div>
+<div class="pt-2">
+<input class="w-full h-2 bg-gray-100 rounded-lg appearance-none cursor-pointer custom-range" max="5000" min="100" step="50" type="range" value="1250"/>
+<div class="flex justify-between mt-2 text-[10px] font-bold text-slate-400">
+<span>MIN: 100</span>
+<span>MAX: 5,000</span>
+</div>
+</div>
+</div>
+<div class="p-5 bg-slate-50 rounded-2xl border border-dashed border-slate-200">
+<h4 class="text-xs font-bold text-slate-800 uppercase mb-3 flex items-center">
+<span class="material-icons text-primary text-sm mr-2">info</span>
+                                    System Estimates
+                                </h4>
+<ul class="space-y-2">
+<li class="flex justify-between text-xs font-medium">
+<span class="text-slate-500">Resource Load:</span>
+<span class="text-slate-800">42.5% Optimal</span>
+</li>
+<li class="flex justify-between text-xs font-medium">
+<span class="text-slate-500">Completion ETD:</span>
+<span class="text-slate-800">14 Oct, 09:00 AM</span>
+</li>
+<li class="flex justify-between text-xs font-medium">
+<span class="text-slate-500">Cost Estimate:</span>
+<span class="text-slate-800 font-bold text-emerald-600">$12,400.00</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="p-8 border-t border-gray-100 bg-white/50 flex items-center justify-between">
+<button class="px-6 py-3 rounded-xl text-sm font-bold text-slate-500 hover:text-slate-800 transition-colors uppercase tracking-widest flex items-center">
+<span class="material-icons mr-2 text-base">arrow_back</span>
+                        Back to Dashboard
+                    </button>
+<div class="flex space-x-4">
+<button class="px-8 py-3.5 rounded-xl text-sm font-bold neon-button text-slate-900 uppercase tracking-widest flex items-center font-orbitron">
+                            Next Step
+                            <span class="material-icons ml-2 text-base">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+</body></html>

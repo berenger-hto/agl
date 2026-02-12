@@ -1,25 +1,14 @@
-import { pool } from '../config/pool.js';
+import { EmployeeModel } from '../models/Employee.model.js';
 export class EmployeeController {
     static async getAll(c) {
         try {
-            // Fetch all employees with their roles if possible
-            // This is a simplified query. In a real scenario, we'd LEFT JOIN with CAISSIERS, AGENTS, etc.
-            // to determine the role.
-            const query = `
-            SELECT e.*, 
-            CASE 
-                WHEN c.matricule_employe IS NOT NULL THEN 'Caissier'
-                WHEN a.matricule_employe IS NOT NULL THEN 'Agent Production'
-                WHEN adm.matricule_employe IS NOT NULL THEN adm.poste_administratif
-                ELSE 'Employe'
-            END as poste
-            FROM EMPLOYES e
-            LEFT JOIN CAISSIERS c ON e.matricule_employe = c.matricule_employe
-            LEFT JOIN AGENTS_PRODUCTIONS a ON e.matricule_employe = a.matricule_employe
-            LEFT JOIN ADMINISTRATIFS adm ON e.matricule_employe = adm.matricule_employe
-        `;
-            const [rows] = await pool.execute(query);
-            return c.json(rows);
+            const format = c.req.query('format');
+            if (format === 'tree') {
+                const tree = await EmployeeModel.getHierarchy();
+                return c.json(tree);
+            }
+            const employees = await EmployeeModel.getAll();
+            return c.json(employees);
         }
         catch (error) {
             console.error('Error fetching employees:', error);

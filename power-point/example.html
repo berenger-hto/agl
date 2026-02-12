@@ -1,0 +1,873 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les Intervenants du Marché Informatique</title>
+
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Orbitron:wght@600;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Reveal.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/theme/white.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'neon-blue': '#0066cc',
+                        'neon-pink': '#d60045',
+                        'neon-purple': '#9300d6',
+                        'light-bg': '#f8fafc',
+                        'glass': 'rgba(0, 0, 0, 0.05)',
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'display': ['Orbitron', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .reveal {
+            background-color: #f8fafc;
+            color: #1e293b;
+            font-size: 24px;
+            /* Default base size for Reveal */
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        /* Progress Breadcrumb */
+        #breadcrumb-container {
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            z-index: 20;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            pointer-events: none;
+        }
+
+        .breadcrumb-active {
+            color: #0066cc;
+            text-shadow: none;
+        }
+
+        /* Layout resets for Reveal.js compatibility */
+        .reveal .slides section {
+            height: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex !important;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Remove Tailwind's huge default line-heights for headings in this context */
+        h1,
+        h2,
+        h3,
+        h4 {
+            line-height: 1.2 !important;
+        }
+
+        p {
+            text-align: justify !important;
+            text-justify: inter-word !important;
+            /* Répartition propre des espaces */
+            hyphens: auto !important;
+            /* Active les tirets de coupure */
+            lang: fr !important;
+            /* Important pour que les coupures soient correctes en français */
+            color: #000 !important;
+        }
+
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+
+        img {
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body class="bg-light-bg h-screen w-screen overflow-hidden">
+
+    <!-- Breadcrumb Indicator -->
+    <div id="breadcrumb-container">
+        <span id="breadcrumb-chapter">ACCUEIL</span>
+        <span class="text-neon-pink">></span>
+        <span id="breadcrumb-slide" class="breadcrumb-active">TITRE</span>
+    </div>
+
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- SLIDE 1: TITLE -->
+            <section data-state="intro" data-chapter="01 - ACCUEIL" data-slide="TITRE">
+                <div class="w-full max-w-4xl relative" style="transform: scale(1.3);">
+                    <!-- Background Elements -->
+                    <div
+                        class="absolute top-0 right-0 w-64 h-64 bg-neon-blue rounded-full mix-blend-multiply filter blur-[80px] opacity-20 animate-pulse pointer-events-none">
+                    </div>
+                    <div class="absolute bottom-0 left-0 w-64 h-64 bg-neon-pink rounded-full mix-blend-multiply filter blur-[80px] opacity-20 animate-pulse pointer-events-none"
+                        style="animation-delay: 2s"></div>
+
+                    <div class="z-10 text-center glass-card p-8">
+                        <div class="text-neon-blue font-display tracking-[0.2em] text-sm uppercase mb-4">HECM Porto-Novo
+                            | LP2 SIL</div>
+                        <h1
+                            class="text-5xl font-display font-black text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-slate-600 mb-6">
+                            Les Intervenants du<br />Marché Informatique
+                        </h1>
+                        <br>
+
+                        <div class="grid grid-cols-2 gap-8 text-left w-full max-w-2xl mx-auto">
+                            <div>
+                                <h3
+                                    class="text-neon-blue font-bold uppercase text-sm tracking-wider mb-3 border-b border-slate-600/30 pb-1">
+                                    Exposé Présenté par</h3>
+                                <ol class="list-decimal list-inside space-y-1 text-zinc-800 text-lg">
+                                    <li>ATIBA Manfaz</li>
+                                    <li>FREJUS Owen</li>
+                                    <li>HOUETO Lauris</li>
+                                    <li>IDOHOU Foiad</li>
+                                    <li>LOKO Gabriel</li>
+                                    <li>TONOUHEWA Sabine</li>
+                                </ol>
+                            </div>
+                            <div class="flex flex-col gap-10">
+                                <div>
+                                    <h3
+                                        class="text-neon-pink font-bold uppercase text-sm tracking-wider mb-3 border-b border-slate-600/30 pb-1">
+                                        Sous la direction de</h3>
+                                    <p class="text-xl font-bold text-slate-900 mb-6">M. AKOHA GUERSCHOM</p>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-slate-500 font-bold uppercase text-xs tracking-wider">Année
+                                        Académique</h3>
+                                    <p class="text-slate-900 text-lg">2025 - 2026</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 2: PLAN -->
+            <section data-state="plan" data-chapter="02 - STRUCTURE" data-slide="PLAN">
+                <div class="w-full max-w-6xl relative left-10" style="transform: scale(1.15);">
+                    <h2
+                        class="text-4xl font-display font-bold text-neon-blue mb-8 text-left pl-4 border-l-4 border-zinc-500/60">
+                        PLAN DE LA PRÉSENTATION
+                    </h2>
+
+                    <div class="grid grid-cols-2 gap-8 items-center">
+                        <div class="relative top-3 mx-auto relative left-4">
+                            <img src="https://private-us-east-1.manuscdn.com/sessionFile/pGo4smEe83YzEngfLD8KIo/sandbox/slides_resource_inqclx5v5jlzm0xo3jfmk-299bacbc-e2b-prod-us2_1768380803974_na1fn_L2hvbWUvdWJ1bnR1L3VwbG9hZC9zZWFyY2hfaW1hZ2VzL3hMUzBja1hGOVpiZQ.png?x-oss-process=image/resize,w_1560,h_1560/format,webp&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvcEdvNHNtRWU4M1l6RW5nZkxEOEtJby9zYW5kYm94L3NsaWRlc19yZXNvdXJjZV9pbnFjbHg1djVqbHptMHhvM2pmbWstMjk5YmFjYmMtZTJiLXByb2QtdXMyXzE3NjgzODA4MDM5NzRfbmExZm5fTDJodmJXVXZkV0oxYm5SMUwzVndiRzloWkM5elpXRnlZMmhmYVcxaFoyVnpMM2hNVXpCamExaEdPVnBpWlEucG5nP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLHdfMTU2MCxoXzE1NjAvZm9ybWF0LHdlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTg3NjE2MDB9fX1dfQ__&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=s7NKBCOvVIFl~2x432oM~0dbaT-d1M0lF23zWqkRZuaXWsL0f0juejvVQE7lBrEnI0tFvkq5oXIBYQ5S2at16JcswKK06uuUv-IpHMPi86Jjhw4uMcdYrPmzdIS32UtMHD5I7xqvhXkHNewHkBK8xv7Ewf4oi915QhoaQiFbqRsW~ckO2AL9HMmHL7dOMnnicBkQGJ9-3phDac~KD5BrqLgy3bzXRB15iM8laUZWLaOcwDKXoZt-ad0OFhHh1Wd~K1wJ3ikihlLYjLHVexRf6yOykurnVq9Liecp0yZXxma2Jpy~0mCmUfQGyllq2VT2fNwnDRzsLMGEnJACGQhOLQ__"
+                                class="w-full max-h-[400px] object-contain rounded opacity-90"
+                                alt="Écosystème Numérique">
+                            <p class="mt-2 text-xl text-slate-500 italic text-center w-full">Vue globale de l'écosystème
+                                numérique</p>
+                        </div>
+
+                        <div class="space-y-3 font-light text-base relative left-16" style="transform: scale(1.2);">
+                            <div class="flex items-center gap-4 text-slate-500">
+                                <span class="text-zinc-500/40 font-display font-bold w-12 text-right">INTR</span>
+                                <div class="relative left-2 text-xl font-bold uppercase">Introduction</div>
+                            </div>
+                            <!-- List Items -->
+                            <div class="flex items-center gap-4 group p-2 hover:bg-black/5 rounded transition">
+                                <span
+                                    class="text-zinc-500/40 font-display text-xl font-bold w-12 text-right relative right-2">01</span>
+                                <div>
+                                    <h3 class="text-slate-900 font-bold text-lg">Les créateurs de solutions</h3>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 group p-2 hover:bg-black/5 rounded transition">
+                                <span class="text-zinc-500/40 font-display text-xl font-bold w-12 text-right">02</span>
+                                <div>
+                                    <h3 class="text-slate-900 font-bold text-lg">Le Canal de Vente</h3>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 group p-2 hover:bg-black/5 rounded transition">
+                                <span class="text-zinc-500/40 font-display text-xl font-bold w-12 text-right">03</span>
+                                <div>
+                                    <h3 class="text-slate-900 font-bold text-lg">Les Accompagnateurs</h3>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 group p-2 hover:bg-black/5 rounded transition">
+                                <span class="text-zinc-500/40 font-display text-xl font-bold w-12 text-right">04</span>
+                                <div>
+                                    <h3 class="text-slate-900 font-bold text-lg">La Demande et le Cadre</h3>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 group p-2 hover:bg-black/5 rounded transition">
+                                <span class="text-zinc-500/40 font-display text-xl font-bold w-12 text-right">05</span>
+                                <div>
+                                    <h3 class="text-slate-900 font-bold text-lg">Perspectives</h3>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 text-slate-500">
+                                <span class="text-zinc-500/40 font-display font-bold w-12 text-right">CONC</span>
+                                <div class="relative left-2 text-xl font-bold uppercase">Conclusion</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 3: INTRODUCTION -->
+            <section data-chapter="03 - INTRODUCTION" data-slide="CONTEXTE">
+                <div class="w-full relative" style="transform: scale(.95);">
+                    <h2
+                        class="text-4xl font-display font-bold text-slate-900 mb-10 border-b-2 border-zinc-500/60 inline-block pb-3">
+                        INTRODUCTION
+                    </h2>
+
+                    <div class="space-y-12 border-l-4 border-zinc-500/60 pl-6">
+                        <div>
+                            <p class="text-3xl text-slate-600 leading-relaxed font-light text-justify"
+                                style="line-height: 38px!important;">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Le <b>marché des technologies de
+                                    l'information (TI)</b> est un pilier stratégique de
+                                l'économie
+                                mondiale, touchant tous les secteurs de la société (entreprises, particuliers,
+                                administrations). Ce secteur ne se limite pas à la simple vente de produits, mais
+                                constitue un écosystème complexe dédié à la création et au déploiement de solutions
+                                matérielles et logicielles. <br> <br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Porté par une transformation numérique
+                                constante, ce marché repose sur une multitude
+                                d'acteurs interdépendants. L'enjeu central est de comprendre comment ces intervenants
+                                collaborent pour maintenir le fonctionnement du monde numérique tout en anticipant les
+                                défis technologiques futurs.
+                            </p>
+                        </div>
+
+                        <div>
+                            <p class="text-4xl font-bold text-slate-900 italic leading-snug">
+                                "Comment les acteurs interagissent-ils pour maintenir le fonctionnement de l'écosystème
+                                numérique tout en anticipant les défis technologiques futurs ?"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 4: L'OFFRE PRIMAIRE -->
+            <section data-chapter="04 - OFFRE PRIMAIRE" data-slide="CREATEURS DE SOLUTIONS">
+                <div class="w-full" style="transform: translateY(10px) scale(.96);">
+                    <h2 class="text-3xl font-display font-bold text-slate-900 mb-5">
+                        <span class="text-zinc-500">I -</span> LES CREATEURS DE SOLUTIONS
+                    </h2>
+
+                    <div>
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="glass-card p-5 border-t-4 border-t-zinc-500/60 relative">
+                                <h3 class="text-xl font-bold text-zinc-500/60 mb-2">Constructeurs</h3>
+                                <p class="text-slate-600 text-2xl text-justify" style="line-height: 36px!important;">Les
+                                    constructeurs conçoivent et
+                                    fabriquent le socle physique de l'informatique, incluant les terminaux, les
+                                    infrastructures de serveurs et les équipements réseau. Des leaders comme
+                                    <b>Dell</b>, <b>Apple</b> ou <b>Cisco</b> investissent massivement en R&D pour
+                                    proposer des équipements toujours plus performants, miniaturisés et économes en
+                                    énergie.
+                                </p>
+                                <div
+                                    class="text-zinc-800 opacity-30 text-3xl font-display font-bold text-right absolute bottom-6 right-6">
+                                    01</div>
+                            </div>
+                            <div class="glass-card p-5 border-t-4 border-t-zinc-500/60">
+                                <h3 class="text-xl font-bold text-zinc-500/60 mb-2">Éditeurs</h3>
+                                <p class="text-slate-600 text-2xl text-justify" style="line-height: 36px!important;">
+                                    Le matériel serait inerte sans les logiciels. Les éditeurs de logiciels créent
+                                    l'intelligence des machines à travers les <b>systèmes d'exploitation</b>, les
+                                    <b>applications métiers</b> et les <b>outils de gestion de données</b>. Ils
+                                    permettent ainsi d'exploiter les ressources matérielles pour réaliser des tâches
+                                    variées, de la bureautique à la gestion complexe d'entreprise. Des leaders comme
+                                    <b>Microsoft</b>, <b>Oracle</b> ou <b>SAP</b> investissent massivement en R&D pour
+                                    proposer des solutions toujours plus performantes et adaptées aux besoins des
+                                    entreprises.
+                                </p>
+                                <br>
+                                <div
+                                    class="text-zinc-800 opacity-30 text-3xl font-display font-bold text-right absolute bottom-6 right-6">
+                                    02</div>
+
+                            </div>
+                            <div class="glass-card p-5 border-t-4 border-t-zinc-500/60">
+                                <h3 class="text-xl font-bold text-neon-purple mb-2">Cloud</h3>
+                                <p class="text-slate-600 text-2xl text-justify" style="line-height: 36px!important;">
+                                    Les fournisseurs de cloud, ou hyperscalers, permettent aux entreprises de louer des
+                                    ressources informatiques à la demande via trois modèles : l'IaaS (infrastructure),
+                                    le PaaS (plateforme) et le SaaS (logiciel). Ce marché, qui transforme la
+                                    consommation technologique, est dominé par le trio majeur composé d'Amazon Web
+                                    Services (AWS), Microsoft Azure et Google Cloud Platform (GCP).
+                                </p>
+                                <br>
+                                <div
+                                    class="text-zinc-800 opacity-30 text-3xl font-display font-bold text-right absolute bottom-6 right-6">
+                                    03</div>
+                            </div>
+                        </div>
+                        <!--
+                            <div class="flex items-center flex-col justify-center relative -top-5">
+                                <img src="/assets/images/images.png" class="max-h-[350px] object-contain rounded-lg"
+                                    alt="Chaîne de valeur du Cloud">
+                                <p class="mt-2 text-lg text-slate-500 italic text-center w-full">
+                                    L'usine de l'écosystème numérique : au cœur de l'innovation et du matériel informatique.
+                                </p>
+                            </div>
+                        -->
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 5: LE CANAL DE VENTE -->
+            <section data-chapter="05 - CANAL DE VENTE" data-slide="DIFFUSION">
+                <div class="w-full" style="transform: translateY(10px) scale(.96);">
+                    <h2 class="text-3xl font-display font-bold text-slate-900 mb-8">
+                        <span class="text-zinc-500">II -</span> LE CANAL DE VENTE
+                    </h2>
+
+                    <div class="grid grid-cols-3 gap-6 mb-8">
+                        <!-- Card 1 -->
+                        <div class="glass-card p-5 border-t-4 border-t-zinc-500/60 relative">
+                            <h3 class="text-lg font-bold text-slate-900 mb-2 uppercase">Grossistes</h3>
+                            <p class="text-slate-700 text-2xl leading-relaxed mb-4 text-justify"
+                                style="line-height: 36px!important;">
+                                Ces acteurs jouent un rôle de logisticien à grande échelle. Ils achètent d'énormes
+                                volumes de produits (matériels et licences logicielles) auprès des constructeurs et
+                                éditeurs pour les stocker et les revendre à un réseau de partenaires. Leur valeur
+                                ajoutée réside dans leur capacité à optimiser la chaîne d'approvisionnement, à gérer
+                                les stocks, à proposer des solutions de financement et à agréger des offres multi-
+                                constructeurs. Des géants comme Ingram Micro et TD Synnex sont des piliers
+                                de ce secteur.
+                            </p>
+                            <br>
+                            <div
+                                class="text-zinc-800 opacity-30 text-3xl font-display font-bold text-right absolute bottom-6 right-6">
+                                01</div>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="glass-card p-5 border-t-4 border-t-zinc-500/60 relative">
+                            <h3 class="text-lg font-bold text-slate-900 mb-2 uppercase">Revendeurs (VAR)</h3>
+                            <p class="text-slate-700 text-2xl leading-relaxed mb-4 text-justify"
+                                style="line-height: 36px!important;">
+                                <b>Les Value Added Resellers (VAR)</b> ne se contentent pas de vendre des produits.
+                                Ils y ajoutent une couche de services et d'expertise pour créer une solution complète
+                                et personnalisée. Cela peut inclure l'audit des besoins, l'installation, la
+                                configuration, la migration de données et le support technique de premier niveau.
+                                Ils sont le contact de proximité pour de nombreuses PME.
+                            </p>
+                            <div
+                                class="text-zinc-800 opacity-30 text-3xl font-display font-bold text-right absolute bottom-6 right-6">
+                                02</div>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="glass-card p-5 border-t-4 border-t-zinc-500/60 relative">
+                            <h3 class="text-lg font-bold text-slate-900 mb-2 uppercase">Détail</h3>
+                            <p class="text-slate-700 text-2xl leading-relaxed mb-4" style="line-height: 36px!important;">
+                                Pour le marché grand public (B2C), la distribution passe par des canaux de détail,
+                                qu'ils soient physiques (grandes surfaces spécialisées comme la Fnac, Boulanger)
+                                ou en ligne (Amazon, Cdiscount). Ces acteurs se concentrent sur la vente de
+                                produits standardisés et la gestion de volumes importants de transactions.
+                            </p>
+                            <div
+                                class="text-zinc-800 opacity-30 text-3xl font-display font-bold text-right absolute bottom-6 right-6">
+                                03</div>
+                        </div>
+                    </div>
+
+                    <!--
+                        <div class="w-full flex justify-center">
+                            <img src="https://private-us-east-1.manuscdn.com/sessionFile/pGo4smEe83YzEngfLD8KIo/sandbox/slides_resource_inqclx5v5jlzm0xo3jfmk-299bacbc-e2b-prod-us2_1768380938534_na1fn_L2hvbWUvdWJ1bnR1L3VwbG9hZC9zZWFyY2hfaW1hZ2VzL1AwSGMzNVJzVjh3MA.jpg?x-oss-process=image/resize,w_1560,h_1560/format,webp&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvcEdvNHNtRWU4M1l6RW5nZkxEOEtJby9zYW5kYm94L3NsaWRlc19yZXNvdXJjZV9pbnFjbHg1djVqbHptMHhvM2pmbWstMjk5YmFjYmMtZTJiLXByb2QtdXMyXzE3NjgzODA5Mzg1MzRfbmExZm5fTDJodmJXVXZkV0oxYm5SMUwzVndiRzloWkM5elpXRnlZMmhmYVcxaFoyVnpMMUF3U0dNek5WSnpWamgzTUEuanBnP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLHdfMTU2MCxoXzE1NjAvZm9ybWF0LHdlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTg3NjE2MDB9fX1dfQ__&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=o9QBDVoJZSIGxJjao3~B40jEvltZ~NxoSxAgc~RdENXUPmaOqQs~m4maayRxsA264E-oEEZn7zjpAAqlsX9b~yivf1CMHLY5E1CA-kmV1uwUZXKH9YfzmZzvjJVnOXKuyOD-xEcGoTBj7LvtcLAcq0dSrPjB4V7JhQrKMONyZWZ7kmhicWtnsYHSy8xMFdeRkEV0MGpiYO47h8mt1jFbdGgsz8U5mE969OJ-vEofy9itSjbArBNtlQslOJz1Z6lVW2mwdzSmT43zqH~dRXy7vHoArJHmSlwKE0BerDlh19WfcIf3Ho7Xjb5tRZiUO6ZHvqdc8kh9~jvFx0Obaz1~3w__"
+                                class="h-32 object-contain rounded opacity-80" alt="Écosystème Marketplace">
+                            <p class="mt-2 text-sm text-slate-500 italic text-center w-full">Le paysage de la distribution
+                                informatique</p>
+                        </div>
+                    -->
+                </div>
+            </section>
+
+            <!-- SLIDE 6: LES ACCOMPAGNATEURS -->
+            <section data-chapter="06 - ACCOMPAGNATEURS" data-slide="VALEUR AJOUTÉE">
+                <div class="w-full" style="transform: translateY(10px) scale(.96);">
+                    <h2
+                        class="text-3xl font-display font-bold text-slate-900 mb-2 uppercase flex items-center justify-center">
+                        <span><span class="text-zinc-500">III- </span> Les Accompagnateurs</span>
+                    </h2>
+                    <br>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="glass-card p-6 border border-slate-300 border-t-4 border-t-zinc-500/60 relative">
+                        <div class="text-lg font-bold text-zinc-500 tracking-widest uppercase mb-2">Stratégie
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Conseil en IT</h3>
+                        <p class="text-slate-700 text-2xl leading-relaxed mb-4" style="line-height: 36px!important;">
+                            Les cabinets de conseil en stratégie (ex: McKinsey, BCG,
+                            Wavestone) interviennent en amont des projets pour aider les directions générales
+                            à aligner leur stratégie d'entreprise avec leur stratégie technologique. Ils se
+                            concentrent sur les aspects organisationnels, financiers et stratégiques de la
+                            transformation numérique.
+                        </p>
+                        <br>
+                        <div
+                            class="text-zinc-800 opacity-30 text-3xl font-display font-bold text-right absolute bottom-6 right-6">
+                            01</div>
+                    </div>
+
+                        <!-- Col 1 -->
+                        <div class="glass-card p-6 border border-slate-300 border-t-4 border-t-zinc-500/60 relative">
+                            <div class="text-lg font-bold text-zinc-500 tracking-widest uppercase mb-2">Services
+                                Numériques</div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">ESN (ex-SSII)</h3>
+                            <p class="text-slate-700 text-2xl leading-relaxed mb-4" style="line-height: 36px!important;">
+                                Les Entreprises de Services du Numérique (ESN), anciennement appelées SSII, accompagnent
+                                la transformation numérique des organisations à travers le conseil, l'intégration de
+                                systèmes, le développement sur mesure et l'infogérance. Ce secteur est animé par des
+                                leaders mondiaux comme Capgemini, Accenture ou Atos, ainsi que par un réseau dense de
+                                PME spécialisées.
+                            </p>
+                            <br>
+                            <div
+                                class="text-zinc-800 opacity-30 text-3xl font-display font-bold text-right absolute bottom-6 right-6">
+                                02</div>
+                        </div>
+
+                        <!-- Col 2 -->
+
+
+                        <!-- Col 3 -->
+                        <div class="glass-card p-6 border border-slate-300 border-t-4 border-t-zinc-500/60 relative">
+                            <div class="text-lg font-bold text-zinc-500 tracking-widest uppercase mb-2">Agilité
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Freelances</h3>
+                            <p class="text-slate-700 text-2xl leading-relaxed mb-4" style="line-height: 36px!important;">
+                                Le marché de l'IT fait de plus en plus appel à des travailleurs indépendants. Ces
+                                freelances, souvent des experts sur des technologies de niche, apportent une
+                                flexibilité et une expertise pointue aux entreprises pour des missions spécifiques.
+                                Ils sont une composante essentielle de la dynamique du marché du travail dans le
+                                secteur.
+                            </p>
+                            <div
+                                class="text-zinc-800 opacity-30 text-3xl font-display font-bold text-right absolute bottom-6 right-6">
+                                03</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 7: UTILISATEURS ET RÉGULATEURS -->
+            <section data-chapter="07 - DEMANDE & CADRE" data-slide="ACTEURS">
+                <div class="w-full" style="transform: scale(0.80);">
+                    <h2 class="text-3xl font-display font-bold text-slate-900 mb-8">
+                        <span class="text-zinc-500">IV -</span> UTILISATEURS & RÉGULATEURS
+                    </h2>
+                    <br>
+
+                    <div class="grid grid-cols-2 gap-12">
+                        <!-- Clients -->
+                        <div class="space-y-6 relative left-6">
+                            <h3
+                                class="text-xl font-bold text-zinc-500 border-b-2 border-zinc-500/30 padding-b-1 inline-block">
+                                Typologie des Clients
+                            </h3>
+
+                            <div class="space-y-4">
+                                <div class="glass-card p-6 border border-slate-300 border-t-4 border-t-zinc-500/60">
+                                    <h4 class="text-base font-bold text-slate-900 mb-1" style="font-size: 30px;">Entreprises (B2B)</h4>
+                                    <p class="text-slate-700 text-3xl" style="line-height: 40px!important;">
+                                        Le plus grand segment, allant de la startup à la
+                                        multinationale (Grands Comptes), avec des besoins et des budgets très variés.
+                                    </p>
+                                    <br>
+                                    <h4 class="text-base font-bold text-slate-900 mb-1" style="font-size: 30px;">Secteur Public</h4>
+                                    <p class="text-slate-700 text-3xl" style="line-height: 40px!important;" >
+                                        Les administrations, les collectivités locales, les
+                                        hôpitaux et les établissements d'enseignement, avec des contraintes fortes en
+                                        matière de sécurité et de respect des marchés publics.
+                                    </p>
+                                    <br>
+                                    <h4 class="text-base font-bold text-slate-900 mb-1" style="font-size: 30px;">Particuliers (B2C)</h4>
+                                    <p class="text-slate-700 text-3xl" style="line-height: 40px!important">
+                                        Le marché grand public, tiré par la demande de
+                                        connectivité, de divertissement et de services en ligne.
+                                    </p>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <!-- Regulators -->
+                        <div class="space-y-6 pl-6 border-l border-slate-300 relative">
+                            <h3
+                                class="text-xl font-bold text-zinc-500 border-b-2 border-zinc-500/30 padding-b-1 inline-block">
+                                Le Cadre
+                            </h3>
+
+                            <div class="space-y-4">
+                                <div class="glass-card p-6 border border-slate-300 border-t-4 border-t-zinc-500/60">
+                                    <h4 class="text-base font-bold text-slate-900 mb-1" style="font-size: 30px;">Régulation</h4>
+                                    <p class="text-slate-700 text-2xl" style="line-height: 36px!important;">
+                                        Les organismes de normalisation comme l'ISO (Organisation
+                                        internationale de normalisation) ou l'IEEE (Institute of Electrical and
+                                        Electronics Engineers) qui élaborent des standards techniques.
+                                        <br>
+                                        Les régulateurs nationaux et supranationaux comme la CNIL en France
+                                        pour la protection des données personnelles, ou la Commission Européenne
+                                        qui veille au respect du droit de la concurrence.
+                                    </p>
+                                    <h4 class="text-base font-bold text-slate-900 mb-1" style="font-size: 30px;">Analystes</h4>
+                                    <p class="text-slate-700 text-2xl" style="line-height: 36px!important;">
+                                        Les cabinets d'analystes comme Gartner, IDC, Forrester et Everest Group agissent
+                                        comme des influenceurs mondiaux en fournissant des prévisions et des outils
+                                        d'évaluation (Magic Quadrant, PEAK Matrix) qui orientent les budgets
+                                        technologiques. Leur rôle est crucial pour valider la crédibilité des
+                                        fournisseurs et guider les entreprises dans leurs choix stratégiques de
+                                        solutions et d'externalisation.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 8: IA ET SOUVERAINETÉ -->
+            <section data-chapter="08 - PERSPECTIVES" data-slide="IA & SOUVERAINETÉ">
+                <div class="w-full">
+                    <h2 class="text-3xl font-display font-bold text-slate-900 mb-8">
+                        <span class="text-zinc-500">V- </span> IA et Souveraineté
+                    </h2>
+
+                    <div class="grid grid-cols-2 gap-8">
+                        <div class="space-y-6">
+                            <div class="glass-card p-6 border-l-4 border-slate-600/60 relative">
+                                <h3 class="text-xl font-bold text-slate-900 mb-2">IA Générative</h3>
+                                <p class="text-slate-700 text-2xl leading-relaxed" style="line-height: 36px!important;">
+                                    L'IA générative, en particulier, est en train de révolutionner de nombreux secteurs,
+                                    de la création de contenu à l'optimisation des processus métiers. Elle impacte les
+                                    rôles des développeurs, des analystes de données et des utilisateurs finaux, créant
+                                    de nouvelles opportunités et nécessitant de nouvelles compétences.
+                                </p>
+                                <br>
+                                <h3 class="text-xl font-bold text-slate-900 mb-2">Souveraineté Numérique</h3>
+                                <p class="text-slate-700 text-2xl leading-relaxed" style="line-height: 36px!important;">
+                                    Face aux enjeux géopolitiques et de protection des données, de nombreux pays
+                                    cherchent à reprendre le contrôle de leurs infrastructures numériques. Le concept de
+                                    cloud souverain, garantissant que les données sont hébergées et traitées sur le
+                                    territoire national et soumises aux lois locales, prend de l'ampleur.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col items-center justify-center relative left-12">
+                            <img src="https://private-us-east-1.manuscdn.com/sessionFile/pGo4smEe83YzEngfLD8KIo/sandbox/slides_resource_inqclx5v5jlzm0xo3jfmk-299bacbc-e2b-prod-us2_1768381064006_na1fn_L2hvbWUvdWJ1bnR1L3VwbG9hZC9zZWFyY2hfaW1hZ2VzL1lHdGY3SWR1U3Jpdg.jpeg?x-oss-process=image/resize,w_1560,h_1560/format,webp&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvcEdvNHNtRWU4M1l6RW5nZkxEOEtJby9zYW5kYm94L3NsaWRlc19yZXNvdXJjZV9pbnFjbHg1djVqbHptMHhvM2pmbWstMjk5YmFjYmMtZTJiLXByb2QtdXMyXzE3NjgzODEwNjQwMDZfbmExZm5fTDJodmJXVXZkV0oxYm5SMUwzVndiRzloWkM5elpXRnlZMmhmYVcxaFoyVnpMMWxIZEdZM1NXUjFVM0pwZGcuanBlZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE1NjAsaF8xNTYwL2Zvcm1hdCx3ZWJwIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzk4NzYxNjAwfX19XX0_&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=B~jygxWyDfiZVecIxHnVr21rB1j0gc5OgahJEZkHqofLuS6MzMYXefZo0NarHSMZbVDB-oteXGvJK8VvvGY5OBOR6SrIz~BWAlIPJEPl2zvko1Vd2Kln6aFg80oaq-dbExmpEfkgOoZdmdMMz2gdVpvfoCB~BHgfYOddFN9Kz~bQADtR8MisV-~AutMLZzGPmgpRCI9s~aBciHo9EPWYUcGPktQj~hTdX8-UJl1KfcYDt-Ap0UHDQtKcTiZK3aLD6L1xYedgfi2WBbTD26fQ9Fwonx6Ppp~rW6Bk6NpZSnbSKrfoxwViVgvpxprHHfItqldySpe7aHwZ7KDrf9TrIA__"
+                                class="max-h-[300px] rounded-lg shadow-lg opacity-80" alt="Infrastructure Cloud">
+                            <p class="mt-2 text-xl text-slate-500 italic w-full">L'infrastructure moderne du
+                                Cloud</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 9: CYBERSEC & GREEN IT -->
+            <section data-chapter="09 - PERSPECTIVES" data-slide="CYBERSEC & GREEN IT">
+                <div class="w-full" style="transform: scale(1.1);">
+                    <h2 class="text-3xl font-display font-bold text-slate-900 mb-8 text-center">
+                        CYBERSEC & GREEN IT
+                    </h2>
+                    <br>
+                    <div class="grid grid-cols-2 gap-8">
+                        <!-- Cyber -->
+                        <div class="glass-card p-6 border border-slate-300 border-t-4 border-t-zinc-500/60">
+                            <h3 class="text-xl font-bold text-red-500 mb-2">Cybersécurité</h3>
+                            <p class="text-slate-700 mb-4 text-2xl" style="line-height: 36px!important;">
+                                Avec la multiplication des cyberattaques et la sophistication croissante des menaces, la
+                                cybersécurité est devenue une
+                                priorité absolue pour toutes les organisations. Elle représente un marché en
+                                forte croissance et un enjeu majeur de confiance numérique.
+                            </p>
+                            <br>
+                            <div
+                                class="text-zinc-800 opacity-30 text-3xl font-display font-bold text-right absolute bottom-6 right-6">
+                                01</div>
+                        </div>
+
+                        <!-- Green IT -->
+                        <div class="glass-card p-6 border border-slate-300 border-t-4 border-t-zinc-500/60">
+                            <h3 class="text-xl font-bold text-green-500 mb-2">Green IT (Informatique durable)</h3>
+                            <p class="text-slate-700 mb-4 text-2xl" style="line-height: 36px!important;">
+                                Face aux enjeux environnementaux et aux pressions réglementaires, le Green IT devient
+                                une
+                                priorité pour les entreprises. Il permet de réduire l'empreinte carbone tout en
+                                optimisant les coûts et en améliorant la performance des infrastructures.
+                            </p>
+                            <div
+                                class="text-zinc-800 opacity-30 text-3xl font-display font-bold text-right absolute bottom-6 right-6">
+                                02</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 10: CONCLUSION -->
+            <section data-state="conclusion" data-chapter="10 - SYNTHESE" data-slide="SYNTHÈSE">
+                <div class="w-full flex items-center justify-center" style="transform: scale(1.1);">
+                    <div class="w-full grid grid-cols-2 gap-12 relative">
+                        <!-- Left Content -->
+                        <div class="relative z-10 flex flex-col justify-center">
+                            <div
+                                class="inline-block px-3 py-1 text-zinc-900 rounded-full text-2xl font-bold uppercase tracking-widest w-max mb-6">
+                                Synthèse</div>
+                            <h2
+                                class="text-left relative left-2 text-3xl font-display font-black text-slate-900 mb-6 leading-tight">
+                                L'Ère du Numérique</h2>
+
+                            <ul class="space-y-4 relative -left-4" style="list-style: none;">
+                                <li class="px-3 py-1 bg-black/5 rounded border-l-2 border-zinc-800">
+                                    <p class="text-2xl">
+                                        <strong>Écosystème Interdépendant</strong> : Chaque acteur, du constructeur au
+                                        régulateur, est un maillon essentiel de la chaîne de valeur.
+                                    </p>
+                                </li>
+                                <li class="px-3 py-1 bg-black/5 rounded border-l-2 border-zinc-800">
+                                    <p class="text-2xl">
+                                        <strong>Mutation Permanente</strong> : L'IA, la cybersécurité et le Green IT
+                                        redéfinissent continuellement les règles du marché.
+                                    </p>
+                                </li>
+                                <li class="px-3 py-1 bg-black/5 rounded border-l-2 border-zinc-800">
+                                    <p class="text-2xl">
+                                        <strong>Vision Stratégique</strong> : Comprendre ces dynamiques est la clé pour
+                                        anticiper les ruptures et réussir sa transformation.
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Right Image -->
+                        <div class="relative h-full mt-[7.5em] left-32 rounded-xl overflow-hidden">
+                            <img src="https://private-us-east-1.manuscdn.com/sessionFile/pGo4smEe83YzEngfLD8KIo/sandbox/slides_resource_inqclx5v5jlzm0xo3jfmk-299bacbc-e2b-prod-us2_1768381113595_na1fn_L2hvbWUvdWJ1bnR1L3VwbG9hZC9zZWFyY2hfaW1hZ2VzL1JkZFhBVGJUVDVIdg.jpg?x-oss-process=image/resize,w_1560,h_1560/format,webp&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvcEdvNHNtRWU4M1l6RW5nZkxEOEtJby9zYW5kYm94L3NsaWRlc19yZXNvdXJjZV9pbnFjbHg1djVqbHptMHhvM2pmbWstMjk5YmFjYmMtZTJiLXByb2QtdXMyXzE3NjgzODExMTM1OTVfbmExZm5fTDJodmJXVXZkV0oxYm5SMUwzVndiRzloWkM5elpXRnlZMmhmYVcxaFoyVnpMMUprWkZoQlZHSlVWRFZJZGcuanBnP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLHdfMTU2MCxoXzE1NjAvZm9ybWF0LHdlYnAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTg3NjE2MDB9fX1dfQ__&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=YpDIReKzLbF~HCa0P-uyb4P-C5vpV2wdT4SeZdaKLMbDvp5kgn~o4ZpHuFUldeZ~wFHFC4VGBMV2gESluyCp-t7yaU8KqiPoopQTBVGXxvUK8kEO7KNHbYGliu9cufze5o6gccu2rfQhzHsYRJhjkcYk7cFioj~SmeV5WvqZNuE1WjBeh4cm9pfqP~GAvl3LE-90b6Ekcd9tt-0OJZQeY9Wejm3TJ5TCiUwenqsyFRvqkJWvn94S4zPxNlYxTj6VDpD1cPMKVF5WORaQu0XKLQCObjaQLaYRLSnzsfX7qVTWPm8j7~uxzHzzjRPThzJKMtgdVa5cyIwVkUviPrt8aQ__" class="final-img" alt="Infrastructure Data Center">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 11: CONCLUSION FINAL -->
+            <section data-state="conclusion-final" data-chapter="11 - CONCLUSION" data-slide="CLÔTURE">
+                <div class="w-full" style="transform: scale(1.1);">
+                    <div>
+                        <h2
+                            class="text-3xl font-display font-bold text-zinc-500 mb-8 border-b-2 border-zinc-500 inline-block pb-2 relative z-10">
+                            CONCLUSION GÉNÉRALE
+                        </h2>
+
+                        <p class="text-3xl text-zinc-800 leading-relaxed font-light text-justify relative z-10"
+                            style="line-height: 38px!important;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Le marché informatique est un écosystème
+                            complexe et dynamique, caractérisé par
+                            une forte interdépendance entre ses multiples intervenants. Des constructeurs de
+                            matériel aux éditeurs de logiciels, des distributeurs aux prestataires de services, en
+                            passant par les utilisateurs finaux et les organismes de régulation, chaque acteur
+                            joue un rôle essentiel dans la chaîne de valeur numérique. <br> <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Les évolutions
+                            technologiques rapides, notamment l'IA, la cybersécurité et le Green IT, continuent
+                            de redéfinir les contours de ce marché, créant de nouveaux défis et d'innombrables
+                            opportunités. Comprendre cette dynamique est fondamental pour anticiper les
+                            transformations à venir et naviguer avec succès dans l'ère numérique.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Reveal.js Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/reveal.min.js"></script>
+    <script>
+        // Initialize Reveal
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            center: true,
+            hash: true,
+            transition: 'slide',
+            backgroundTransition: 'zoom',
+            width: 1280,
+            height: 720,
+            direction: 'horizontal',
+            margin: 0.1, // Adjusted margin
+            minScale: 0.2,
+            maxScale: 1.5,
+            disableLayout: false // Ensure Reveal handles layout
+        });
+
+        // Breadcrumb Logic
+        const chapterEl = document.getElementById('breadcrumb-chapter');
+        const slideEl = document.getElementById('breadcrumb-slide');
+
+        Reveal.on('slidechanged', event => {
+            const currentSlide = event.currentSlide;
+            const chapter = currentSlide.getAttribute('data-chapter');
+            const slide = currentSlide.getAttribute('data-slide');
+
+            if (chapter) chapterEl.textContent = chapter;
+            if (slide) slideEl.textContent = slide;
+        });
+    </script>
+    <script>
+        // WebSocket Connection for Remote Control
+        (function () {
+            const host = location.hostname || 'localhost';
+            const socket = new WebSocket(`ws://${host}:3001`);
+
+            // Timer Logic
+            let timerInterval;
+            let timeLeft = 15 * 60; // 15 minutes in seconds
+            let isPaused = true;
+            const timerEl = document.getElementById('timer');
+            const dotEl = document.getElementById('timer-dot');
+
+            function updateTimerDisplay() {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+                if (timeLeft === 0) {
+                    dotEl.classList.remove('bg-neon-blue', 'animate-pulse');
+                    dotEl.classList.add('bg-red-500');
+                    stopTimer();
+                } else {
+                    // Ensure blue if reset or running
+                    if (dotEl.classList.contains('bg-red-500')) {
+                        dotEl.classList.remove('bg-red-500');
+                        dotEl.classList.add('bg-neon-blue', 'animate-pulse');
+                    }
+                }
+            }
+
+            function startTimer() {
+                if (!isPaused) return;
+                isPaused = false;
+                timerInterval = setInterval(() => {
+                    if (timeLeft > 0) {
+                        timeLeft--;
+                        updateTimerDisplay();
+                    } else {
+                        stopTimer();
+                    }
+                }, 1000);
+            }
+
+            function pauseTimer() {
+                isPaused = true;
+                clearInterval(timerInterval);
+            }
+
+            function stopTimer() {
+                isPaused = true;
+                clearInterval(timerInterval);
+            }
+
+            function resetTimer() {
+                stopTimer();
+                timeLeft = 15 * 60;
+                updateTimerDisplay();
+                // Reset dot color
+                dotEl.classList.remove('bg-red-500');
+                dotEl.classList.add('bg-neon-blue', 'animate-pulse');
+            }
+
+            socket.onopen = () => {
+                console.log("Connected to Remote Control Server");
+            };
+
+            socket.onmessage = (event) => {
+                try {
+                    const message = JSON.parse(event.data);
+
+                    if (message.type === "NEXT") Reveal.next();
+                    if (message.type === "PREV") Reveal.prev();
+                    if (message.type === "GOTO") Reveal.slide(message.h, message.v || 0);
+
+                    // Timer Commands
+                    if (message.type === "TIMER_START") startTimer();
+                    if (message.type === "TIMER_PAUSE") pauseTimer();
+                    if (message.type === "TIMER_RESET") resetTimer();
+
+                    // System Commands
+                    if (message.type === "FULLSCREEN") {
+                        if (!document.fullscreenElement) {
+                            document.documentElement.requestFullscreen().catch(err => {
+                                console.error(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                            });
+                        } else {
+                            if (document.exitFullscreen) {
+                                document.exitFullscreen();
+                            }
+                        }
+                    }
+
+                } catch (e) {
+                    console.error("Invalid message received", e);
+                }
+            };
+
+            // Optional: Sync back to remote (if needed in future)
+            Reveal.on("slidechanged", event => {
+                if (socket.readyState === WebSocket.OPEN) {
+                    socket.send(JSON.stringify({
+                        type: "SYNC",
+                        h: event.indexh,
+                        v: event.indexv
+                    }));
+                }
+            });
+        })();
+    </script>
+</body>
+
+</html>

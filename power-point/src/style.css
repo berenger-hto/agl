@@ -1,0 +1,27 @@
+/* Custom styles to enhance the default light theme */
+:root {
+  --r-main-font: 'Inter', sans-serif;
+  --r-heading-font: 'Inter', sans-serif;
+  --r-main-color: #333;
+  --r-heading-color: #2c3e50;
+  --r-link-color: #3498db;
+  --r-selection-color: #3498db;
+}
+
+.reveal section img {
+  border: none;
+  box-shadow: none;
+}
+
+.reveal h1, .reveal h2, .reveal h3 {
+  text-transform: none; 
+}
+
+.reveal ul {
+    display: block;
+    text-align: left; 
+}
+
+.reveal li {
+    margin-bottom: 10px;
+}

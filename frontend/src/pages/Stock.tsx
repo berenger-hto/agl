@@ -65,31 +65,29 @@ const StockPage = () => {
     };
 
     return (
-        <div className="space-y-8">
+        <div className="space-y-8 flex flex-col">
             <div className="flex justify-between items-center">
                 <div>
-                    <h2 className="text-3xl font-display font-bold text-slate-900">Inventory Management</h2>
-                    <p className="text-slate-500">Real-time stock tracking and valuation.</p>
+                    <h2 className="text-3xl font-display font-bold text-slate-900">Gestion des Stocks</h2>
+                    <p className="text-slate-500">Suivi et valorisation des stocks en temps réel.</p>
                 </div>
                 <button className="bg-white hover:bg-slate-50 text-slate-700 text-sm font-semibold px-5 py-2.5 rounded-xl border border-gray-200 transition-all flex items-center shadow-sm">
-                    <span className="material-icons text-base mr-2">inventory</span> Audit Stock
+                    <span className="material-icons text-base mr-2">inventory</span> Auditer le Stock
                 </button>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="flex flex-col gap-8">
                 <div className="elevated-card rounded-2xl p-8 lg:col-span-1 flex flex-col justify-center items-center">
                     <div className="relative w-full aspect-square max-w-[300px]">
                         {loading ? (
-                            <div className="flex items-center justify-center h-full text-slate-400">Loading Chart...</div>
+                            <div className="flex items-center justify-center h-full text-slate-400">Chargement du graphique...</div>
                         ) : (
-                            <div className="relative w-full h-full">
-                                <Doughnut data={chartData} options={chartOptions} />
-                                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                                    <div className="text-center">
-                                        <p className="text-xs text-slate-400 font-bold uppercase tracking-widest">Total Items</p>
-                                        <p className="text-3xl font-black text-slate-900">{stocks.reduce((acc, curr) => acc + curr.quantite_disponible, 0)}</p>
-                                    </div>
+                            <div className="relative w-full h-full flex flex-col items-center justify-center gap-4">
+                                <div className="text-center relative top-20">
+                                    <p className="text-xs text-slate-400 font-bold uppercase tracking-widest">Total des articles</p>
+                                    <p className="text-3xl font-black text-slate-900">{stocks.reduce((acc, curr) => acc + curr.quantite_disponible, 0)}</p>
                                 </div>
+                                <Doughnut data={chartData} options={chartOptions} />
                             </div>
                         )}
                     </div>
@@ -97,23 +95,23 @@ const StockPage = () => {
 
                 <div className="elevated-card rounded-2xl p-0 lg:col-span-2 overflow-hidden flex flex-col">
                     <div className="p-6 border-b border-gray-50 flex justify-between items-center">
-                        <h3 className="font-bold text-slate-800">Stock Details</h3>
-                        <input type="text" placeholder="Search item..." className="bg-slate-50 border border-gray-100 rounded-lg px-3 py-1.5 text-sm outline-none focus:border-primary/50" />
+                        <h3 className="font-bold text-slate-800">Détails du stock</h3>
+                        <input type="text" placeholder="Rechercher un article..." className="bg-slate-50 border border-gray-100 rounded-lg px-3 py-1.5 text-sm outline-none focus:border-primary/50" />
                     </div>
                     <div className="overflow-x-auto flex-1">
                         <table className="w-full text-left">
                             <thead className="bg-slate-50 text-xs font-bold text-slate-500 uppercase tracking-wider">
                                 <tr>
-                                    <th className="px-6 py-3">Gadget Name</th>
-                                    <th className="px-6 py-3">Category</th>
-                                    <th className="px-6 py-3">Price</th>
-                                    <th className="px-6 py-3">Available</th>
-                                    <th className="px-6 py-3">Status</th>
+                                    <th className="px-6 py-3">Nom du Gadget</th>
+                                    <th className="px-6 py-3">Catégorie</th>
+                                    <th className="px-6 py-3">Prix</th>
+                                    <th className="px-6 py-3">Disponible</th>
+                                    <th className="px-6 py-3">Statut</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-50">
                                 {loading ? (
-                                    <tr><td colSpan={5} className="px-6 py-8 text-center text-slate-500">Loading...</td></tr>
+                                    <tr><td colSpan={5} className="px-6 py-8 text-center text-slate-500">Chargement...</td></tr>
                                 ) : stocks.map((stock) => (
                                     <tr key={stock.id_stock} className="group hover:bg-slate-50/50 transition-colors">
                                         <td className="px-6 py-4 font-semibold text-slate-800">{stock.nom_gadget}</td>
@@ -123,11 +121,11 @@ const StockPage = () => {
                                         <td className="px-6 py-4">
                                             {stock.quantite_disponible < 10 ? (
                                                 <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-red-100 text-red-800">
-                                                    Low Stock
+                                                    Stock Faible
                                                 </span>
                                             ) : (
                                                 <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-green-100 text-green-800">
-                                                    In Stock
+                                                    En Stock
                                                 </span>
                                             )}
                                         </td>

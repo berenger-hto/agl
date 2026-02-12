@@ -21,4 +21,8 @@ export class StockModel {
         }
         return true;
     }
+    static async getLowStockCount(threshold = 10) {
+        const [rows] = await pool.execute('SELECT COUNT(*) as count FROM STOCKS WHERE quantite_disponible < ?', [threshold]);
+        return rows[0].count;
+    }
 }
